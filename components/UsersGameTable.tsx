@@ -1,12 +1,4 @@
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableFooter,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
+import {Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow,} from "@/components/ui/table"
 import {db} from "@/lib/db";
 import {ScrollArea} from "@/components/ui/scroll-area";
 
@@ -23,35 +15,36 @@ export const UsersGameTable = async ()=> {
         return users.find(user => user.id === id)?.name
     }
     return (
+        <ScrollArea className={"h-[80vh]"}>
+            <Table>
 
-        <Table>
-
-            <TableHeader>
-                <TableRow >
-                    <TableHead className={"text-center text-indigo-950"}>User Name</TableHead>
-                    <TableHead className={"text-center text-indigo-950"}>Game Name</TableHead>
-                    <TableHead className={"text-center text-indigo-950"}>Points</TableHead>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-
-            {userGames.map((userGame, index)=> (
-                    <TableRow key={userGame.id}>
-                        <TableCell className={"text-center"}>{findUser(userGame.userId)}</TableCell>
-                        <TableCell className={"text-center"}>{findGame(userGame.gameId)}</TableCell>
-                        <TableCell className={"text-center"}>{userGame.points}</TableCell>
+                <TableHeader className={"sticky top-0 bg-secondary"}>
+                    <TableRow>
+                        <TableHead className={"text-indigo-950"}>User Name</TableHead>
+                        <TableHead className={"text-indigo-950"}>Game Name</TableHead>
+                        <TableHead className={"text-indigo-950"}>Points</TableHead>
                     </TableRow>
+                </TableHeader>
+
+
+                <TableBody>
+            {userGames.map((userGame, index)=> (
+                <TableRow key={userGame.id}>
+                    <TableCell>{findUser(userGame.userId)}</TableCell>
+                    <TableCell>{findGame(userGame.gameId)}</TableCell>
+                    <TableCell>{userGame.points}</TableCell>
+                </TableRow>
                 ))}
 
-            </TableBody>
+                </TableBody>
 
-            <TableFooter>
-                <TableRow>
-                    <TableCell colSpan={2}>Total</TableCell>
-                    <TableCell className="text-right">{userGames.length} Games(s)</TableCell>
-                </TableRow>
-            </TableFooter>
-        </Table>
-
+                <TableFooter className={"sticky -bottom-0.5 bg-secondary"}>
+                    <TableRow>
+                        <TableCell colSpan={2}>Total</TableCell>
+                        <TableCell className="text-right">{userGames.length} Games(s)</TableCell>
+                    </TableRow>
+                </TableFooter>
+            </Table>
+        </ScrollArea>
     )
 }

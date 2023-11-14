@@ -1,10 +1,9 @@
 import {db} from "@/lib/db";
-import {ScrollArea} from "@/components/ui/scroll-area";
 import memory from "@/public/memory.png"
-import tictactoe from "@/public/tic-tac-toe.png"
+import ticTacToe from "@/public/tic-tac-toe.png"
+import guessTheNumber from "@/public/guess the number.png"
 import {GameCard} from "@/components/GameCard";
 import Link from "next/link";
-import {Separator} from "@radix-ui/react-select";
 
 interface Props {
     id: any
@@ -22,7 +21,7 @@ export const UserDashboard = async ({id}: Props) => {
         return games.find(game => game.id === id)?.name
     }
 
-    userGames = userGames.splice(-5);
+    userGames = userGames.splice(-5).reverse();
 
 
     return (
@@ -39,20 +38,26 @@ export const UserDashboard = async ({id}: Props) => {
                     <span>No Games found</span>
                 )}
             </div>
-            <div>
+            <div className={"flex flex-col"}>
                 <span className={"text-2xl font-semibold"}>Play A game</span>
-                <div className={"grid xl:grid-cols-3 grid-cols-1 lg:grid-cols-2 gap-10 justify-items-center"}>
+                <div className={"m-2 flex flex-row text-center justify-items-center items-center w-fit"}>
                     <Link href={"/games/memory-game"}>
-                        <GameCard image={memory}
-                                  text={"The objective of the game is to find all the matching pairs by clicking on the cards."}
-                                  name={"Memory Game"}
-                        />
+                    <span className={" font-bold bg-indigo-950 text-white p-2 rounded-2xl "}>Start Game</span>
                     </Link>
-                    <Link href={"/games/tic-tac-toe"}>
-                        <GameCard image={tictactoe}
-                                  text={"In this game, the player needs to get three of the same symbol in a row, either horizontally, vertically, or diagonally, to win."}
-                                  name={"Tic Tac Toe"}/>
-                    </Link>
+                </div>
+                <div className={"grid xl:grid-cols-3 grid-cols-1 lg:grid-cols-2 gap-10 justify-items-center"}>
+
+                <GameCard image={memory}
+                          text={"The objective of the game is to find all the matching pairs by clicking on the cards."}
+                          name={"Memory Game"}
+                />
+
+                <GameCard image={ticTacToe}
+                          text={"In this game, the player needs to get three of the same symbol in a row, either horizontally, vertically, or diagonally, to win."}
+                          name={"Tic Tac Toe"}/>
+                <GameCard image={guessTheNumber}
+                          text={"The goal of the game is for the player to guess a randomly generated number within a limited number of attempts."}
+                          name={"Guess The Number"}/>
 
                 </div>
             </div>

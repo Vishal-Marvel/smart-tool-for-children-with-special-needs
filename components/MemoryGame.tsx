@@ -69,7 +69,6 @@ export const MemoryGame = ({id}: Props) => {
                 moves,
                 maxMoves: 16
             })
-            alert("Game Completed");
             router.push("/games/tic-tac-toe")
         }
     }

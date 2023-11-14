@@ -3,8 +3,7 @@ const prisma = new PrismaClient()
 async function main() {
  await prisma.game.createMany({
      data:[
-         {name: "Memory Game"},
-         {name: "tic-tac-toe"}
+         {name: "Guess the Number"},
      ]
  })
 }

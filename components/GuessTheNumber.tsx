@@ -103,6 +103,7 @@ export  const GuessTheNumber = ({id}: Props)=> {
                 maxMoves: 7
             }).then(r => {
                 alert("You Won")
+                setCheckGuessOutcome("nil")
                 router.push("/games/hangman")
             })
 
@@ -113,6 +114,7 @@ export  const GuessTheNumber = ({id}: Props)=> {
                 maxMoves: 7
             }).then(r => {
                 alert("You Lost")
+                setCheckGuessOutcome("nil")
                 router.push("/games/hangman")
             })
         }

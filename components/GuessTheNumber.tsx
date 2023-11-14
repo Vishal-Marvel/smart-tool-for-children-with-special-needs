@@ -28,7 +28,7 @@ export  const GuessTheNumber = ({id}: Props)=> {
 
     function disableButton() {
         setButtonDisabled(true);
-        completeGame().then();
+        completeGame();
     }
 
     function arrayPush() {
@@ -94,14 +94,17 @@ export  const GuessTheNumber = ({id}: Props)=> {
         setCheckGuessOutcome("nil");
         setRandomNum(generateRandomNumber());
     }
-    const completeGame = async ()=>{
+    const completeGame = ()=>{
         if (checkGuessOutcome === "win") {
-            await axios.post("/api/game-over", {
+            axios.post("/api/game-over", {
                 gameId: id,
                 moves: array.length,
                 maxMoves: 7
+            }).then(r=>{
+                alert("You Won")
+                router.push("/games/hangman")
             })
-            router.push("/dashboard")
+
         }
     }
 

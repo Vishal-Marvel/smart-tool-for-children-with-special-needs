@@ -2,6 +2,7 @@ import {db} from "@/lib/db";
 import memory from "@/public/memory.png"
 import ticTacToe from "@/public/tic-tac-toe.png"
 import guessTheNumber from "@/public/guess the number.png"
+import hangman from "@/public/hangman.png"
 import {GameCard} from "@/components/GameCard";
 import Link from "next/link";
 
@@ -58,7 +59,9 @@ export const UserDashboard = async ({id}: Props) => {
                 <GameCard image={guessTheNumber}
                           text={"The goal of the game is for the player to guess a randomly generated number within a limited number of attempts."}
                           name={"Guess The Number"}/>
-
+                <GameCard image={hangman}
+                          text={"The goal is for the guesser to discover the chosen word by suggesting letters one at a time, Before the full man is created "}
+                          name={"Hangman"}/>
                 </div>
             </div>
 

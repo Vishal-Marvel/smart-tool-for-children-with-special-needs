@@ -95,6 +95,7 @@ export  const GuessTheNumber = ({id}: Props)=> {
         setRandomNum(generateRandomNumber());
     }
     const completeGame = ()=>{
+        console.log(checkGuessOutcome)
         if (checkGuessOutcome === "win") {
             axios.post("/api/game-over", {
                 gameId: id,
@@ -105,7 +106,7 @@ export  const GuessTheNumber = ({id}: Props)=> {
                 router.push("/games/hangman")
             })
 
-        } else if (checkGuessOutcome === "lose") {
+        } else {
             axios.post("/api/game-over", {
                 gameId: id,
                 moves: 70,

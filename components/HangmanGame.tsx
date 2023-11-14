@@ -1,11 +1,9 @@
 "use client"
-import { useCallback, useEffect, useState } from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import words from '@/components/Hangman/wordList.json';
 import HangmanDraw from '@/components/Hangman/HangmanDraw';
 import HangmanWord from '@/components/Hangman/HangmanWord';
 import Keyboard from '@/components/Hangman/Keyboard';
-import { ToastContainer, toast } from 'react-toastify';
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import axios from "axios";
 import {useRouter} from "next/navigation";
 
@@ -91,7 +89,7 @@ export const Hangman = ({id}: Props)=> {
                     maxMoves: 1
                 }).then(r  =>{
 
-                    router.push("/games/rock-paper-scissor/games/rock-paper-scissor")
+                    router.push("/games/rock-paper-scissor")
                 })
             })
 

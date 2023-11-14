@@ -86,6 +86,7 @@ export const TicTacToeGame = ({id}: Props) => {
         let check = Object.keys(boardData).every((v) => boardData[v]);
         setIsDraw(check);
         if (check) setModalTitle("Match Draw!!!");
+        gameOver();
     };
     const checkWinner = () => {
         WINNING_COMBO.map((bd) => {

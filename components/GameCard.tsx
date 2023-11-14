@@ -4,16 +4,18 @@ import Image, {StaticImageData} from "next/image";
 interface GameCardProps{
     image: StaticImageData,
     text: string,
-    name: string
+    name: string,
+    med: string
 }
 
-export const GameCard= ({image, text, name}: GameCardProps)=>{
+export const GameCard = ({image, text, name, med}: GameCardProps) => {
     return (
         <Card className={"p-3 m-3 w-[350px]"}>
             <CardTitle className={"p-2 text-center"}>
                 {name}
             </CardTitle>
-            <CardDescription className={"flex text-center h-[80px] items-center justify-center"}>
+            <CardDescription className={"flex flex-col text-center h-[120px] items-center justify-center"}>
+                <strong className={"capitalize"}>{med}</strong><br/>
                 {text}
             </CardDescription>
             <CardContent className={" flex items-center justify-center p-3"}>

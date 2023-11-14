@@ -100,7 +100,7 @@ export  const GuessTheNumber = ({id}: Props)=> {
             axios.post("/api/game-over", {
                 gameId: id,
                 moves: array.length,
-                maxMoves: 7
+                maxMoves: 1
             }).then(r => {
                 alert("You Won")
                 setCheckGuessOutcome("nil")
@@ -111,7 +111,7 @@ export  const GuessTheNumber = ({id}: Props)=> {
             axios.post("/api/game-over", {
                 gameId: id,
                 moves: 70,
-                maxMoves: 7
+                maxMoves: 1
             }).then(r => {
                 alert("You Lost")
                 setCheckGuessOutcome("nil")

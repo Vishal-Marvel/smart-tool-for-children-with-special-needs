@@ -23,7 +23,7 @@ export const UsersTable = async ()=> {
                         <TableHead>Height</TableHead>
                         <TableHead>Email</TableHead>
                         <TableHead>Phone</TableHead>
-                        <TableHead className={"w-2/5 text-center"}>Medical History</TableHead>
+                        <TableHead className={"w-2/5"}>Medical History</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -35,7 +35,7 @@ export const UsersTable = async ()=> {
                             <TableCell>{user.height}</TableCell>
                             <TableCell>{user.email}</TableCell>
                             <TableCell>{user.phone_no}</TableCell>
-                            <TableCell className={"text-center"}>{user.medical_history}</TableCell>
+                            <TableCell className={"text-left"}>{user.medical_history}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

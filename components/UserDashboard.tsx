@@ -57,20 +57,24 @@ export const UserDashboard = async ({id}: Props) => {
                 <div className={"grid xl:grid-cols-3 grid-cols-1 lg:grid-cols-2 gap-10 justify-items-center"}>
 
                     <GameCard image={memory}
-                              text={"The objective of the rock-paper-scissor is to find all the matching pairs by clicking on the cards."}
+                              med={"Hand eye coordination."}
+                              text={"The objective of the memory game is to find all the matching pairs by clicking on the cards."}
                               name={"Memory Game"}
                     />
-
                     <GameCard image={ticTacToe}
-                              text={"In this rock-paper-scissor, the player needs to get three of the same symbol in a row, either horizontally, vertically, or diagonally, to win."}
+                              med={"Visual attention with coordination assessment"}
+                              text={"In this game, the player needs to get three of the same symbol in a row, either horizontally, vertically, or diagonally, to win."}
                               name={"Tic Tac Toe"}/>
                     <GameCard image={guessTheNumber}
-                              text={"The goal of the rock-paper-scissor is for the player to guess a randomly generated number within a limited number of attempts."}
+                              med={"visual problem solving ability with motor skill"}
+                              text={"The goal of the game is for the player to guess a randomly generated number within a limited number of attempts."}
                               name={"Guess The Number"}/>
                     <GameCard image={hangman}
+                              med={" visual cognitive reasoning with  motor stability"}
                               text={"The goal is for the guesser to discover the chosen word by suggesting letters one at a time, Before the full man is created "}
                               name={"Hangman"}/>
                     <GameCard image={RPS}
+                              med={"Visual discrimination and motor response."}
                               text={"The game has three possible outcomes other than a tie: rock crushes scissors, scissors cuts paper, and paper covers rock."}
                               name={"Rock Paper Scissor"}/>
                 </div>

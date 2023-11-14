@@ -74,7 +74,7 @@ export const Hangman = ({id}: Props)=> {
                     maxMoves: 1
                 }).then(r  =>{
 
-                    router.push("/dashboard")
+                    router.push("/games/rock-paper-scissor")
                 })
             })
 
@@ -91,7 +91,7 @@ export const Hangman = ({id}: Props)=> {
                     maxMoves: 1
                 }).then(r  =>{
 
-                    router.push("/dashboard")
+                    router.push("/games/rock-paper-scissor/games/rock-paper-scissor")
                 })
             })
 

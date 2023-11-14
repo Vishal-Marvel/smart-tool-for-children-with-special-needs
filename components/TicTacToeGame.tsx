@@ -134,7 +134,7 @@ export const TicTacToeGame = ({id}: Props) => {
             }).then(r => {
                 reset()
                 count -= 1;
-                router.push("/dashboard")
+                router.push("/games/guess-the-number")
             })
         }
     };

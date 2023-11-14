@@ -8,6 +8,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import {db} from "@/lib/db";
+import {ScrollArea} from "@/components/ui/scroll-area";
 
 
 export const UsersGameTable = async ()=> {
@@ -22,7 +23,9 @@ export const UsersGameTable = async ()=> {
         return users.find(user => user.id === id)?.name
     }
     return (
+
         <Table>
+
             <TableHeader>
                 <TableRow >
                     <TableHead className={"text-center text-indigo-950"}>User Name</TableHead>
@@ -31,14 +34,17 @@ export const UsersGameTable = async ()=> {
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {userGames.map((userGame, index)=> (
+
+            {userGames.map((userGame, index)=> (
                     <TableRow key={userGame.id}>
                         <TableCell className={"text-center"}>{findUser(userGame.userId)}</TableCell>
                         <TableCell className={"text-center"}>{findGame(userGame.gameId)}</TableCell>
                         <TableCell className={"text-center"}>{userGame.points}</TableCell>
                     </TableRow>
                 ))}
+
             </TableBody>
+
             <TableFooter>
                 <TableRow>
                     <TableCell colSpan={2}>Total</TableCell>
@@ -46,5 +52,6 @@ export const UsersGameTable = async ()=> {
                 </TableRow>
             </TableFooter>
         </Table>
+
     )
 }

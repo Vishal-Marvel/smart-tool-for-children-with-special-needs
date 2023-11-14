@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import {useEffect, useState} from "react";
 import Section from "@/components/Section";
 import axios from "axios";
 import {useRouter} from "next/navigation";
@@ -100,11 +100,20 @@ export  const GuessTheNumber = ({id}: Props)=> {
                 gameId: id,
                 moves: array.length,
                 maxMoves: 7
-            }).then(r=>{
+            }).then(r => {
                 alert("You Won")
                 router.push("/games/hangman")
             })
 
+        } else if (checkGuessOutcome === "lose") {
+            axios.post("/api/game-over", {
+                gameId: id,
+                moves: 70,
+                maxMoves: 7
+            }).then(r => {
+                alert("You Lost")
+                router.push("/games/hangman")
+            })
         }
     }
 

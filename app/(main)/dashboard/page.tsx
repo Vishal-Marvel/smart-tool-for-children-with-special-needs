@@ -1,9 +1,9 @@
 import {UserButton} from "@clerk/nextjs";
 import {initProfile} from "@/lib/init-profile";
 import {$Enums} from ".prisma/client";
-import MemberRole = $Enums.MemberRole;
 import {AdminDashboard} from "@/components/AdminDashboard";
 import {UserDashboard} from "@/components/UserDashboard";
+import MemberRole = $Enums.MemberRole;
 
 const Dashboard = async () => {
     const profile = await initProfile()
@@ -15,7 +15,7 @@ const Dashboard = async () => {
             <UserButton afterSignOutUrl={"/"}/>
         </div>
         <div>
-            {profile.role === MemberRole.ADMIN && <AdminDashboard id={profile.id}/>}
+            {profile.role === MemberRole.ADMIN && <AdminDashboard/>}
             {profile.role === MemberRole.USER && <UserDashboard id={profile.id}/>}
         </div>
 

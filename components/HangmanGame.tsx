@@ -100,16 +100,16 @@ export const Hangman = ({id}: Props)=> {
     return (
         <div>
 
-            <div className='font-adlam flex max-w-5xl items-center  flex-row gap-8 mx-auto pt-12'>
+            <div className='font-adlam flex max-w-5xl items-center flex-col md:flex-row gap-8 mx-auto pt-12'>
 
                 {/* I want to know how many times I chose the wrong letter */}
                 <div className={"flex flex-col mr-10"}>
-                <HangmanDraw numberOfGuess={incorrectLetters.length} />
-                <HangmanWord
-                    result={isLoser}
-                    guessLetters={guessLetters}
-                    wordToGuess={wordToGuess}
-                />
+                    <HangmanDraw numberOfGuess={incorrectLetters.length}/>
+                    <HangmanWord
+                        result={isLoser}
+                        guessLetters={guessLetters}
+                        wordToGuess={wordToGuess}
+                    />
                 </div>
                 <div className={"ml-10"}>
                     <Keyboard

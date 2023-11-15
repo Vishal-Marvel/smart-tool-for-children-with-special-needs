@@ -7,7 +7,7 @@ import {useRouter} from "next/navigation";
 import {useState} from "react";
 import Link from "next/link";
 
-import {SignedIn, SignedOut, SignInButton, UserButton} from "@clerk/nextjs";
+import {SignedIn, SignedOut, SignInButton} from "@clerk/nextjs";
 
 import {Button, buttonVariants} from "@/components/ui/button"
 
@@ -32,7 +32,7 @@ export default function Home() {
 
                 <SignedOut>
 
-                    <SignInButton >
+                    <SignInButton>
                         <Button className={cn(buttonVariants({variant: "default"}))}>
                             Sign In
                         </Button>
@@ -40,13 +40,13 @@ export default function Home() {
                 </SignedOut>
             </div>
 
-            <div className="m-3 p-3 flex items-center text-center w-full flex-col">
-                <h1 className={"text-4xl font-bold w-[800px]"}>
+            <div className="m-3 md:p-3 flex items-center text-center flex-col">
+                <h1 className={"text-2xl md:text-4xl font-bold w-4/5"}>
                     Smart And Digitised Visual Motorized Integrated Tool for Child With Special Needs
                 </h1>
-                <div className={"flex flex-row align-middle items-center m-4"}>
+                <div className={"flex md:flex-row flex-col align-middle items-center justify-center md:m-4"}>
                     <div>
-                        <p className={"font-2xl p-4 pb-1 text-justify"}>
+                        <p className={"font-2xl md:p-4 p-2 pb-1 text-justify"}>
                             A "Smart and Digitized Visual Motorized Integrated Tool for Children with Special Needs"
                             refers to an innovative device designed to assist and support children who have special
                             needs, particularly those with motor and visual challenges. This tool incorporates advanced
@@ -59,15 +59,18 @@ export default function Home() {
                             such as sensors, interactive displays, or adaptive software to personalize the experience
                             for each child.
                         </p>
-                        <p className={"text-justify p-4 pt-0"}>
+                        <p className={"text-justify md:p-4 p-2 pt-0"}>
                             <br/>
-                            <strong> Adaptability</strong>: The tool is likely designed to adapt to the specific needs and abilities of
+                            <strong> Adaptability</strong>: The tool is likely designed to adapt to the specific needs
+                            and abilities of
                             each child, providing a customized and inclusive learning environment.
                             <br/>
-                            <strong> Interactive Learning</strong>: Incorporation of interactive elements can make the learning process
+                            <strong> Interactive Learning</strong>: Incorporation of interactive elements can make the
+                            learning process
                             engaging and enjoyable, fostering the development of both motor and cognitive skills.
                             <br/>
-                            <strong> Digital Support</strong>: The use of digital technologies can offer real-time feedback, progress
+                            <strong> Digital Support</strong>: The use of digital technologies can offer real-time
+                            feedback, progress
                             tracking, and potentially connect with other devices or platforms to enhance the overall
                             learning experience.
                             <br/>
@@ -90,7 +93,7 @@ export default function Home() {
             {/*  <h1 style={{fontSize:30,fontWeight:"bold",textAlign:'center'}}>Sign up</h1>*/}
             {/*</div>*/}
             <div
-                className=" rounded-full bg-indigo-950 text-white h-16 w-64 mx-auto mt-4 flex items-center cursor-pointer space-x-4 transform transition-all duration-600 "
+                className=" rounded-full bg-indigo-950 text-white h-16 w-64 mx-auto m-4 flex items-center cursor-pointer space-x-4 transform transition-all duration-600 "
                 onClick={() => router.push("/dashboard")}
                 onMouseEnter={() => {
                     setArrow("translate-x-4 opacity-100");

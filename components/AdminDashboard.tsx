@@ -1,27 +1,8 @@
-import {db} from "@/lib/db";
-import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableFooter,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
-import {
-    Tabs,
-    TabsContent,
-    TabsList,
-    TabsTrigger,
-} from "@/components/ui/tabs"
+import {Tabs, TabsContent, TabsList, TabsTrigger,} from "@/components/ui/tabs"
 import {UsersTable} from "@/components/UsersTable";
 import {UsersGameTable} from "@/components/UsersGameTable";
-interface Props{
-    id: any
-}
 
-export const AdminDashboard = async({id}:Props) =>{
+export const AdminDashboard = async () => {
 
 
     return <div className={" justify-center items-center flex pt-4"}>

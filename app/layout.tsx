@@ -16,13 +16,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-    if (process.env.MAINTENANCE) {
-        return (
-          <div className={"flex justify-center items-center align-middle h-screen"}>
-        <span className={"font-bold text-2xl"}>This page is under Maintenance, Kindly Check Later</span>
-    </div>
-        );
-    }
+
     return (
         <ClerkProvider>
             <html lang="en">

@@ -1,8 +1,8 @@
 import type {Metadata} from 'next'
 import {Inter} from 'next/font/google'
-import './globals.css'
+import '../globals.css'
 import {ClerkProvider} from "@clerk/nextjs";
-import {Maintenance} from "@/components/Maintenance";
+import {redirect} from "next/navigation";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,6 +16,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+    if (process.env.MAINTENANCE) {
+        return redirect("/maintenance")
+    }
 
     return (
         <ClerkProvider>

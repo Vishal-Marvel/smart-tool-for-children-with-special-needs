@@ -1,6 +1,7 @@
 import {currentUser} from "@clerk/nextjs";
 
 import {db} from "@/lib/db";
+import {Users} from "@prisma/client";
 
 export const currentProfile = async () => {
     const user = await currentUser();
@@ -9,9 +10,10 @@ export const currentProfile = async () => {
         return null;
     }
 
-    return db.users.findUnique({
+    const profile: Users = await db.users.findUnique({
         where: {
             email: user.emailAddresses[0].emailAddress
         }
     });
+    return profile;
 }

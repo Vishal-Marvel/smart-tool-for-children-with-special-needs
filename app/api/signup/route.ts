@@ -1,7 +1,6 @@
 import {NextResponse} from "next/server";
 
 import {currentUser} from "@clerk/nextjs";
-import {retry} from "next/dist/compiled/@next/font/dist/google/retry";
 import {db} from "@/lib/db";
 
 export async function POST(

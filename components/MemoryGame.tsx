@@ -2,18 +2,31 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/navigation";
-interface Props{
-    id:string
+import robot from "@/public/memory/robot.webp"
+import alien from "@/public/memory/alien.webp"
+import ghost from "@/public/memory/ghost.webp"
+import clown from "@/public/memory/clown.webp"
+import penguin from "@/public/memory/penguin.webp"
+import peacock from "@/public/memory/peacock.webp"
+import smile from "@/public/memory/smile.webp"
+import rocket from "@/public/memory/rocket.webp"
+import Image from "next/image";
+import {PopUpNotification} from "@/components/PopUpNotification";
+
+interface Props {
+    id: string
 }
+
 export const MemoryGame = ({id}: Props) => {
     const router = useRouter();
-    const board = ["🤖", "👽", "👻", "🤡", "🐧", "🦚", "😄", "🚀"];
+    const board = [robot, alien, ghost, clown, penguin, peacock, smile, rocket];
 
     const [boardData, setBoardData] = useState([]);
     const [flippedCards, setFlippedCards] = useState([]);
     const [matchedCards, setMatchedCards] = useState([]);
     const [moves, setMoves] = useState(0);
     const [gameOver, setGameOver] = useState(false);
+    const [dialogBox, setDialogBox] = useState(false);
 
     useEffect(() => {
 
@@ -64,18 +77,20 @@ export const MemoryGame = ({id}: Props) => {
     };
     const completeGame = async ()=>{
         if (gameOver === true) {
+            setDialogBox(true)
             await axios.post("/api/game-over", {
                 gameId: id,
                 moves,
                 maxMoves: 16
             })
-            router.push("/games/tic-tac-toe")
+
         }
     }
     useEffect(()=>{
         completeGame().then(()=>{})
 
     },[gameOver])
+
 
     return (
         <div className={"flex flex-col"}>
@@ -100,7 +115,9 @@ export const MemoryGame = ({id}: Props) => {
                                     matched ? "matched" : ""
                                 } ${gameOver ? "gameover" : ""}`}
                             >
-                                <div className="card-front">{data}</div>
+                                <div className="card-front object-cover pl-1">
+                                    <Image src={data} alt={"Image"} height={70} width={70}/>
+                                </div>
                                 <div className="card-back"></div>
                             </div>
                         );
@@ -108,6 +125,8 @@ export const MemoryGame = ({id}: Props) => {
                 </div>
 
             </div>
+            <PopUpNotification display={dialogBox} title={"Game Over"} buttonOnClick={() => router.push("/dashboard")}/>
+
         </div>
     );
 }

@@ -1,12 +1,6 @@
 "use client";
 
-import React, {
-  createContext,
-  useEffect,
-  useState,
-  useContext,
-  useMemo,
-} from "react";
+import React, {createContext, useContext, useEffect, useMemo, useState,} from "react";
 
 interface ThemeContextType {
   theme: string;
@@ -71,4 +65,4 @@ function ThemeProvider({children}: ThemeContextProps) {
 export default ThemeProvider;
 
 // --- easy use this context --- //
-export const useThemeCOntext = () => useContext(ThemeContext);
+export const useThemeContext = () => useContext(ThemeContext);

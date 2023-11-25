@@ -20,9 +20,9 @@ export const UsersGameTable = async ()=> {
 
                 <TableHeader className={"sticky top-0 bg-secondary"}>
                     <TableRow>
-                        <TableHead className={"text-indigo-950"}>User Name</TableHead>
-                        <TableHead className={"text-indigo-950"}>Game Name</TableHead>
-                        <TableHead className={"text-indigo-950"}>Points</TableHead>
+                        <TableHead>User Name</TableHead>
+                        <TableHead>Game Name</TableHead>
+                        <TableHead>Points</TableHead>
                     </TableRow>
                 </TableHeader>
 

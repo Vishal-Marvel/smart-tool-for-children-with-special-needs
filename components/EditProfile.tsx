@@ -14,6 +14,8 @@ import {useRouter} from "next/navigation";
 import {Users} from "@prisma/client";
 import {useState} from "react";
 import {PopUpNotification} from "@/components/PopUpNotification";
+import {ArrowLeft} from "lucide-react";
+import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,} from "@/components/ui/tooltip"
 
 interface EditProfileProps {
     profile: Users
@@ -64,7 +66,22 @@ export function EditProfile({profile}: EditProfileProps) {
         <>
             <Card className="w-fit  ">
                 <CardHeader>
-                    <CardTitle>Edit Profile</CardTitle>
+                    <div className={"flex flex-row"}>
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger>
+                                    <ArrowLeft onClick={() => router.push("/dashboard")}
+                                               className={"cursor-pointer transition-all duration-100 hover:scale-125"}/>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    <p>Dashboard</p>
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
+
+
+                        <CardTitle className={"ml-2"}>Edit Profile</CardTitle>
+                    </div>
                 </CardHeader>
                 <CardContent>
                     <Form {...form}>

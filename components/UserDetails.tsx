@@ -26,7 +26,7 @@ export const UserDetails = async ({profile}: Props) => {
                 <DialogTrigger>
                     <Avatar className={"w-9 h-9"}>
                         <AvatarImage src={user.imageUrl}/>
-                        <AvatarFallback>U</AvatarFallback>
+                        <AvatarFallback>{profile.name[0]}</AvatarFallback>
                     </Avatar>
 
                 </DialogTrigger>

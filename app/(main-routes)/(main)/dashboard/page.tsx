@@ -14,8 +14,8 @@ import MemberRole = $Enums.MemberRole;
 const Dashboard = async () => {
     const profile: Users = await initProfile();
 
-    return <div className={"p-3 m-3"}>
-        <div className={"flex justify-between"}>
+    return <div>
+        <div className={"flex justify-between  p-3"}>
             <span className={"font-bold text-2xl capitalize"}>Welcome! {profile.name}</span>
             <div className={"flex flex-row justify-between min-w-1/7"}>
                 <ToggleButton/>

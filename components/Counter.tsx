@@ -6,6 +6,7 @@ import "./styles.css";
 import {cn} from "@/lib/utils";
 
 interface Props {
+    restart?: number
     time: number,
     size?: number,
     isPlaying: boolean,
@@ -29,7 +30,7 @@ const renderTime = ({remainingTime}) => {
     } else {
         return (
             <div className={"time-wrapper"}>
-                <div className={cn("time", remainingTime <= 10 && "time-effect")}>
+                <div className={cn("time", remainingTime <= 20 && "time-effect")}>
                     {remainingTime}
                 </div>
             </div>
@@ -39,11 +40,12 @@ const renderTime = ({remainingTime}) => {
 };
 
 
-export const Counter = ({time, isPlaying, size, onCompleteFunc, onUpdateFunc}: Props) => {
+export const Counter = ({restart, time, isPlaying, size, onCompleteFunc, onUpdateFunc}: Props) => {
     return (
         <div className="App">
             <div className="timer-wrapper">
                 <CountdownCircleTimer
+                    key={restart ? restart : 0}
                     isPlaying={isPlaying}
                     size={size ? size : 100}
                     onComplete={onCompleteFunc}

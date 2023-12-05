@@ -39,5 +39,6 @@ model User_Game {
   gameId    String
   userId    String
   timeTaken Int
-  moves     Int
+  level     Int
+  accuracy  Int
 }

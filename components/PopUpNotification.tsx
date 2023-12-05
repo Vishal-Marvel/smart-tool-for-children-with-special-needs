@@ -17,8 +17,8 @@ export const PopUpNotification = ({display, title, buttonText, buttonOnClick, me
             <DialogContent>
                 <DialogClose className={"hidden"}/>
                 <DialogTitle>{title}</DialogTitle>
-                <div className={"pt-4 m-2 w-full"}>
-                    {message}
+                <div className={"m-2 w-full flex-col flex"}>
+                    <span className={"text-indigo-950 m-2 pb-4"}>{message}</span>
 
                     <Button className={"w-full"} onClick={buttonOnClick}>{buttonText ? buttonText : "Continue"}</Button>
                 </div>

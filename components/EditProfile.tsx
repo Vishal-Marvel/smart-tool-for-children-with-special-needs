@@ -16,7 +16,6 @@ import {useEffect, useState} from "react";
 import {PopUpNotification} from "@/components/PopUpNotification";
 import {ArrowLeft} from "lucide-react";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,} from "@/components/ui/tooltip"
-import ConfirmDialogBox from "@/components/ConfirmDialogBox";
 
 interface EditProfileProps {
     profile: Users
@@ -267,9 +266,7 @@ export function EditProfile({profile}: EditProfileProps) {
             </Card>
             <PopUpNotification display={popup} title={"Profile Edited"}
                                buttonOnClick={() => (router.push("/dashboard"))}/>
-            <ConfirmDialogBox buttonName={"Confirm?"} title={"You have unsaved changes. Do you really want to leave?"}>
 
-            </ConfirmDialogBox>
         </>
     );
 }

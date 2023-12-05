@@ -8,8 +8,6 @@ import {SignedIn, SignedOut, SignInButton} from "@clerk/nextjs";
 
 import {Button, buttonVariants} from "@/components/ui/button"
 import ToggleButton from "@/components/ToggleButton";
-import {GameCard} from "@/components/GameCard";
-import memory from "@/public/memory.png";
 
 export default function Home() {
     const router = useRouter();
@@ -38,37 +36,35 @@ export default function Home() {
                 </SignedOut>
             </div>
 
-            <div className="m-3 flex items-center text-center flex-col">
+            <div className="m-3 flex items-center text-center flex-col text-indigo-950 dark:text-indigo-50">
                 <h1 className={"text-2xl md:text-4xl font-bold w-4/5"}>
                     Smart And Digitised Visual Motorized Integrated Tool for Child With Special Needs
                 </h1>
-                <div className={"flex md:flex-row flex-col align-middle items-center justify-center md:m-4"}>
-                    <p className={"font-2xl md:p-4 p-2 pb-1 text-center"}>
-                        A "Smart and Digitized Visual Motorized Integrated Tool for Children with Special Needs"
-                        refers to an innovative device designed to assist and support children who have special
-                        needs, particularly those with motor and visual challenges. This tool incorporates advanced
-                        technologies and digital features to provide a tailored and interactive learning or
-                        therapeutic experience for these children.
+                <div className={"flex flex-col align-middle justify-center md:m-4"}>
 
-                        The term "visual motorized" suggests that the tool combines visual and motor skills
-                        development, addressing challenges related to both perception and physical coordination. The
-                        integration of smart technology indicates that the tool likely utilizes digital elements
-                        such as sensors, interactive displays, or adaptive software to personalize the experience
-                        for each child.
+                    <p className={"text-justify md:p-4 p-2"}>
+                        <strong className={"text-[24px] p-2 pl-0"}>DOMAINS TESTED:</strong><br/><br/>
+
+                        <strong>Visual Discrimination:</strong> The ability to differentiate and identify distinct
+                        visual stimuli or details, crucial for tasks like reading and recognizing shapes.
+                        <br/><br/><strong>Form Constancy Assessment:</strong> Examining the capability to recognize and
+                        understand a form or object regardless of its size, position, or orientation.
+                        <br/><br/><strong>Figure-Ground Discrimination:</strong> Assessing the capacity to distinguish
+                        an object from its surrounding background.
+                        <br/><br/><strong>Visual Closure Assessment:</strong> Gauging the ability to mentally complete
+                        or identify a whole object when presented with incomplete visual information, contributing to
+                        overall visual understanding.
+                        <br/><br/><strong>Allocentric visual perception Assessment:</strong> Evaluating the ability to
+                        perceive and understand the spatial relationships between objects from an external,
+                        viewer-independent perspective.
+                        <br/><br/><strong>Egocentric visual perception Assessment:</strong> Assessing the ability to
+                        perceive and understand spatial relationships from a subjective, viewer-dependent perspective,
+                        considering one's own position.
+                        <br/><br/><strong>Motion-Based Dynamic Visual Cognitive Perception
+                        Assessment:</strong> Examining cognitive processing abilities related to understanding and
+                        interpreting visual information in motion, including tracking moving objects and perceiving
+                        dynamic visual stimuli.
                     </p>
-                </div>
-            </div>
-            <div className={"m-4 p-2"}>
-                <span className={"text-2xl font-semibold"}>Games Available</span>
-
-                <div className={"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center"}>
-
-                    <GameCard image={memory}
-                              med={"Hand eye coordination."}
-                              text={"The objective of the memory game is to find all the matching pairs by clicking on the cards."}
-                              name={"Memory Game"}
-                    />
-
                 </div>
             </div>
 

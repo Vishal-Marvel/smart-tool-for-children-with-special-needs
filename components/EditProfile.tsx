@@ -12,10 +12,11 @@ import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import axios from "axios";
 import {useRouter} from "next/navigation";
 import {Users} from "@prisma/client";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {PopUpNotification} from "@/components/PopUpNotification";
 import {ArrowLeft} from "lucide-react";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,} from "@/components/ui/tooltip"
+import ConfirmDialogBox from "@/components/ConfirmDialogBox";
 
 interface EditProfileProps {
     profile: Users
@@ -50,6 +51,8 @@ export function EditProfile({profile}: EditProfileProps) {
         }
     });
     const isLoading = form.formState.isSubmitting;
+    // Store the initial form values
+    const initialFormValues = form.getValues();
     const router = useRouter();
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -62,6 +65,38 @@ export function EditProfile({profile}: EditProfileProps) {
         }
     };
 
+    // Check for changes before redirecting
+    const checkChangesBeforeRedirect = () => {
+        if (!form.formState.isDirty) {
+            // No changes, proceed with redirect
+            router.push('/dashboard');
+        } else {
+
+            const confirmChanges = window.confirm('You have unsaved changes. Do you really want to leave?');
+            if (confirmChanges) {
+                router.push('/dashboard');
+            }
+            // You can customize the confirmation dialog or behavior based on your requirements
+        }
+    };
+
+    useEffect(() => {
+        const handleBeforeUnload = (event) => {
+            if (form.formState.isDirty) {
+                const message = 'You have unsaved changes. Are you sure you want to leave?';
+                event.returnValue = message; // Standard for most browsers
+                return message; // For some older browsers
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [form.formState.isDirty]);
+
+
     return (
         <>
             <Card className="w-fit  ">
@@ -70,7 +105,7 @@ export function EditProfile({profile}: EditProfileProps) {
                         <TooltipProvider>
                             <Tooltip>
                                 <TooltipTrigger>
-                                    <ArrowLeft onClick={() => router.push("/dashboard")}
+                                    <ArrowLeft onClick={checkChangesBeforeRedirect}
                                                className={"cursor-pointer transition-all duration-100 hover:scale-125"}/>
                                 </TooltipTrigger>
                                 <TooltipContent>
@@ -232,6 +267,9 @@ export function EditProfile({profile}: EditProfileProps) {
             </Card>
             <PopUpNotification display={popup} title={"Profile Edited"}
                                buttonOnClick={() => (router.push("/dashboard"))}/>
+            <ConfirmDialogBox buttonName={"Confirm?"} title={"You have unsaved changes. Do you really want to leave?"}>
+
+            </ConfirmDialogBox>
         </>
     );
 }

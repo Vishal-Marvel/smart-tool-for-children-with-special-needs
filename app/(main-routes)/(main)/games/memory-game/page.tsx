@@ -1,5 +1,5 @@
 import "./style.css"
-import {MemoryGame} from "@/components/MemoryGame";
+import {MemoryGame} from "@/components/games/MemoryGame";
 import {db} from "@/lib/db";
 
 const MemoryPage = async ()=> {

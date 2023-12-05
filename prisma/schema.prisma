@@ -35,8 +35,9 @@ model Game {
 }
 
 model User_Game {
-  id     String @id @default(auto()) @map("_id") @db.ObjectId
-  gameId String
-  userId String
-  points Int
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  gameId    String
+  userId    String
+  timeTaken Int
+  moves     Int
 }

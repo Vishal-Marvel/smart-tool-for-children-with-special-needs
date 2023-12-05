@@ -1,20 +1,22 @@
-import {UserButton} from "@clerk/nextjs";
 import {initProfile} from "@/lib/init-profile";
-import {$Enums} from ".prisma/client";
+
 import {AdminDashboard} from "@/components/AdminDashboard";
 import {UserDashboard} from "@/components/UserDashboard";
-import ToggleButton from "@/components/ToggleButton";
-import {UserDetails} from "@/components/UserDetails";
+
 import {Users} from "@prisma/client";
+import {$Enums} from ".prisma/client";
+import ToggleButton from "@/components/ToggleButton";
+import {UserButton} from "@clerk/nextjs";
+import {UserDetails} from "@/components/UserDetails";
 import MemberRole = $Enums.MemberRole;
 
-const Dashboard = async () => {
-    const profile: Users = await initProfile()
 
+const Dashboard = async () => {
+    const profile: Users = await initProfile();
 
     return <div className={"p-3 m-3"}>
         <div className={"flex justify-between"}>
-            <span className={"font-bold text-2xl capitalize"}>Dashboard</span>
+            <span className={"font-bold text-2xl capitalize"}>Welcome! {profile.name}</span>
             <div className={"flex flex-row justify-between min-w-1/7"}>
                 <ToggleButton/>
                 {profile.role === MemberRole.ADMIN && <UserButton afterSignOutUrl={"/"}/>}

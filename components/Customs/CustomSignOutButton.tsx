@@ -1,32 +1,22 @@
 "use client"
-import {useRouter} from 'next/navigation'
 import {SignOutButton} from "@clerk/nextjs";
+import ConfirmDialogBox from "@/components/ConfirmDialogBox";
+import {useRouter} from "next/navigation";
 import {Button} from "@/components/ui/button";
-import {Dialog, DialogContent, DialogTitle, DialogTrigger} from "@/components/ui/dialog";
 import {useState} from "react";
 
-const CustomSignOut = () => {
-    const router = useRouter()
-    const [dialog, setDialog] = useState(true);
+const CustomSignOutButton = () => {
+    const [dialog, setDialog] = useState(false)
+    const router = useRouter();
     return (
-        <Dialog open={dialog} onOpenChange={() => setDialog(!dialog)}>
-            <DialogTrigger>
-                <Button>Sign Out</Button>
-            </DialogTrigger>
-            <DialogContent>
-                <DialogTitle>Confirm Sign Out ?</DialogTitle>
-                <div className={"flex justify-between p-4"}>
-                    <Button>
-                        <SignOutButton signOutCallback={() => router.push("/")}/>
-                    </Button>
-                    <Button variant={"ghost"} onClick={() => (setDialog(false))}>
-                        Cancel
-                    </Button>
-                </div>
-
-            </DialogContent>
-        </Dialog>
-    );
-};
-
-export default CustomSignOut
+        <Button onClick={() => (setDialog(true))}>
+            <ConfirmDialogBox open={dialog}
+                              title={"Confirm Sign Out?"}
+            >
+                <SignOutButton signOutCallback={() => router.push("/")}/>
+            </ConfirmDialogBox>
+            Sign Out
+        </Button>
+    )
+}
+export default CustomSignOutButton;

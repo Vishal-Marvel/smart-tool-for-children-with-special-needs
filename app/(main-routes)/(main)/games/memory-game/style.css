@@ -70,7 +70,9 @@ a {
 }
 .menu {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: space-around;
+    padding: 30px;
 }
 
 .menu p {

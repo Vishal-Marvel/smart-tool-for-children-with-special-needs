@@ -8,32 +8,33 @@ export async function POST(
 ){
     try{
         const user = await currentProfile();
-        const {gameId, moves, maxMoves} = await req.json();
-        if (!user){
+        const {gameId, moves, timeTaken} = await req.json();
+        if (!user) {
             return new NextResponse("UnAuth", {status: 401});
         }
-        let points
-        const calculateMoves = () => {
-            if (Math.abs(maxMoves-moves) > 10){
-                points = 1
-            }else if (Math.abs(maxMoves-moves) > 8){
-                points = 2
-            }
-            else if (Math.abs(maxMoves-moves) > 6){
-                points = 3
-            }
-            else if (Math.abs(maxMoves-moves) > 4){
-                points = 4
-            }else {
-                points = 5
-            }
-        }
-        calculateMoves();
+        // let points
+        // const calculateMoves = () => {
+        //     if (Math.abs(maxMoves-moves) > 10){
+        //         points = 1
+        //     }else if (Math.abs(maxMoves-moves) > 8){
+        //         points = 2
+        //     }
+        //     else if (Math.abs(maxMoves-moves) > 6){
+        //         points = 3
+        //     }
+        //     else if (Math.abs(maxMoves-moves) > 4){
+        //         points = 4
+        //     }else {
+        //         points = 5
+        //     }
+        // }
+        // calculateMoves();
         const user_game = await db.user_Game.create({
-            data:{
+            data: {
                 gameId,
                 userId: user.id,
-                points
+                moves,
+                timeTaken
             }
         })
         return NextResponse.json(user_game)

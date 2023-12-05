@@ -1,9 +1,11 @@
 import {Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger,} from "@/components/ui/dialog"
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar"
 import {currentUser} from "@clerk/nextjs";
-import CustomSignOut from "@/components/Customs/CustomSignOutButton";
 import {Users} from "@prisma/client";
+
 import ProfileEditButton from "@/components/Customs/ProfileEditButton";
+import CustomSignOutButton from "@/components/Customs/CustomSignOutButton";
+
 
 interface Props {
     profile: Users
@@ -13,6 +15,7 @@ export const UserDetails = async ({profile}: Props) => {
     const user = await currentUser();
     const userDetails = [
         {key: "Name", value: profile.name},
+        {key: "Email", value: profile.email},
         {key: "Gender", value: profile.gender},
         {key: "Age", value: profile.age},
         {key: "Weight", value: profile.weight},
@@ -39,7 +42,7 @@ export const UserDetails = async ({profile}: Props) => {
 
                         <div className="flex flex-col p-4">
                             {userDetails.map((member, index) => (
-                                <div className={"grid grid-cols-[40%_2%_45%] gap-5 "} key={index}>
+                                <div className={"grid grid-cols-[30%_2%_45%] gap-5 "} key={index}>
                                     <span className={"text-end"}>{member.key}</span>
                                     <span className={"w-[10px]"}>:</span>
                                     <span className={"text-justify"}>{member.value}</span>
@@ -49,7 +52,7 @@ export const UserDetails = async ({profile}: Props) => {
                         </div>
                         <div className={"flex flex-row justify-between"}>
                             <ProfileEditButton/>
-                            <CustomSignOut/>
+                            <CustomSignOutButton/>
 
                         </div>
                     </div>

@@ -1,7 +1,10 @@
 "use client"
 import {useEffect, useState} from "react";
-import axios from "axios";
 import {useRouter} from "next/navigation";
+
+import axios from "axios";
+import Image from "next/image";
+
 import robot from "@/public/memory/robot.webp"
 import alien from "@/public/memory/alien.webp"
 import ghost from "@/public/memory/ghost.webp"
@@ -10,8 +13,11 @@ import penguin from "@/public/memory/penguin.webp"
 import peacock from "@/public/memory/peacock.webp"
 import smile from "@/public/memory/smile.webp"
 import rocket from "@/public/memory/rocket.webp"
-import Image from "next/image";
+
 import {PopUpNotification} from "@/components/PopUpNotification";
+
+import sound from "@/components/context/PlaySound";
+import {Counter} from "@/components/Counter";
 
 interface Props {
     id: string
@@ -27,7 +33,7 @@ export const MemoryGame = ({id}: Props) => {
     const [moves, setMoves] = useState(0);
     const [gameOver, setGameOver] = useState(false);
     const [dialogBox, setDialogBox] = useState(false);
-
+    const [time, setTime] = useState(5);
     useEffect(() => {
 
         initialize();
@@ -78,14 +84,17 @@ export const MemoryGame = ({id}: Props) => {
     const completeGame = async ()=>{
         if (gameOver === true) {
             setDialogBox(true)
+            if (time > 0) sound.play();
             await axios.post("/api/game-over", {
                 gameId: id,
                 moves,
-                maxMoves: 16
+                timeTaken: 180 - time
             })
 
         }
     }
+
+
     useEffect(()=>{
         completeGame().then(()=>{})
 
@@ -93,12 +102,20 @@ export const MemoryGame = ({id}: Props) => {
 
 
     return (
-        <div className={"flex flex-col"}>
-            <span className={"pb-10 text-center font-semibold text-2xl"}>Memory Game</span>
 
+        <div className={"justify-center justify-items-center flex flex-col"}>
+
+            <span className={"text-center font-semibold text-2xl"}>Memory Game</span>
             <div className="container">
                 <div className="menu">
-                    <p className={"pb-3"}>{`Moves - ${moves}`}</p>
+                    <Counter
+                        isPlaying={!gameOver}
+                        onCompleteFunc={() => setGameOver(true)}
+                        onUpdateFunc={(remainingTime) => setTime(remainingTime)}
+                        time={180}
+                    />
+
+
                 </div>
 
                 <div className="board">

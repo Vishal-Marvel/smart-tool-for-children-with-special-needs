@@ -23,7 +23,7 @@ export const UserDashboard = () => {
             <div className={"m-4 p-2"}>
                 <span className={"text-2xl font-semibold"}>Games Available</span>
 
-                <div className={"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center"}>
+                <div className={"flex flex-row flex-wrap justify-center justify-items-center"}>
 
                     <GameCard image={memory}
                               med={"Hand eye coordination."}

@@ -44,8 +44,8 @@ export const UsersGameTable = async ()=> {
 
                 <TableFooter className={"sticky -bottom-0.5 bg-secondary"}>
                     <TableRow>
-                        <TableCell colSpan={2}>Total</TableCell>
-                        <TableCell className="text-right">{userGames.length} Games(s)</TableCell>
+                        <TableCell colSpan={3}>Total</TableCell>
+                        <TableCell colSpan={2} className="text-right">{userGames.length} Games(s)</TableCell>
                     </TableRow>
                 </TableFooter>
             </Table>

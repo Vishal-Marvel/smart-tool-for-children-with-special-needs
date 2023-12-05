@@ -27,7 +27,7 @@ export const OddOneOut = ({id}: Props) => {
     const [gameLev, setGameLev] = useState(1);
     const [time, setTime] = useState(0);
     const [key, setKey] = useState(0);
-    const [initialTime, setInitialTime] = useState(120);
+    const [initialTime, setInitialTime] = useState(20);
     const [dialogBox, setDialogBox] = useState(false);
     const [message, setMessage] = useState("");
 
@@ -52,29 +52,23 @@ export const OddOneOut = ({id}: Props) => {
         axios
             .post("/api/game-over", {
                 gameId: id,
-                timeTaken: initialTime - time,
+                timeTaken: initialTime - time + 1,
                 level: gameLev,
                 accuracy: acc ? 1 : 0,
             })
             .then(() => {
-                setGameLev(gameLev + 1);
-                nextLev();
+
                 setDialogBox(true);
+                setGameLev(gameLev + 1);
+
             })
             .catch((e) => console.log(e));
     };
 
-    const nextLev = () => {
+    const startGame = () => {
+        setMessage("");
         if (gameLev <= 3) {
             setKey(key + 1);
-            setInitialTime(120);
-
-            setTime(0); // Restart the timer
-        }
-
-    };
-    const startGame = () => {
-        if (gameLev <= 3) {
             setGameOver(false);
             setDialogBox(false);
         } else {
@@ -93,7 +87,10 @@ export const OddOneOut = ({id}: Props) => {
                 <Counter
                     restart={key}
                     isPlaying={!gameOver}
-                    onCompleteFunc={() => sendDate(false)}
+                    onCompleteFunc={() => {
+                        setMessage("Time Up");
+                        sendDate(false);
+                    }}
                     onUpdateFunc={(remainingTime) => setTime(remainingTime)}
                     time={initialTime}
                 />

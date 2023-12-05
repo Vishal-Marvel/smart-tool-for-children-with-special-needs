@@ -22,7 +22,9 @@ export const UsersGameTable = async ()=> {
                     <TableRow>
                         <TableHead>User Name</TableHead>
                         <TableHead>Game Name</TableHead>
-                        <TableHead>Points</TableHead>
+                        <TableHead>Level</TableHead>
+                        <TableHead>Time Taken</TableHead>
+                        <TableHead>Win/Loose</TableHead>
                     </TableRow>
                 </TableHeader>
 
@@ -32,7 +34,9 @@ export const UsersGameTable = async ()=> {
                 <TableRow key={userGame.id}>
                     <TableCell>{findUser(userGame.userId)}</TableCell>
                     <TableCell>{findGame(userGame.gameId)}</TableCell>
-                    <TableCell>{userGame.points}</TableCell>
+                    <TableCell>{userGame.level}</TableCell>
+                    <TableCell>{userGame.timeTaken} s</TableCell>
+                    <TableCell>{userGame.accuracy === 1 ? "Won" : "Lost"}</TableCell>
                 </TableRow>
                 ))}
 

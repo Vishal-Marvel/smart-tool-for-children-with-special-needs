@@ -10,7 +10,7 @@ interface GameCardProps{
 
 export const GameCard = ({image, text, name, med}: GameCardProps) => {
     return (
-        <Card className={"p-3 m-3 w-[350px]"}>
+        <Card className={"p-3 m-3 w-[350px] h-[500px]"}>
             <CardTitle className={"p-2 text-center"}>
                 {name}
             </CardTitle>
@@ -18,8 +18,10 @@ export const GameCard = ({image, text, name, med}: GameCardProps) => {
                 <strong className={"capitalize"}>{med}</strong><br/>
                 {text}
             </CardDescription>
-            <CardContent className={" flex items-center justify-center p-3"}>
-                <Image src={image} alt={name}/>
+            <CardContent className={"flex items-center justify-center p-3 justify-items-center"}>
+                <div className={"align-middle top-1/2"}>
+                    <Image src={image} alt={name}/>
+                </div>
             </CardContent>
         </Card>
     )

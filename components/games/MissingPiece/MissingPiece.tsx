@@ -13,7 +13,6 @@ import wrg3l2 from "@/public/missingpiece/test2_wrg6.png"
 import wrg1l3 from "@/public/missingpiece/test2_wrg7.png"
 import wrg2l3 from "@/public/missingpiece/test2_wrg8.png"
 import wrg3l3 from "@/public/missingpiece/test2_wrg9.png"
-import wrg4l3 from "@/public/missingpiece/test2_wrg10.png"
 import l1 from "@/public/missingpiece/test2.png"
 import l2 from "@/public/missingpiece/test2_l2.png"
 import l3 from "@/public/missingpiece/test2_l3.png"
@@ -21,8 +20,7 @@ import crt1 from "@/public/missingpiece/test2_crt1.png"
 import crt2 from "@/public/missingpiece/test2_crt2.png"
 import crt3 from "@/public/missingpiece/test2_crt3.png"
 
-import {LevOneAndLevTwo} from "@/components/games/MissingPiece/LevOneAndLevTwo";
-import {LevThree} from "@/components/games/MissingPiece/LevThree";
+import {Levels} from "@/components/games/MissingPiece/Levels";
 import sound from "@/components/context/PlaySound";
 import {PopUpNotification} from "@/components/PopUpNotification";
 import {useRouter} from "next/navigation";
@@ -108,10 +106,11 @@ export const MissingPiece = ({id}: Props) => {
                     className={"text-indigo-950 dark:text-indigo-50 text-2xl font-bold uppercase "}> Level - {gameLev}</span>
             </div>
             <div className={"justify-center justify-items-center align-middle"}>
-                {gameLev <= 2 &&
-                    <LevOneAndLevTwo lev={gameLev} wrg1l1={wrg1l1} wrg2l1={wrg2l1} wrg3l1={wrg3l1} wrg1l2={wrg1l2} wrg2l2={wrg2l2} wrg3l2={wrg3l2} crt1={crt1} crt2={crt2} l1={l1} l2={l2}
-                                     handleOnClick={handleOnClick}/>}
-                {gameLev === 3 && <LevThree crt3={crt3} wrg1l3={wrg1l3} wrg2l3={wrg2l3} wrg3l3={wrg3l3} wrg4l3={wrg4l3} l3={l3} handleClick={handleOnClick}/>}
+
+                <Levels lev={gameLev} wrg1l1={wrg1l1} wrg2l1={wrg2l1} wrg3l1={wrg3l1} wrg1l2={wrg1l2} wrg2l2={wrg2l2}
+                        wrg3l2={wrg3l2} crt1={crt1} crt2={crt2} l1={l1} l2={l2} crt3={crt3} wrg1l3={wrg1l3}
+                        wrg2l3={wrg2l3} wrg3l3={wrg3l3} l3={l3}
+                        handleOnClick={handleOnClick}/>
             </div>
             <PopUpNotification display={dialogBox} title={"Game Over"} message={message}
                                buttonOnClick={() => startGame()}/>

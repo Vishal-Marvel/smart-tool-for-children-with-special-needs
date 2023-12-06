@@ -26,7 +26,7 @@ export const LevThree = ({odd, even, handleClick}: Props) => {
     }, []);
 
     return (
-        <div className={"grid grid-cols-2 md:grid-cols-6 justify-items-center justify-center"}>
+        <div className={"grid grid-cols-3 md:grid-cols-6 justify-items-center justify-center"}>
             {shuffledImages.map((image, index) => (
                 <Image key={index} src={image} alt={`Image${index + 1}`}
                        className={"aspect-1 h-20 w-20 object-contain cursor-pointer"}

@@ -38,7 +38,7 @@ export default function Home() {
 
             <div className="m-3 flex items-center text-center flex-col text-indigo-950 dark:text-indigo-50">
                 <h1 className={"text-2xl md:text-4xl font-bold w-4/5"}>
-                    Smart And Digitised Visual Motorized Integrated Tool for Child With Special Needs
+                    Smart And Digitised Visual Perception Integrated Tool for Child With Special Needs
                 </h1>
                 <div className={"flex flex-col align-middle justify-center md:m-4"}>
 

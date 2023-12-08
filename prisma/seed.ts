@@ -2,7 +2,7 @@ import {PrismaClient} from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-export async function main() {
+async function main() {
     const gameRecords = await prisma.game.findMany();
     if (gameRecords.length == 0) {
         await prisma.game.createMany({
@@ -20,3 +20,10 @@ export async function main() {
         console.log("Seed Executed")
     }
 }
+
+main().then(() => {
+    prisma.$disconnect();
+}).catch((e) => {
+    console.error("SEED ERROR", e);
+    prisma.$disconnect();
+})

@@ -47,9 +47,9 @@ export const UserDashboard = () => {
                               name={"Match The Image"}
                     />
                     <GameCard image={match}
-                              med={"Visual closure assessment"}
-                              text={"Identify and match the hidden image. Tap, draw or click on the option."}
-                              name={"Match The Image"}
+                              med={"Allocentric visual perception Assessment"}
+                              text={"Connect the dots on the right-hand side to replicate the pattern from the left. Use tapping, clicking, or drawing to place each dot accurately."}
+                              name={"Dot To Dot"}
                     />
 
                 </div>

@@ -3,6 +3,7 @@ import {GameCard} from "@/components/GameCard";
 import memory from "@/public/memory.png";
 import oddOne from "@/public/odd-one.png";
 import missingpiece from "@/public/missingpiece.png";
+import match from "@/public/match.png";
 
 export const UserDashboard = () => {
 
@@ -14,7 +15,7 @@ export const UserDashboard = () => {
 
 
                 <div className={"m-6 w-fit align-middle items-center justify-center"}>
-                    <Link href={"/games/missing-piece"}>
+                    <Link href={"/games/match"}>
                         <span className={" font-bold bg-indigo-950 text-white p-2.5 rounded-2xl "}>Start Game</span>
                     </Link>
                 </div>
@@ -39,6 +40,16 @@ export const UserDashboard = () => {
                               med={"Form constancy assessment"}
                               text={"Identify the missing piece from a set of given options. Tap or click on the option."}
                               name={"Spot The Missing Piece"}
+                    />
+                    <GameCard image={match}
+                              med={"Visual closure assessment"}
+                              text={"Identify and match the hidden image. Tap, draw or click on the option."}
+                              name={"Match The Image"}
+                    />
+                    <GameCard image={match}
+                              med={"Visual closure assessment"}
+                              text={"Identify and match the hidden image. Tap, draw or click on the option."}
+                              name={"Match The Image"}
                     />
 
                 </div>

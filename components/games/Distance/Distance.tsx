@@ -47,7 +47,7 @@ export const Distance = ({id}: Props) => {
     const [gameLev, setGameLev] = useState(1);
     const [time, setTime] = useState(0);
     const [key, setKey] = useState(0);
-    const [initialTime, setInitialTime] = useState(20);
+    const [initialTime, setInitialTime] = useState(15);
     const [dialogBox, setDialogBox] = useState(false);
     const [message, setMessage] = useState("");
     const [count,setCount] = useState(0);

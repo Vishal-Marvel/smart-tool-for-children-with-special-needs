@@ -4,6 +4,7 @@ import memory from "@/public/memory.png";
 import oddOne from "@/public/odd-one.png";
 import missingpiece from "@/public/missingpiece.png";
 import match from "@/public/match.png";
+import dot from "@/public/dot.png";
 
 export const UserDashboard = () => {
 
@@ -46,7 +47,7 @@ export const UserDashboard = () => {
                               text={"Identify and match the hidden image. Tap, draw or click on the option."}
                               name={"Match The Image"}
                     />
-                    <GameCard image={match}
+                    <GameCard image={dot}
                               med={"Allocentric visual perception Assessment"}
                               text={"Connect the dots on the right-hand side to replicate the pattern from the left. Use tapping, clicking, or drawing to place each dot accurately."}
                               name={"Dot To Dot"}

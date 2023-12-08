@@ -5,6 +5,7 @@ import oddOne from "@/public/odd-one.png";
 import missingpiece from "@/public/missingpiece.png";
 import match from "@/public/match.png";
 import dot from "@/public/dot.png";
+import distance from "@/public/distance.png";
 
 export const UserDashboard = () => {
 
@@ -51,6 +52,11 @@ export const UserDashboard = () => {
                               med={"Allocentric visual perception Assessment"}
                               text={"Connect the dots on the right-hand side to replicate the pattern from the left. Use tapping, clicking, or drawing to place each dot accurately."}
                               name={"Dot To Dot"}
+                    />
+                     <GameCard image={distance}
+                              med={"Egocentric visual perception Assessment"}
+                              text={"Answer the questions by selecting the right options"}
+                              name={"Distance Dash"}
                     />
 
                 </div>

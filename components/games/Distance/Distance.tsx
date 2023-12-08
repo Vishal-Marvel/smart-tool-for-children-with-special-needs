@@ -54,21 +54,26 @@ export const Distance = ({id}: Props) => {
 
     const handleOnClick = (image: StaticImageData) => {
         if (!gameOver) {
-            if(gameLev<2 || gameLev==2 && count==2 || gameLev==3 && count == 3){
+            if(gameLev<2 || gameLev==2 && count==1 || gameLev==3 && count == 2){
                 setGameOver(true);
+                
             }
             
             
 
             if (image === al1 || image === l2a1 || image === l2a2 || image === l3a1 || image === l3a2 || image === l3a3) {
+                
                 sendDate(true);
                 setMessage("It is the correct answer!!")
                 sound.play();
-                if(gameLev>1)   setCount(count +1)
+                if(gameLev>1)   setCount(count+1)
+                
             } else {
+                
                 setMessage("It is the wrong answer")
                 sendDate(false);
-                if(gameLev>1)   setCount(count +1)
+                if(gameLev>1)   setCount(count+1)
+                
             }
 
         }
@@ -85,7 +90,11 @@ export const Distance = ({id}: Props) => {
             .then(() => {
 
                 setDialogBox(true);
-                setGameLev(gameLev + 1);
+                if(gameLev==2 && count==1|| gameLev==1|| gameLev==3 && count==2){
+                    setGameLev(gameLev + 1);
+                    setCount(0);
+                }
+                
 
             })
             .catch((e) => console.log(e));
@@ -96,7 +105,7 @@ export const Distance = ({id}: Props) => {
         if (gameLev <= 3) {
             setKey(key + 1);
             setGameOver(false);
-            setCount(0);
+          
             setDialogBox(false);
         } else {
             router.push("/dashboard");

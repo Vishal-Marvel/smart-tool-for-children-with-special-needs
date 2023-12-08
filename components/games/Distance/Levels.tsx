@@ -171,7 +171,7 @@ export const Levels = ({
     return (
         <div>
             <div className={"flex flex-col justify-center m-4"}>
-                {lev == 1 && <Image src={l1} alt={'question'} className="md:h-50 md:w-50 h-30 w-30"/>}
+                {lev == 1 && <Image src={l1} alt={'question'} className="md:h-50 md:w-50 h-25 w-25"/>}
                 {lev==1 && <div className="mt-4">1. Which object is closer to the swing . </div>}
             </div>
            
@@ -188,29 +188,29 @@ export const Levels = ({
 
             <div className={"flex justify-center m-4"}>
 
-                {lev == 2 && <Image src={l2} alt={"question"} className="md:h-50 md:w-55 h-40 w-25"/>}
+                {lev == 2 && <Image src={l2} alt={"question"} className="md:h-50 md:w-50 h-25 w-25"/>}
             </div>
             <div>
-                {lev ==2 && count==1 && <div>1. Which object is closest to the stop signal?</div>}
+                {lev ==2 && count==0 && <div>1. Which object is closest to the stop signal?</div>}
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-5 justify-items-center">
-                {lev == 2 && count==1 && shuffledImages2.map((image, index) => (
+                {lev == 2 && count==0 && shuffledImages2.map((image, index) => (
 
                     <Image key={index} src={image} alt={`Image${index + 1}`}
-                           className={"aspect-1 md:h-18 md:w-18 h-12 w-12 object-contain cursor-pointer"}
+                           className={"aspect-1 md:h-20 md:w-20 h-15 w-15 object-contain cursor-pointer"}
                            onClick={() => handleOnClick(image)}
                     />
 
                 ))}
             </div>
             <div>
-                {lev ==2 && count==2 && <div>2. Which object is closest to the Traffic Police? </div>}
+                {lev ==2 && count==1 && <div>2. Which object is closest to the Traffic Police? </div>}
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-5 justify-items-center">
-                {lev == 2 && count==2 && shuffledImages3.map((image, index) => (
+                {lev == 2 && count==1 && shuffledImages3.map((image, index) => (
 
                     <Image key={index} src={image} alt={`Image${index + 1}`}
-                           className={"aspect-1 md:h-18 md:w-18 h-12 w-12 object-contain cursor-pointer"}
+                           className={"aspect-1 md:h-20 md:w-20 h-15 w-15 object-contain cursor-pointer"}
                            onClick={() => handleOnClick(image)}
                     />
 
@@ -218,39 +218,39 @@ export const Levels = ({
             </div>
 
             <div className={"flex justify-center m-4"}>
-                {lev == 3 && <Image src={l3} alt={"question"} className="md:h-50 md:w-40 h-20 w-20"/>}
+                {lev == 3 && <Image src={l3} alt={"question"} className="md:h-50 md:w-50 h-25 w-25"/>}
             </div>
             <div>
-                {lev ==3 && count==1 && <div>1. Which object is closest to the black board? </div>}
+                {lev ==3 && count==0 && <div>1. Which object is closest to the black board? </div>}
             </div>
             <div className="grid grid-cols-2 gap-10 justify-items-center">
-                {lev == 3 && count ==1 && shuffledImages4.map((image, index) => (
+                {lev == 3 && count ==0 && shuffledImages4.map((image, index) => (
                     <Image key={index} src={image} alt={`Image${index + 1}`}
-                           className={"aspect-1 h-15 w-15 object-contain cursor-pointer"}
+                           className={"aspect-1 h-18 w-18 object-contain cursor-pointer"}
                            onClick={() => handleOnClick(image)}
                     />
 
                 ))}
             </div>
             <div>
-                {lev ==3 && count==2 && <div> 2. Which object is closest to the window? </div>}
+                {lev ==3 && count==1 && <div> 2. Which object is closest to the window? </div>}
             </div>
             <div className="grid grid-cols-2 gap-10 justify-items-center">
-                {lev == 3 && count==2 && shuffledImages5.map((image, index) => (
+                {lev == 3 && count==1 && shuffledImages5.map((image, index) => (
                     <Image key={index} src={image} alt={`Image${index + 1}`}
-                           className={"aspect-1 h-15 w-15 object-contain cursor-pointer"}
+                           className={"aspect-1 h-18 w-18 object-contain cursor-pointer"}
                            onClick={() => handleOnClick(image)}
                     />
 
                 ))}
             </div>
             <div>
-                {lev ==3 && count==3 && <div>3. Which object is farthest from the black board?  </div>}
+                {lev ==3 && count==2 && <div>3. Which object is farthest from the black board?  </div>}
             </div>
             <div className="grid grid-cols-2 gap-10 justify-items-center">
-                {lev == 3 && count==3 && shuffledImages6.map((image, index) => (
+                {lev == 3 && count==2 && shuffledImages6.map((image, index) => (
                     <Image key={index} src={image} alt={`Image${index + 1}`}
-                           className={"aspect-1 h-15 w-15 object-contain cursor-pointer"}
+                           className={"aspect-1 h-18 w-18 object-contain cursor-pointer"}
                            onClick={() => handleOnClick(image)}
                     />
 

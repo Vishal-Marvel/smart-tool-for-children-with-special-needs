@@ -37,18 +37,18 @@ export const OddOneOut = ({id}: Props) => {
 
 
             if (image === blue_circle || image === bee || image === oddPanda) {
-                sendDate(true);
+                sendData(true);
                 setMessage("It is the correct answer!!")
                 sound.play();
             } else {
                 setMessage("It is the wrong answer")
-                sendDate(false);
+                sendData(false);
             }
 
         }
     };
 
-    const sendDate = (acc: boolean) => {
+    const sendData = (acc: boolean) => {
         axios
             .post("/api/game-over", {
                 gameId: id,
@@ -72,7 +72,7 @@ export const OddOneOut = ({id}: Props) => {
             setGameOver(false);
             setDialogBox(false);
         } else {
-            router.push("/dashboard");
+            router.push("/games/missing-piece");
         }
     }
 
@@ -89,7 +89,7 @@ export const OddOneOut = ({id}: Props) => {
                     isPlaying={!gameOver}
                     onCompleteFunc={() => {
                         setMessage("Time Up");
-                        sendDate(false);
+                        sendData(false);
                     }}
                     onUpdateFunc={(remainingTime) => setTime(remainingTime)}
                     time={initialTime}

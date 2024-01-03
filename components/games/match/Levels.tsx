@@ -1,6 +1,12 @@
 "use client"
 import Image, {StaticImageData} from "next/image";
 import {useEffect, useState} from "react";
+import {cn} from "@/lib/utils";
+
+interface ImageData {
+    question: StaticImageData;
+    answer: StaticImageData;
+}
 
 interface Props {
     q1l1: StaticImageData,
@@ -18,15 +24,16 @@ interface Props {
     q2l3: StaticImageData,
     q3l3: StaticImageData,
     q4l3: StaticImageData,
-    q5l3: StaticImageData,
+
     a1l3: StaticImageData,
     a2l3: StaticImageData,
     a3l3: StaticImageData,
     a4l3: StaticImageData,
-    a5l3: StaticImageData,
-  
-    handleOnDraw: (drawnAnswer:StaticImageData,questionimage: StaticImageData) => void
+
+    timeup: boolean
+    handleOnDraw
 }
+
 
 export const Levels = ({
                            q1l1,
@@ -44,35 +51,64 @@ export const Levels = ({
                            q2l3,
                            q3l3,
                            q4l3,
-                           q5l3,
                            a1l3,
                            a2l3,
                            a3l3,
                            a4l3,
-                           a5l3,
                            handleOnDraw,
+                           timeup
                        }: Props) => {
     const [shuffledImages1, setShuffledImages1] = useState<StaticImageData[]>([]);
     const [shuffledImages2, setShuffledImages2] = useState<StaticImageData[]>([]);
     const [shuffledImages3, setShuffledImages3] = useState<StaticImageData[]>([]);
+    const [lev1questions, setLev1questions] = useState([q1l1, q2l1]);
+    const [lev2questions, setLev2questions] = useState([q1l2, q2l2, q3l2]);
+    const [lev3questions, setLev3questions] = useState([q1l3, q2l3, q3l3, q4l3]);
 
-    const handleDragStart = (event: React.DragEvent<HTMLDivElement>, image: StaticImageData) => {
-        event.dataTransfer.setData("image", JSON.stringify(image)); // Set the dragged image data
-      };
-    
-      const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
-        event.preventDefault();
-      };
-    
-      const handleDrop = (event: React.DragEvent<HTMLDivElement>, questionImage: StaticImageData) => {
-        event.preventDefault();
-        const draggedImageData = JSON.parse(event.dataTransfer.getData("image")); // Get the dragged image data
-    
-        // Call the handleDraw function with the dragged image and the question image
-        handleOnDraw(draggedImageData, questionImage);
-    
-        // Update selected answers state or perform any necessary actions
-      };
+    const [columnA, setColumnA] = useState<StaticImageData>(null);
+    const [columnB, setColumnB] = useState<StaticImageData>(null);
+    const [selected, setSelected] = useState<StaticImageData[]>([]);
+    const [pairs, setPairs] = useState<ImageData[]>([]);
+    const handleSelect = (column, img) => {
+        if (column === "A") {
+            if (!selected.includes(img)) {
+                setColumnA(img);
+            }
+        } else if (column === "B" && columnA !== null) {
+            setColumnB(img);
+            // handleOnDraw(columnA, columnB);
+            if (!selected.includes(img)) {
+                setSelected([...selected, columnA, img]);
+                const newPair: ImageData = {question: columnA, answer: img}
+                setPairs([...pairs, newPair])
+                setColumnA(null);
+                setColumnB(null);
+            }
+
+        }
+    }
+    useEffect(() => {
+        if (lev === 1 && pairs.length == 2) {
+            handleOnDraw(pairs);
+            setPairs([]);
+        }
+        if (lev === 2 && pairs.length == 3) {
+            handleOnDraw(pairs);
+            setPairs([]);
+
+        }
+        if (lev === 3 && pairs.length == 4) {
+            handleOnDraw(pairs);
+            setPairs([]);
+        }
+
+
+    }, [pairs]);
+    useEffect(() => {
+        if (timeup === true) {
+            handleOnDraw(pairs);
+        }
+    }, [timeup])
 
     useEffect(() => {
 
@@ -90,8 +126,8 @@ export const Levels = ({
         setShuffledImages1(shuffledArray);
     }, []);
     useEffect(() => {
-       
-        const imageArray = [a1l2, a2l2,a3l2];
+
+        const imageArray = [a1l2, a2l2, a3l2];
         const validImages = imageArray.filter(image => image);
         const shuffleArray = (array: StaticImageData[]) => {
             for (let i = array.length - 1; i > 0; i--) {
@@ -104,9 +140,8 @@ export const Levels = ({
 
         setShuffledImages2(shuffledArray);
     }, []);
-
     useEffect(() => {
-        const imageArray = [a1l3, a2l3, a3l3, a4l3, a5l3];
+        const imageArray = [a1l3, a2l3, a3l3, a4l3];
         const validImages = imageArray.filter(image => image);
         const shuffleArray = (array: StaticImageData[]) => {
             for (let i = array.length - 1; i > 0; i--) {
@@ -119,139 +154,124 @@ export const Levels = ({
 
         setShuffledImages3(shuffledArray);
     }, []);
+    useEffect(() => {
+
+        const imageArray = lev1questions;
+        const validImages = imageArray.filter(image => image);
+        const shuffleArray = (array: StaticImageData[]) => {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        };
+        const shuffledArray = shuffleArray(validImages);
+
+        setLev1questions(shuffledArray);
+    }, []);
+    useEffect(() => {
+
+        const imageArray = lev2questions;
+        const validImages = imageArray.filter(image => image);
+        const shuffleArray = (array: StaticImageData[]) => {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        };
+        const shuffledArray = shuffleArray(validImages);
+
+        setLev2questions(shuffledArray);
+    }, []);
+    useEffect(() => {
+        const imageArray = lev3questions;
+        const validImages = imageArray.filter(image => image);
+        const shuffleArray = (array: StaticImageData[]) => {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        };
+        const shuffledArray = shuffleArray(validImages);
+
+        setLev3questions(shuffledArray);
+    }, []);
 
     return (
-        <div>
-          
-            <div >
-                {lev==1 
-                    && 
-                    <div className="grid grid-cols-2 md:grid-cols-2 gap-10 justify-items-center">
-                            <div
-                                onDragOver={(event) => handleDragOver(event)}
-                                onDrop={(event) => handleDrop(event, q1l1)}
-                            >
-                            <Image src={q1l1} alt={'question1'} />
-                            </div>
-                            <div
-                                onDragOver={(event) => handleDragOver(event)}
-                                onDrop={(event) => handleDrop(event, q2l1)}
-                            >
-                            <Image src={q2l1} alt={'question2'}/>
-                            </div>
-
-                            {lev == 1 && shuffledImages1.map((image, index) => (
-                                
-                                 <div
-                                 key={index}
-                                 className={"aspect-1 md:h-30 md:w-30 h-15 w-15 cursor-pointer"}
-                                 onDragStart={(event) => handleDragStart(event, image)}
-                                 draggable
-                               >
-                                 <Image src={image} alt={`Image${index + 1}`} />
-                               </div>
-                        
-
-                ))}
-                    </div>
-                   
-                }
-                
+        <div className={"w-full flex flex-col justify-center items-center"}>
+            <div className={"flex flex-row w-1/2 justify-evenly p-2 font-bold text-2xl"}>
+                <span>Column A </span>
+                <span>Column B </span>
             </div>
+            {lev === 1 ? <div className={"flex flex-row w-1/2 justify-evenly m-3"}>
+                <div className={"flex flex-col"}>
+                    {lev1questions.map((qn, index) => (
+
+                        <Image src={qn} alt={`${index}`}
+                               className={cn("m-2 transition-all ease-in cursor-pointer", selected.includes(qn) ? "scale-50" : "",
+                                   columnA === qn ? "scale-125" : "")}
+                               onClick={(e) => handleSelect("A", qn)}/>
+
+                    ))}
+                </div>
+                <div className={"flex flex-col"}>
+                    {shuffledImages1.map((qn, index) => (
+
+                        <Image src={qn} alt={`${index}`}
+                               className={cn("m-2 transition-all ease-in cursor-pointer", selected.includes(qn) ? "scale-50" : "",
+                                   columnB === qn ? "scale-125" : "")}
+                               onClick={(e) => handleSelect("B", qn)}/>
+
+                    ))}
+                </div>
 
 
-       
+            </div> : lev === 2 ? <div className={"flex flex-row w-1/2 justify-evenly m-3"}>
+                <div className={"flex flex-col"}>
+                    {lev2questions.map((qn, index) => (
 
-            <div>
-                {lev==2
-                    && 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-10 justify-items-center">
-                          <div
-                                onDragOver={(event) => handleDragOver(event)}
-                                onDrop={(event) => handleDrop(event, q1l2)}
-                            >
-                        <Image src={q1l2} alt={'question1'} />
-                        </div>
-                        <div
-                                onDragOver={(event) => handleDragOver(event)}
-                                onDrop={(event) => handleDrop(event, q2l2)}
-                            >
-                        <Image src={q2l2} alt={'question2'}/>
-                        </div>
-                        <div
-                                onDragOver={(event) => handleDragOver(event)}
-                                onDrop={(event) => handleDrop(event, q3l2)}
-                            >
-                        <Image src={q3l2} alt={'question3'}/>
-                        </div>
-                        {lev == 2 && shuffledImages2.map((image, index) => (
+                        <Image src={qn} alt={`${index}`}
+                               className={cn("m-2 transition-all ease-in cursor-pointer", selected.includes(qn) ? "scale-50" : "",
+                                   columnA === qn ? "scale-125" : "")}
+                               onClick={(e) => handleSelect("A", qn)}/>
 
-                                <div
-                                    key={index}
-                                    className={"aspect-1 md:h-30 md:w-30 h-15 w-15 cursor-pointer"}
-                                    onDragStart={(event) => handleDragStart(event, image)}
-                                    draggable
-                                >
-                                <Image src={image} alt={`Image${index + 1}`} />
-                                </div>
+                    ))}
+                </div>
+                <div className={"flex flex-col"}>
+                    {shuffledImages2.map((qn, index) => (
+                        <Image src={qn} alt={`${index}`}
+                               className={cn("m-2 transition-all ease-in cursor-pointer", selected.includes(qn) ? "scale-50" : "",
+                                   columnB === qn ? "scale-125" : "")}
+                               onClick={(e) => handleSelect("B", qn)}/>
 
-                        ))}
-                    </div>
-                   
-                }
-               
-            </div>
-         
-            <div>
-            {lev==3 
-                    && 
-                    <div className="grid grid-cols-2  md:grid-cols-5 gap-10 justify-items-center">
-                          <div
-                                onDragOver={(event) => handleDragOver(event)}
-                                onDrop={(event) => handleDrop(event, q1l3)}
-                            >
-                            <Image src={q1l3} alt={'question1'} />
-                            </div>
-                            <div
-                                onDragOver={(event) => handleDragOver(event)}
-                                onDrop={(event) => handleDrop(event, q2l3)}
-                            >
-                            <Image src={q2l3} alt={'question2'}/>
-                            </div>
-                            <div
-                                onDragOver={(event) => handleDragOver(event)}
-                                onDrop={(event) => handleDrop(event, q3l3)}
-                            >
-                            <Image src={q3l3} alt={'question3'} />
-                            </div>
-                            <div
-                                onDragOver={(event) => handleDragOver(event)}
-                                onDrop={(event) => handleDrop(event, q4l3)}
-                            >
-                            <Image src={q4l3} alt={'question4'}/>
-                            </div>
-                            <div
-                                onDragOver={(event) => handleDragOver(event)}
-                                onDrop={(event) => handleDrop(event, q5l3)}
-                            >
-                            <Image src={q5l3} alt={'question5'} />
-                            </div>
-                            {lev == 3 && shuffledImages3.map((image, index) => (
-                                <div
-                                key={index}
-                                className={"aspect-1 md:h-30 md:w-30 h-15 w-15 cursor-pointer"}
-                                onDragStart={(event) => handleDragStart(event, image)}
-                                draggable
-                              >
-                                <Image src={image} alt={`Image${index + 1}`} />
-                              </div>
+                    ))}
+                </div>
 
-                ))}
-                    </div>
-                    
-                 
-                }   
-            </div>
+
+            </div> : lev == 3 ? <div className={"flex flex-row w-1/2 justify-evenly m-3"}>
+                <div className={"flex flex-col"}>
+                    {lev3questions.map((qn, index) => (
+                        <Image src={qn} alt={`${index}`}
+                               className={cn("m-2 transition-all ease-in cursor-pointer", selected.includes(qn) ? "scale-50" : "",
+                                   columnA === qn ? "scale-125" : "")}
+                               onClick={(e) => handleSelect("A", qn)}/>
+                    ))}
+                </div>
+                <div className={"flex flex-col"}>
+                    {shuffledImages3.map((qn, index) => (
+
+                        <Image src={qn} alt={`${index}`}
+                               className={cn("m-2 transition-all ease-in cursor-pointer", selected.includes(qn) ? "scale-50" : "",
+                                   columnB === qn ? "scale-125" : "")}
+                               onClick={(e) => handleSelect("B", qn)}/>
+
+                    ))}
+                </div>
+
+
+            </div> : <div></div>}
 
         </div>
     );

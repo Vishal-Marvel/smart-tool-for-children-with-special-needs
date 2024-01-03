@@ -17,7 +17,7 @@ export const UserDashboard = () => {
 
 
                 <div className={"m-6 w-fit align-middle items-center justify-center"}>
-                    <Link href={"/games/distance"}>
+                    <Link href={"/games/memory-game"}>
                         <span className={" font-bold bg-indigo-950 text-white p-2.5 rounded-2xl "}>Start Game</span>
                     </Link>
                 </div>

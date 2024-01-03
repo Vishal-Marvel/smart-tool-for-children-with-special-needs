@@ -142,7 +142,8 @@ export const MemoryGame = ({id}: Props) => {
                 </div>
 
             </div>
-            <PopUpNotification display={dialogBox} title={"Game Over"} buttonOnClick={() => router.push("/dashboard")}/>
+            <PopUpNotification display={dialogBox} title={"Game Over"}
+                               buttonOnClick={() => router.push("/games/odd-one-out")}/>
 
         </div>
     );

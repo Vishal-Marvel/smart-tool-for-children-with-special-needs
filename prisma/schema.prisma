@@ -35,9 +35,10 @@ model Game {
 }
 
 model User_Game {
-  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
   gameId    String
   userId    String
+  date      DateTime @default(now())
   timeTaken Int
   level     Int
   accuracy  Int

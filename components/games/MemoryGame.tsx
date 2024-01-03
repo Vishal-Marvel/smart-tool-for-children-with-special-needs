@@ -33,7 +33,8 @@ export const MemoryGame = ({id}: Props) => {
     const [moves, setMoves] = useState(0);
     const [gameOver, setGameOver] = useState(false);
     const [dialogBox, setDialogBox] = useState(false);
-    const [time, setTime] = useState(5);
+    const [time, setTime] = useState(0);
+    const [initialTime, setInitialTime] = useState(180);
     useEffect(() => {
 
         initialize();
@@ -81,22 +82,26 @@ export const MemoryGame = ({id}: Props) => {
             setMoves((v) => v + 1);
         }
     };
-    const completeGame = async ()=>{
+    const completeGame = ()=>{
         if (gameOver === true) {
-            setDialogBox(true)
+
             if (time > 0) sound.play();
-            await axios.post("/api/game-over", {
+            axios.post("/api/game-over", {
                 gameId: id,
-                moves,
-                timeTaken: 180 - time
+                level: 1,
+                accuracy: time>0? 1: 0,
+                timeTaken: initialTime - time
             })
+                .then(()=>{
+                    setDialogBox(true)
+                })
 
         }
     }
 
 
     useEffect(()=>{
-        completeGame().then(()=>{})
+        completeGame();
 
     },[gameOver])
 
@@ -112,7 +117,7 @@ export const MemoryGame = ({id}: Props) => {
                         isPlaying={!gameOver}
                         onCompleteFunc={() => setGameOver(true)}
                         onUpdateFunc={(remainingTime) => setTime(remainingTime)}
-                        time={180}
+                        time={initialTime}
                     />
 
 

@@ -80,7 +80,7 @@ export const MissingPiece = ({id}: Props) => {
             setGameOver(false);
             setDialogBox(false);
         } else {
-            router.push("/dashboard");
+            router.push("/games/match");
         }
     }
 

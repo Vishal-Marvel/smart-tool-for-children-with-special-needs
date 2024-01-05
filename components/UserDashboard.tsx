@@ -6,9 +6,10 @@ import missingPiece from "@/public/missingpiece.png";
 import match from "@/public/match.png";
 import dot from "@/public/dot.png";
 import distance from "@/public/distance.png";
+import {currentProfile} from "@/lib/current-profile";
 
-export const UserDashboard = () => {
-
+export const UserDashboard = async () => {
+    const user = await currentProfile();
     return (
 
         <div className={"p-2 flex flex-col"}>
@@ -19,6 +20,9 @@ export const UserDashboard = () => {
                 <div className={"m-6 w-fit align-middle items-center justify-center"}>
                     <Link href={"/games/memory-game"}>
                         <span className={" font-bold bg-indigo-950 text-white p-2.5 rounded-2xl "}>Start Test</span>
+                    </Link>
+                    <Link className={"ml-5"} href={"/user-details/"+user.id}>
+                        <span className={" font-bold bg-indigo-950 text-white p-2.5 rounded-2xl "}>Analysis</span>
                     </Link>
                 </div>
 

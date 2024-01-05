@@ -12,7 +12,7 @@ export async function GET(
     try{
         const user = await currentProfile();
 
-        if (!user || user.role!=MemberRole.ADMIN) {
+        if (!user) {
             return new NextResponse("UnAuth", {status: 401});
         }
         const {searchParams} = new URL(req.url);

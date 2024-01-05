@@ -2,7 +2,7 @@ import Link from "next/link";
 import {GameCard} from "@/components/GameCard";
 import memory from "@/public/memory.png";
 import oddOne from "@/public/odd-one.png";
-import missingpiece from "@/public/missingpiece.png";
+import missingPiece from "@/public/missingpiece.png";
 import match from "@/public/match.png";
 import dot from "@/public/dot.png";
 import distance from "@/public/distance.png";
@@ -18,13 +18,13 @@ export const UserDashboard = () => {
 
                 <div className={"m-6 w-fit align-middle items-center justify-center"}>
                     <Link href={"/games/memory-game"}>
-                        <span className={" font-bold bg-indigo-950 text-white p-2.5 rounded-2xl "}>Start Game</span>
+                        <span className={" font-bold bg-indigo-950 text-white p-2.5 rounded-2xl "}>Start Test</span>
                     </Link>
                 </div>
 
             </div>
             <div className={"m-4 p-2"}>
-                <span className={"text-2xl font-semibold"}>Games Available</span>
+                <span className={"text-2xl font-semibold"}>Test Available</span>
 
                 <div className={"flex flex-row flex-wrap justify-center justify-items-center"}>
 
@@ -38,7 +38,7 @@ export const UserDashboard = () => {
                               text={"Identify the object that is different from the rest. Tap or click on the object believed to be the odd one out."}
                               name={"Odd One Out"}
                     />
-                    <GameCard image={missingpiece}
+                    <GameCard image={missingPiece}
                               med={"Form constancy assessment"}
                               text={"Identify the missing piece from a set of given options. Tap or click on the option."}
                               name={"Spot The Missing Piece"}

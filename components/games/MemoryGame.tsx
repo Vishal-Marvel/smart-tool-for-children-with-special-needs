@@ -93,7 +93,7 @@ export const MemoryGame = ({id}: Props) => {
             if (time > 0) sound.play();
             axios.post("/api/game-over", {
                 gameId: id,
-                level: 1,
+                level: gameLev,
                 accuracy: matchedCards.length,
                 maximum: 16,
                 timeTaken: initialTime - time
@@ -116,15 +116,16 @@ export const MemoryGame = ({id}: Props) => {
             // setGameOver(false);
             setDialogBox(false);
              if (gameLev==2){
-                setInitialTime(10)
+                setInitialTime(120)
             }
             else if (gameLev==3){
-                setInitialTime(10);
+                setInitialTime(80);
             }
             initialize();
 
         } else {
-            router.push("/games/missing-piece");
+            setMessage("Completed")
+            router.push("/games/odd-one-out");
         }
     }
 
@@ -181,7 +182,7 @@ export const MemoryGame = ({id}: Props) => {
                 </div>
 
             </div>
-            <PopUpNotification display={dialogBox} title={"Game Over"}
+            <PopUpNotification display={dialogBox} title={"Memory Game"}
                                message={message}
                                buttonOnClick={startGame}/>
 

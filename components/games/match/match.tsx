@@ -43,7 +43,7 @@ export const Match = ({id}: Props) => {
     const [gameLev, setGameLev] = useState(1);
     const [time, setTime] = useState(0);
     const [key, setKey] = useState(0);
-    const [initialTime, setInitialTime] = useState(50);
+    const [initialTime, setInitialTime] = useState(30);
     const [dialogBox, setDialogBox] = useState(false);
     const [message, setMessage] = useState("");
     const [timeUp, setTimeUp] = useState(false);
@@ -105,6 +105,7 @@ export const Match = ({id}: Props) => {
             setGameOver(false);
             setDialogBox(false);
         } else {
+            setMessage("Completed")
             router.push("/games/dot-to-dot");
         }
     }
@@ -130,7 +131,7 @@ export const Match = ({id}: Props) => {
                 <span
                     className={"text-indigo-950 dark:text-indigo-50 text-2xl font-bold uppercase "}> Level - {gameLev}</span>
             </div>
-            <span className={"capitalize"}>Choose An Image from the column A and choose an image from column B</span>
+            <span className={""}>Choose an image from the <strong>Column A</strong> and choose an image from <strong>Column B</strong></span>
             <div className={"justify-center justify-items-center align-middle"}>
 
                 <Levels lev={gameLev} a1l1={a1l1} a2l1={a2l1} q1l1={q1l1} q2l1={q2l1} q1l2={q1l2}
@@ -138,7 +139,7 @@ export const Match = ({id}: Props) => {
                         q1l3={q1l3} q2l3={q2l3} q3l3={q3l3} q4l3={q4l3} a1l2={a1l2} a2l2={a2l2} a3l2={a3l2}
                         handleOnDraw={handleOnDraw} timeup={timeUp}/>
             </div>
-            <PopUpNotification display={dialogBox} title={"Game Over"} message={message}
+            <PopUpNotification display={dialogBox} title={"Match The Image"} message={message}
                                buttonOnClick={() => startGame()}/>
         </div>
     );

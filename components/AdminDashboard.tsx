@@ -1,22 +1,10 @@
-import {Tabs, TabsContent, TabsList, TabsTrigger,} from "@/components/ui/tabs"
 import {UsersTable} from "@/components/UsersTable";
-import {UsersGameTable} from "@/components/UsersGameTable";
 
 export const AdminDashboard = async () => {
 
 
-    return <div className={" justify-center items-center flex pt-4"}>
-        <Tabs defaultValue="users" className="w-4/5">
-            <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="users">Users Data</TabsTrigger>
-                <TabsTrigger value="games">Users Game Data</TabsTrigger>
-            </TabsList>
-            <TabsContent value="users">
-                <UsersTable/>
-            </TabsContent>
-            <TabsContent value="games">
-                <UsersGameTable/>
-            </TabsContent>
-        </Tabs>
+    return <div className={" justify-center items-center flex flex-col pt-4"}>
+        <h1 className={"font-bold text-2xl m-2 p-2 font-sans"}>User Details</h1>
+        <UsersTable/>
     </div>
 }

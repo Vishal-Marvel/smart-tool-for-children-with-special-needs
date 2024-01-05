@@ -81,6 +81,7 @@ export const MissingPiece = ({id}: Props) => {
             setGameOver(false);
             setDialogBox(false);
         } else {
+            setMessage("Completed")
             router.push("/games/match");
         }
     }
@@ -113,7 +114,7 @@ export const MissingPiece = ({id}: Props) => {
                         wrg2l3={wrg2l3} wrg3l3={wrg3l3} l3={l3}
                         handleOnClick={handleOnClick}/>
             </div>
-            <PopUpNotification display={dialogBox} title={"Game Over"} message={message}
+            <PopUpNotification display={dialogBox} title={"Spot The Missing Piece"} message={message}
                                buttonOnClick={() => startGame()}/>
         </div>
     );

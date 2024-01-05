@@ -117,6 +117,7 @@ export const Distance = ({id}: Props) => {
           
             setDialogBox(false);
         } else {
+            setMessage("Completed");
             router.push("/dashboard");
         }
     }
@@ -150,7 +151,7 @@ export const Distance = ({id}: Props) => {
                         l2a2={l2a2} l3a1={l3a1} l3a2={l3a2} l3a3={l3a3}
                         handleOnClick={handleOnClick}/>
             </div>
-            <PopUpNotification display={dialogBox} title={"Game Over"} message={message}
+            <PopUpNotification display={dialogBox} title={"Distance Dash"} message={message}
                                buttonOnClick={() => startGame()}/>
         </div>
     );

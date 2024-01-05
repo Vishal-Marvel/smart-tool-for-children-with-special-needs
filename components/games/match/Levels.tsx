@@ -251,15 +251,16 @@ export const Levels = ({
 
 
             </div> : lev == 3 ? <div className={"flex flex-row w-1/2 justify-evenly m-3"}>
-                <div className={"flex flex-col"}>
+                <div className={"grid grid-cols-2"}>
                     {lev3questions.map((qn, index) => (
                         <Image src={qn} alt={`${index}`}
-                               className={cn("m-2 transition-all ease-in cursor-pointer", selected.includes(qn) ? "scale-50" : "",
+
+                               className={cn("aspect-square h-20 m-2 transition-all ease-in cursor-pointer", selected.includes(qn) ? "scale-50" : "",
                                    columnA === qn ? "scale-125" : "")}
                                onClick={(e) => handleSelect("A", qn)}/>
                     ))}
                 </div>
-                <div className={"flex flex-col"}>
+                <div className={"grid grid-cols-2"}>
                     {shuffledImages3.map((qn, index) => (
 
                         <Image src={qn} alt={`${index}`}

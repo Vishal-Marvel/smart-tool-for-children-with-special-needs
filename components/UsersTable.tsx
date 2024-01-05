@@ -3,6 +3,8 @@ import {db} from "@/lib/db";
 import {$Enums} from ".prisma/client";
 import {ScrollArea} from "@/components/ui/scroll-area";
 import MemberRole = $Enums.MemberRole;
+import Link from "next/link";
+import {Button} from "@/components/ui/button";
 
 
 export const UsersTable = async ()=> {
@@ -24,6 +26,7 @@ export const UsersTable = async ()=> {
                         <TableHead>Email</TableHead>
                         <TableHead>Phone</TableHead>
                         <TableHead className={"w-2/5"}>Medical History</TableHead>
+                        <TableHead className={"w-1/6"}>View Details</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -35,13 +38,15 @@ export const UsersTable = async ()=> {
                             <TableCell>{user.height}</TableCell>
                             <TableCell>{user.email}</TableCell>
                             <TableCell>{user.phone_no}</TableCell>
-                            <TableCell className={"text-left"}>{user.medical_history}</TableCell>
+                            <TableCell className={"text-right"}>{user.medical_history}</TableCell>
+                            <TableCell><Button variant={"link"} ><Link href={"user-details/"+user.id}>View Details</Link> </Button></TableCell>
+
                         </TableRow>
                     ))}
                 </TableBody>
                 <TableFooter className={"sticky bottom-0 bg-secondary"}>
                     <TableRow>
-                        <TableCell colSpan={6}>Total</TableCell>
+                        <TableCell colSpan={7}>Total</TableCell>
                         <TableCell className="text-right">{users.length} User(s)</TableCell>
                     </TableRow>
                 </TableFooter>

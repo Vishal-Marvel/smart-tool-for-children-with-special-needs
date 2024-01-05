@@ -73,6 +73,7 @@ export const OddOneOut = ({id}: Props) => {
             setGameOver(false);
             setDialogBox(false);
         } else {
+            setMessage("Completed")
             router.push("/games/missing-piece");
         }
     }
@@ -104,7 +105,7 @@ export const OddOneOut = ({id}: Props) => {
                                      handleOnClick={handleOnClick}/>}
                 {gameLev === 3 && <LevThree even={evenPanda} odd={oddPanda} handleClick={handleOnClick}/>}
             </div>
-            <PopUpNotification display={dialogBox} title={"Game Over"} message={message}
+            <PopUpNotification display={dialogBox} title={"Odd One Out"} message={message}
                                buttonOnClick={() => startGame()}/>
         </div>
     );

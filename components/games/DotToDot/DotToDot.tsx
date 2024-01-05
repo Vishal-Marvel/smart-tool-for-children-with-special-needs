@@ -196,6 +196,7 @@ export const DotToDot = ({id}:Props) => {
                 setInitialTime(30);
             }
         } else {
+            setMessage("Completed")
             router.push("/games/distance");
         }
     }
@@ -243,7 +244,7 @@ export const DotToDot = ({id}:Props) => {
 
 
             </div>
-            <PopUpNotification display={dialogBox} title={"Game Over"} message={message}
+            <PopUpNotification display={dialogBox} title={"Dot To Dot"} message={message}
                                buttonOnClick={() => {startGame()}}/>
         </div>
 

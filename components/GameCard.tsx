@@ -19,7 +19,7 @@ export const GameCard = ({image, text, name, med}: GameCardProps) => {
                 {text}
             </CardDescription>
             <CardContent className={"flex items-center justify-center p-3 justify-items-center"}>
-                <div className={"align-middle top-1/2"}>
+                <div className={"flex flex-col justify-center items-center"}>
                     <Image src={image} alt={name}/>
                 </div>
             </CardContent>

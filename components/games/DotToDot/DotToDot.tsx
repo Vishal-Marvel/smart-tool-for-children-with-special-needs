@@ -230,7 +230,7 @@ export const DotToDot = ({id}:Props) => {
                     </div>
 
                 }{gameLev===3 &&
-                <div className={"grid grid-cols-1 md:grid-cols-2 "}>
+                <div className={"grid grid-cols-1 md:grid-cols-2 gap-10"}>
                     <Comp img={l1} handleDone={(any)=>handleDone(any, 3, 1)} timeUp={timeUp}/>
                     <Comp img={l2} handleDone={(any)=>handleDone(any, 3, 2)} timeUp={timeUp}/>
                     <Comp img={l3_1} handleDone={(any)=>handleDone(any, 3, 3)} timeUp={timeUp}/>

@@ -104,7 +104,7 @@ export const Match = ({id}: Props) => {
             setGameOver(false);
             setDialogBox(false);
         } else {
-            router.push("/dashboard");
+            router.push("/games/distance");
         }
     }
 

@@ -36,7 +36,7 @@ export const UsersGameTable = async ()=> {
                     <TableCell>{findGame(userGame.gameId)}</TableCell>
                     <TableCell>{userGame.level}</TableCell>
                     <TableCell>{userGame.timeTaken} s</TableCell>
-                    <TableCell>{userGame.accuracy >= 1 ? "Won" : "Lost"}</TableCell>
+                    <TableCell>{userGame.accuracy }</TableCell>
                 </TableRow>
                 ))}
 

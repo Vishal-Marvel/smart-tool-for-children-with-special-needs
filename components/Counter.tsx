@@ -30,7 +30,7 @@ const renderTime = ({remainingTime}) => {
     } else {
         return (
             <div className={"time-wrapper"}>
-                <div className={cn("time", remainingTime <= 20 && "time-effect")}>
+                <div className={cn("time", remainingTime <= 10 && "time-effect")}>
                     {remainingTime}
                 </div>
             </div>

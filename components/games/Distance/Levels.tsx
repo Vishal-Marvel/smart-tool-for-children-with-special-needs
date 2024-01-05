@@ -175,7 +175,7 @@ export const Levels = ({
                 {lev==1 && <div className="mt-4">1. Which object is closer to the swing . </div>}
             </div>
            
-            <div className="grid grid-cols-2 gap-10 justify-center justify-items-center align-middle">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 justify-center justify-items-center align-middle">
                 {lev == 1 && shuffledImages1.map((image, index) => (
                     <Image key={index} src={image} alt={`Image${index + 1}`}
                            className={"aspect-1 md:h-30 md:w-30 h-15 w-15 cursor-pointer"}
@@ -217,13 +217,13 @@ export const Levels = ({
                 ))}
             </div>
 
-            <div className={"flex justify-center m-4"}>
-                {lev == 3 && <Image src={l3} alt={"question"} className="md:h-50 md:w-50 h-25 w-25"/>}
+            <div className={"flex justify-center m-1"}>
+                {lev == 3 && <Image src={l3} alt={"question"} height={300} width={300} className=""/>}
             </div>
             <div>
                 {lev ==3 && count==0 && <div>1. Which object is closest to the black board? </div>}
             </div>
-            <div className="grid grid-cols-2 gap-10 justify-items-center">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-10 justify-items-center">
                 {lev == 3 && count ==0 && shuffledImages4.map((image, index) => (
                     <Image key={index} src={image} alt={`Image${index + 1}`}
                            className={"aspect-1 h-18 w-18 object-contain cursor-pointer"}
@@ -235,7 +235,7 @@ export const Levels = ({
             <div>
                 {lev ==3 && count==1 && <div> 2. Which object is closest to the window? </div>}
             </div>
-            <div className="grid grid-cols-2 gap-10 justify-items-center">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-10 justify-items-center">
                 {lev == 3 && count==1 && shuffledImages5.map((image, index) => (
                     <Image key={index} src={image} alt={`Image${index + 1}`}
                            className={"aspect-1 h-18 w-18 object-contain cursor-pointer"}
@@ -247,7 +247,7 @@ export const Levels = ({
             <div>
                 {lev ==3 && count==2 && <div>3. Which object is farthest from the black board?  </div>}
             </div>
-            <div className="grid grid-cols-2 gap-10 justify-items-center">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-10 justify-items-center">
                 {lev == 3 && count==2 && shuffledImages6.map((image, index) => (
                     <Image key={index} src={image} alt={`Image${index + 1}`}
                            className={"aspect-1 h-18 w-18 object-contain cursor-pointer"}

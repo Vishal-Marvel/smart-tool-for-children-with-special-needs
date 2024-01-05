@@ -46,6 +46,7 @@ export const Distance = ({id}: Props) => {
     const [gameOver, setGameOver] = useState(false);
     const [gameLev, setGameLev] = useState(1);
     const [time, setTime] = useState(0);
+    let score = 0;
     const [key, setKey] = useState(0);
     const [initialTime, setInitialTime] = useState(15);
     const [dialogBox, setDialogBox] = useState(false);
@@ -54,46 +55,50 @@ export const Distance = ({id}: Props) => {
 
     const handleOnClick = (image: StaticImageData) => {
         if (!gameOver) {
-            if(gameLev<2 || gameLev==2 && count==1 || gameLev==3 && count == 2){
-                setGameOver(true);
-                
-            }
-            
-            
 
             if (image === al1 || image === l2a1 || image === l2a2 || image === l3a1 || image === l3a2 || image === l3a3) {
-                
-                sendDate(true);
-                setMessage("It is the correct answer!!")
-                sound.play();
+                console.log("correct");
+
+                // setMessage("It is the correct answer!!")
+
+                score++;
                 if(gameLev>1)   setCount(count+1)
                 
             } else {
                 
-                setMessage("It is the wrong answer")
-                sendDate(false);
+                // setMessage("It is the wrong answer")
                 if(gameLev>1)   setCount(count+1)
                 
+            }
+            if(gameLev<2 || gameLev==2 && count==1 || gameLev==3 && count == 2){
+                setGameOver(true);
+                sound.play();
+                sendDate();
+
             }
 
         }
     };
 
-    const sendDate = (acc: boolean) => {
+    const sendDate = () => {
+        console.log(score)
         axios
             .post("/api/game-over", {
                 gameId: id,
                 timeTaken: initialTime - time + 1,
                 level: gameLev,
-                accuracy: acc ? 1 : 0,
+                accuracy: score,
             })
             .then(() => {
 
                 setDialogBox(true);
-                if(gameLev==2 && count==1|| gameLev==1|| gameLev==3 && count==2){
-                    setGameLev(gameLev + 1);
-                    setCount(0);
-                }
+                setMessage("Level " + gameLev + " completed")
+                // if(gameLev==2 && count==1|| gameLev==1|| gameLev==3 && count==2){
+                //
+                // }
+                setGameLev(gameLev + 1);
+                setCount(0);
+                score = 0;
                 
 
             })
@@ -104,6 +109,9 @@ export const Distance = ({id}: Props) => {
         setMessage("");
         if (gameLev <= 3) {
             setKey(key + 1);
+            if (gameLev===3){
+                setInitialTime(30);
+            }
             setGameOver(false);
           
             setDialogBox(false);
@@ -125,7 +133,7 @@ export const Distance = ({id}: Props) => {
                     isPlaying={!gameOver}
                     onCompleteFunc={() => {
                         setMessage("Time Up");
-                        sendDate(false);
+                        sendDate();
                     }}
                     onUpdateFunc={(remainingTime) => setTime(remainingTime)}
                     time={initialTime}

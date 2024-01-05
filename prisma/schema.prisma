@@ -39,6 +39,7 @@ model User_Game {
   gameId    String
   userId    String
   date      DateTime @default(now())
+  maximum   Int
   timeTaken Int
   level     Int
   accuracy  Int

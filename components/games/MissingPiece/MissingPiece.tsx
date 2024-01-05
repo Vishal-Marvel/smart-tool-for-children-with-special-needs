@@ -45,23 +45,24 @@ export const MissingPiece = ({id}: Props) => {
 
 
             if (image === crt1 || image === crt2 || image === crt3) {
-                sendDate(true);
+                sendData(true);
                 setMessage("It is the correct answer!!")
                 sound.play();
             } else {
                 setMessage("It is the wrong answer")
-                sendDate(false);
+                sendData(false);
             }
 
         }
     };
 
-    const sendDate = (acc: boolean) => {
+    const sendData = (acc: boolean) => {
         axios
             .post("/api/game-over", {
                 gameId: id,
                 timeTaken: initialTime - time + 1,
                 level: gameLev,
+                maximum: 1,
                 accuracy: acc ? 1 : 0,
             })
             .then(() => {
@@ -97,7 +98,7 @@ export const MissingPiece = ({id}: Props) => {
                     isPlaying={!gameOver}
                     onCompleteFunc={() => {
                         setMessage("Time Up");
-                        sendDate(false);
+                        sendData(false);
                     }}
                     onUpdateFunc={(remainingTime) => setTime(remainingTime)}
                     time={initialTime}

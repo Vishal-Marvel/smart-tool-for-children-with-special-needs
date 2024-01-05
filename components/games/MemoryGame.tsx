@@ -18,6 +18,7 @@ import {PopUpNotification} from "@/components/PopUpNotification";
 
 import sound from "@/components/context/PlaySound";
 import {Counter} from "@/components/Counter";
+import {cn} from "@/lib/utils";
 
 interface Props {
     id: string
@@ -25,7 +26,7 @@ interface Props {
 
 export const MemoryGame = ({id}: Props) => {
     const router = useRouter();
-    const board = [robot, alien, ghost, clown, penguin, peacock, smile, rocket];
+    const [board,setBoard] = useState([robot, alien, ghost, clown, penguin, peacock, smile, rocket]);
 
     const [boardData, setBoardData] = useState([]);
     const [flippedCards, setFlippedCards] = useState([]);
@@ -35,6 +36,9 @@ export const MemoryGame = ({id}: Props) => {
     const [dialogBox, setDialogBox] = useState(false);
     const [time, setTime] = useState(0);
     const [initialTime, setInitialTime] = useState(180);
+    const [gameLev , setGameLev] = useState(1);
+    const [message, setMessage] = useState("");
+    const [key, setKey] = useState(0);
     useEffect(() => {
 
         initialize();
@@ -56,10 +60,11 @@ export const MemoryGame = ({id}: Props) => {
         setMoves(0);
     };
     const shuffle = () => {
-        const shuffledCards = [...board, ...board]
+        let shuffledCards = [...board, ...board];
+
+        shuffledCards
             .sort(() => Math.random() - 0.5)
             .map((v) => v);
-
         setBoardData(shuffledCards);
     };
 
@@ -89,13 +94,37 @@ export const MemoryGame = ({id}: Props) => {
             axios.post("/api/game-over", {
                 gameId: id,
                 level: 1,
-                accuracy: time>0? 1: 0,
+                accuracy: matchedCards.length,
+                maximum: 16,
                 timeTaken: initialTime - time
             })
                 .then(()=>{
                     setDialogBox(true)
+                    setMessage("You Have Completed Level "+ gameLev);
+
+                    setGameLev(gameLev+1);
+
                 })
 
+        }
+    }
+    const startGame = () => {
+        setMessage("");
+
+        if (gameLev <= 3) {
+            setKey(key + 1);
+            // setGameOver(false);
+            setDialogBox(false);
+             if (gameLev==2){
+                setInitialTime(10)
+            }
+            else if (gameLev==3){
+                setInitialTime(10);
+            }
+            initialize();
+
+        } else {
+            router.push("/games/missing-piece");
         }
     }
 
@@ -114,16 +143,21 @@ export const MemoryGame = ({id}: Props) => {
             <div className="container">
                 <div className="menu">
                     <Counter
+                        restart={key}
                         isPlaying={!gameOver}
                         onCompleteFunc={() => setGameOver(true)}
                         onUpdateFunc={(remainingTime) => setTime(remainingTime)}
                         time={initialTime}
                     />
+                    <span
+                        className={"text-indigo-950 dark:text-indigo-50 text-2xl font-bold uppercase "}> Level - {gameLev}
+                    </span>
 
 
                 </div>
 
-                <div className="board">
+                <div className={cn("board")}>
+
                     {boardData.map((data, i) => {
                         const flipped = flippedCards.includes(i);
                         const matched = matchedCards.includes(i);
@@ -148,7 +182,8 @@ export const MemoryGame = ({id}: Props) => {
 
             </div>
             <PopUpNotification display={dialogBox} title={"Game Over"}
-                               buttonOnClick={() => router.push("/games/odd-one-out")}/>
+                               message={message}
+                               buttonOnClick={startGame}/>
 
         </div>
     );

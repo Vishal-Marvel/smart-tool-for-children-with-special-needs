@@ -12,6 +12,7 @@ import {useRouter} from "next/navigation";
 import {Comp} from "@/components/games/DotToDot/Comp";
 import Image from "next/image";
 import axios from "axios";
+import {Button} from "@/components/ui/button";
 
 interface Props{
     id: string
@@ -171,6 +172,7 @@ export const DotToDot = ({id}:Props) => {
                 gameId: id,
                 timeTaken: initialTime - time ,
                 level: gameLev,
+                maximum: gameLev==1 ? 1 : gameLev==2 ? 2 : gameLev==3 && 4,
                 accuracy: score,
             })
             .then(() => {
@@ -219,7 +221,7 @@ export const DotToDot = ({id}:Props) => {
                     Level - {gameLev}
                 </span>
             </div>
-            <div className={"justify-center justify-items-center align-middle"}>
+            <div className={"flex flex-col justify-center justify-items-center align-middle"}>
                 {gameLev===1 &&
 
                     <Comp img={l1} handleDone={(any)=>handleDone(any, 1 ,1)} timeUp={timeUp}/>
@@ -237,6 +239,8 @@ export const DotToDot = ({id}:Props) => {
                     <Comp img={l3_2} handleDone={(any)=>handleDone(any, 3, 4)} timeUp={timeUp}/>
                 </div>
                 }
+                <div className={"w-full justify-center flex mt-2"}> <Button onClick={(e)=>setTimeUp(true)}>Submit</Button></div>
+
 
             </div>
             <PopUpNotification display={dialogBox} title={"Game Over"} message={message}

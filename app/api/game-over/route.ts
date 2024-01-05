@@ -8,7 +8,7 @@ export async function POST(
 ){
     try{
         const user = await currentProfile();
-        const {gameId, timeTaken, level, accuracy} = await req.json();
+        const {gameId, timeTaken, level, accuracy, maximum} = await req.json();
         if (!user) {
             return new NextResponse("UnAuth", {status: 401});
         }
@@ -19,7 +19,8 @@ export async function POST(
                 userId: user.id,
                 timeTaken,
                 level,
-                accuracy
+                accuracy,
+                maximum
             }
         })
         return NextResponse.json(user_game)

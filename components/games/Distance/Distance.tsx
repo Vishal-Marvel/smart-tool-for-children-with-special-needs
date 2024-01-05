@@ -87,6 +87,7 @@ export const Distance = ({id}: Props) => {
                 gameId: id,
                 timeTaken: initialTime - time + 1,
                 level: gameLev,
+                maximum: gameLev==1 ? 1 : gameLev==2 ? 2 : gameLev==3 && 3,
                 accuracy: score,
             })
             .then(() => {

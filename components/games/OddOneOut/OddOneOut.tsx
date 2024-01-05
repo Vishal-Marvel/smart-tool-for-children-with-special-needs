@@ -54,6 +54,7 @@ export const OddOneOut = ({id}: Props) => {
                 gameId: id,
                 timeTaken: initialTime - time + 1,
                 level: gameLev,
+                maximum: 1,
                 accuracy: acc ? 1 : 0,
             })
             .then(() => {

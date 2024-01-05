@@ -85,6 +85,7 @@ export const Match = ({id}: Props) => {
                 gameId: id,
                 timeTaken: initialTime - time + 1,
                 level: gameLev,
+                maximum: gameLev==1 ? 2 : gameLev==2 ? 3 : gameLev==3 && 4,
                 accuracy: score,
             })
             .then(() => {

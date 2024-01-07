@@ -1,5 +1,5 @@
 import {db} from "@/lib/db";
-import {Match} from "@/components/games/match/match";
+import {Match} from "@/components/games/match/Match";
 
 const MatchPage = async () => {
     const game = await db.game.findUnique({

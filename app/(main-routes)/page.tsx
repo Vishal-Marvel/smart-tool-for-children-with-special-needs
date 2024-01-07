@@ -18,23 +18,7 @@ export default function Home() {
     return (
 
         <div>
-            <div className={"justify-end flex p-3"}>
-                <ToggleButton/>
-                <SignedIn>
-                    <Button asChild>
-                        <Link href="/dashboard">Dashboard</Link>
-                    </Button>
-                </SignedIn>
 
-                <SignedOut>
-
-                    <SignInButton>
-                        <Button className={cn(buttonVariants({variant: "default"}))}>
-                            Sign In
-                        </Button>
-                    </SignInButton>
-                </SignedOut>
-            </div>
 
             <div className="m-3 flex items-center text-center flex-col text-indigo-950 dark:text-indigo-50">
                 <h1 className={"text-2xl md:text-4xl font-bold w-4/5 font-sans"}>
@@ -67,7 +51,22 @@ export default function Home() {
                     </p>
                 </div>
             </div>
+            <div className={"justify-center flex mb-4"}>
+                <SignedIn>
+                    <Button asChild>
+                        <Link href="/dashboard">Dashboard</Link>
+                    </Button>
+                </SignedIn>
 
+                <SignedOut>
+
+                    <SignInButton>
+                        <Button className={cn(buttonVariants({variant: "default"}))}>
+                            Sign In
+                        </Button>
+                    </SignInButton>
+                </SignedOut>
+            </div>
 
         </div>
     )

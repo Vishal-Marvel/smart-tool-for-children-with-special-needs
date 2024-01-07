@@ -35,10 +35,12 @@ export const MemoryGame = ({id}: Props) => {
     const [gameOver, setGameOver] = useState(false);
     const [dialogBox, setDialogBox] = useState(false);
     const [time, setTime] = useState(0);
-    const [initialTime, setInitialTime] = useState(180);
+    const [initialTime, setInitialTime] = useState(45);
     const [gameLev , setGameLev] = useState(1);
     const [message, setMessage] = useState("");
     const [key, setKey] = useState(0);
+    const [accuracy, setAccuracy] = useState(0);
+    const [num, setNum] = useState(0);
     useEffect(() => {
 
         initialize();
@@ -89,8 +91,10 @@ export const MemoryGame = ({id}: Props) => {
     };
     const completeGame = ()=>{
         if (gameOver === true) {
+            sound.play();
 
-            if (time > 0) sound.play();
+
+
             axios.post("/api/game-over", {
                 gameId: id,
                 level: gameLev,
@@ -100,9 +104,11 @@ export const MemoryGame = ({id}: Props) => {
             })
                 .then(()=>{
                     setDialogBox(true)
-                    setMessage("You Have Completed Level "+ gameLev);
-
+                    setMessage("You Have Completed Level "+ gameLev + "");
+                    setAccuracy(matchedCards.length/16*100)
+                    setNum(Math.ceil((matchedCards.length/16)*5));
                     setGameLev(gameLev+1);
+
 
                 })
 
@@ -116,14 +122,15 @@ export const MemoryGame = ({id}: Props) => {
             // setGameOver(false);
             setDialogBox(false);
              if (gameLev==2){
-                setInitialTime(120)
+                setInitialTime(35)
             }
             else if (gameLev==3){
-                setInitialTime(80);
+                setInitialTime(25);
             }
             initialize();
 
         } else {
+
             setMessage("Completed")
             router.push("/games/odd-one-out");
         }
@@ -140,7 +147,7 @@ export const MemoryGame = ({id}: Props) => {
 
         <div className={"justify-center justify-items-center flex flex-col"}>
 
-            <span className={"text-center font-semibold text-2xl"}>Memory Game</span>
+            <span className={"text-center font-semibold text-2xl capitalize"}>PAIR THE HIDDEN OBJECT</span>
             <div className="container">
                 <div className="menu">
                     <Counter
@@ -184,6 +191,10 @@ export const MemoryGame = ({id}: Props) => {
             </div>
             <PopUpNotification display={dialogBox} title={"Memory Game"}
                                message={message}
+                               num={num}
+                               over={gameOver}
+                               accuracy={accuracy}
+                               time={initialTime - time}
                                buttonOnClick={startGame}/>
 
         </div>

@@ -13,6 +13,7 @@ import {Comp} from "@/components/games/DotToDot/Comp";
 import Image from "next/image";
 import axios from "axios";
 import {Button} from "@/components/ui/button";
+import sound from "@/components/context/PlaySound";
 
 interface Props{
     id: string
@@ -29,6 +30,9 @@ export const DotToDot = ({id}:Props) => {
     const [dialogBox, setDialogBox] = useState(false);
     const [message, setMessage] = useState("");
     const [timeUp, setTimeUp] = useState(false);
+
+    const [accuracy, setAccuracy] = useState(0);
+    const [num, setNum] = useState(0);
     const lev1 = {
         "0,0,0": 1,
         "0,0,1": 0,
@@ -166,7 +170,7 @@ export const DotToDot = ({id}:Props) => {
         }
     }
     const sendData = () => {
-        console.log(score);
+        sound.play();
         axios
             .post("/api/game-over", {
                 gameId: id,
@@ -178,6 +182,8 @@ export const DotToDot = ({id}:Props) => {
             .then(() => {
                 setMessage("You Have Completed Level "+gameLev)
                 setDialogBox(true);
+                setAccuracy((score/(gameLev==1 ? 2 : gameLev==2 ? 3 : gameLev==3 && 4))*100);
+                setNum((score/(gameLev==1 ? 2 : gameLev==2 ? 3 : gameLev==3 && 4))*5);
                 setGameLev(gameLev + 1);
                 score=0
                 count=0
@@ -245,6 +251,10 @@ export const DotToDot = ({id}:Props) => {
 
             </div>
             <PopUpNotification display={dialogBox} title={"Dot To Dot"} message={message}
+                               num={num}
+                               over={gameOver}
+                               accuracy={accuracy}
+                               time={initialTime - time}
                                buttonOnClick={() => {startGame()}}/>
         </div>
 

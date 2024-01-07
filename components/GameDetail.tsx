@@ -9,6 +9,7 @@ import Chart from 'chart.js/auto';
 
 Chart.register(CategoryScale);
 
+
 interface Props {
     game: Game,
     userId: string
@@ -30,6 +31,7 @@ export const GameDetail = ({game, userId}: Props) => {
                 }
             });
             const data: User_Game = (await axios.get(url)).data[0];
+            console.log(data)
 
             if (data != undefined) {
                 setGameData(prevState => {
@@ -61,55 +63,54 @@ export const GameDetail = ({game, userId}: Props) => {
 
     return (
         <div className={"w-full m-2 p-3"}>
-            {gameData.length > 0 && (
-                <>
-                    <span className={"text-2xl font-bold uppercase ml-10 m-3 p-3"}>{game.name}</span>
-                    <div className={"w-[97%] flex justify-evenly"}>
-                        <div className={"w-1/3"}>
-                            <Bar
-                                className={"h-[350px] w-[500px]"}
-                                data={{
-                                    labels: ["Level 1", "Level 2", "Level 3"],
-                                    datasets: [
-                                        {
-                                            label: "Time",
-                                            data: time,
-                                            backgroundColor: "blue",
-                                            borderColor: "orange",
-                                            borderWidth: 2
-                                        }
-                                    ]
-                                }}
-                                width={50}
-                                options={{
-                                    maintainAspectRatio: false
-                                }}
-                            />
-                        </div>
-                        <div className={"w-1/3 "}>
-                            <Bar
-                                className={"h-[350px] w-[500px]"}
-                                data={{
-                                    labels: ["Level 1", "Level 2", "Level 3"],
-                                    datasets: [
-                                        {
-                                            label: "Accuracy",
-                                            data: accuracy,
-                                            backgroundColor: "purple",
-                                            borderColor: "red",
-                                            borderWidth: 2
-                                        }
-                                    ]
-                                }}
-                                width={50}
-                                options={{
-                                    maintainAspectRatio: false
-                                }}
-                            />
-                        </div>
-                    </div>
-                </>
-            )}
+            <span className={"text-2xl font-bold uppercase ml-10 m-3 p-3"}>{game.name}</span>
+            <div className={"w-[97%] flex justify-evenly"}>
+                <div className={"w-1/3"}>
+                    <Bar
+                        className={"h-[350px] w-[500px]"}
+                        data={{
+                            labels: ["Level 1", "Level 2", "Level 3"],
+                            datasets: [
+                                {
+                                    label: "Time",
+                                    data: time,
+                                    backgroundColor: "blue",
+                                    borderColor: "orange",
+                                    borderWidth: 2
+                                }
+                            ]
+                        }}
+                        width={50}
+                        options={{
+                            maintainAspectRatio: false
+                        }}
+                    />
+                </div>
+                <div className={"w-1/3 "}>
+                    <Bar
+                        className={"h-[350px] w-[500px]"}
+                        data={{
+                            labels: ["Level 1", "Level 2", "Level 3"],
+                            datasets: [
+                                {
+                                    label: "Accuracy",
+                                    data: accuracy,
+                                    backgroundColor: "purple",
+                                    borderColor: "red",
+                                    borderWidth: 2
+                                }
+                            ]
+                        }}
+                        width={50}
+                        options={{
+                            maintainAspectRatio: false
+                        }}
+                    />
+                </div>
+            </div>
+            <div className={"text-center"}>
+                <span className={"text-center "}>{game.graphStatement}</span>
+            </div>
         </div>
     );
 };

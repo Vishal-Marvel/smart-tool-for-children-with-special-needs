@@ -35,9 +35,11 @@ export const MissingPiece = ({id}: Props) => {
     const [gameLev, setGameLev] = useState(1);
     const [time, setTime] = useState(0);
     const [key, setKey] = useState(0);
-    const [initialTime, setInitialTime] = useState(20);
+    const [initialTime, setInitialTime] = useState(500);
     const [dialogBox, setDialogBox] = useState(false);
     const [message, setMessage] = useState("");
+    const [accuracy, setAccuracy] = useState(0);
+    const [num, setNum] = useState(0);
 
     const handleOnClick = (image: StaticImageData) => {
         if (!gameOver) {
@@ -46,10 +48,7 @@ export const MissingPiece = ({id}: Props) => {
 
             if (image === crt1 || image === crt2 || image === crt3) {
                 sendData(true);
-                setMessage("It is the correct answer!!")
-                sound.play();
             } else {
-                setMessage("It is the wrong answer")
                 sendData(false);
             }
 
@@ -57,10 +56,11 @@ export const MissingPiece = ({id}: Props) => {
     };
 
     const sendData = (acc: boolean) => {
+        sound.play();
         axios
             .post("/api/game-over", {
                 gameId: id,
-                timeTaken: initialTime - time + 1,
+                timeTaken: initialTime - time,
                 level: gameLev,
                 maximum: 1,
                 accuracy: acc ? 1 : 0,
@@ -68,6 +68,9 @@ export const MissingPiece = ({id}: Props) => {
             .then(() => {
 
                 setDialogBox(true);
+                setMessage("You Have Completed Level " + gameLev);
+                setAccuracy((acc ? 1 : 0) * 100);
+                setNum((acc ? 1 : 0) * 5);
                 setGameLev(gameLev + 1);
 
             })
@@ -115,6 +118,10 @@ export const MissingPiece = ({id}: Props) => {
                         handleOnClick={handleOnClick}/>
             </div>
             <PopUpNotification display={dialogBox} title={"Spot The Missing Piece"} message={message}
+                               num={num}
+                               over={gameOver}
+                               accuracy={accuracy}
+                               time={initialTime - time}
                                buttonOnClick={() => startGame()}/>
         </div>
     );

@@ -201,11 +201,11 @@ export const Levels = ({
 
     return (
         <div className={"w-full flex flex-col justify-center items-center"}>
-            <div className={"flex flex-row w-1/2 justify-evenly p-2 font-bold text-2xl"}>
+            <div className={"flex flex-row w-full justify-evenly p-2 font-bold text-2xl"}>
                 <span>Column A </span>
                 <span>Column B </span>
             </div>
-            {lev === 1 ? <div className={"flex flex-row w-1/2 justify-evenly m-3"}>
+            {lev === 1 ? <div className={"flex flex-row w-full justify-evenly m-3"}>
                 <div className={"flex flex-col"}>
                     {lev1questions.map((qn, index) => (
 
@@ -228,12 +228,12 @@ export const Levels = ({
                 </div>
 
 
-            </div> : lev === 2 ? <div className={"flex flex-row w-1/2 justify-evenly m-3"}>
+            </div> : lev === 2 ? <div className={"flex flex-row w-full justify-evenly m-3"}>
                 <div className={"flex flex-col"}>
                     {lev2questions.map((qn, index) => (
 
                         <Image src={qn} alt={`${index}`}
-                               className={cn("m-2 transition-all ease-in cursor-pointer", selected.includes(qn) ? "scale-50" : "",
+                               className={cn("h-[120px] w-[100px]  m-1 transition-all ease-in cursor-pointer", selected.includes(qn) ? "scale-50" : "",
                                    columnA === qn ? "scale-125" : "")}
                                onClick={(e) => handleSelect("A", qn)}/>
 
@@ -242,7 +242,7 @@ export const Levels = ({
                 <div className={"flex flex-col"}>
                     {shuffledImages2.map((qn, index) => (
                         <Image src={qn} alt={`${index}`}
-                               className={cn("m-2 transition-all ease-in cursor-pointer", selected.includes(qn) ? "scale-50" : "",
+                               className={cn("h-[120px] w-[100px] m-1 transition-all ease-in cursor-pointer", selected.includes(qn) ? "scale-50" : "",
                                    columnB === qn ? "scale-125" : "")}
                                onClick={(e) => handleSelect("B", qn)}/>
 
@@ -250,17 +250,17 @@ export const Levels = ({
                 </div>
 
 
-            </div> : lev == 3 ? <div className={"flex flex-row w-1/2 justify-evenly m-3"}>
-                <div className={"grid grid-cols-2"}>
+            </div> : lev == 3 ? <div className={"flex flex-row  justify-evenly m-3"}>
+                <div className={"grid grid-cols-1 md:grid-cols-2"}>
                     {lev3questions.map((qn, index) => (
                         <Image src={qn} alt={`${index}`}
 
-                               className={cn("aspect-square h-20 m-2 transition-all ease-in cursor-pointer", selected.includes(qn) ? "scale-50" : "",
+                               className={cn("m-2 transition-all ease-in cursor-pointer", selected.includes(qn) ? "scale-50" : "",
                                    columnA === qn ? "scale-125" : "")}
                                onClick={(e) => handleSelect("A", qn)}/>
                     ))}
                 </div>
-                <div className={"grid grid-cols-2"}>
+                <div className={"grid md:grid-cols-2"}>
                     {shuffledImages3.map((qn, index) => (
 
                         <Image src={qn} alt={`${index}`}

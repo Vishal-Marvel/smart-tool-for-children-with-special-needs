@@ -4,11 +4,7 @@ import ToggleButton from "@/components/ToggleButton";
 const GameLayout = ({children}: { children: React.ReactNode }) => {
     return (
 
-        <div className="h-[98vh] flex items-center justify-center align-middle">
-            <div className={"absolute top-0 right-0 p-2"}>
-                <ToggleButton/>
-
-            </div>
+        <div className="h-full flex flex-col items-center justify-center align-middle">
             {children}
         </div>
 

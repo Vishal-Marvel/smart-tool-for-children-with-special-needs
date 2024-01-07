@@ -5,7 +5,7 @@ import {db} from "@/lib/db";
 const MemoryPage = async ()=> {
   const game = await db.game.findUnique({
     where:{
-      name: "MEMORY GAME"
+      name: "PAIR THE HIDDEN OBJECT"
     }
   })
 

@@ -30,8 +30,10 @@ model Users {
 }
 
 model Game {
-  id   String @id @default(auto()) @map("_id") @db.ObjectId
-  name String @unique
+  id             String @id @default(auto()) @map("_id") @db.ObjectId
+  name           String @unique
+  description    String
+  graphStatement String
 }
 
 model User_Game {

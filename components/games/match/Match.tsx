@@ -27,6 +27,7 @@ import q4l3 from "@/public/match/q4l3.png"
 import {Levels} from "@/components/games/match/Levels";
 import {PopUpNotification} from "@/components/PopUpNotification";
 import {useRouter} from "next/navigation";
+import sound from "@/components/context/PlaySound";
 
 interface Props {
     id: String
@@ -43,9 +44,11 @@ export const Match = ({id}: Props) => {
     const [gameLev, setGameLev] = useState(1);
     const [time, setTime] = useState(0);
     const [key, setKey] = useState(0);
-    const [initialTime, setInitialTime] = useState(30);
+    const [initialTime, setInitialTime] = useState(300);
     const [dialogBox, setDialogBox] = useState(false);
     const [message, setMessage] = useState("");
+    const [accuracy, setAccuracy] = useState(0);
+    const [num, setNum] = useState(0);
     const [timeUp, setTimeUp] = useState(false);
     const imageDataArray: ImageData[] = [
         {question: q1l1, answer: a1l1},
@@ -79,7 +82,7 @@ export const Match = ({id}: Props) => {
     };
 
     const sendData = () => {
-        console.log(score);
+        sound.play()
         axios
             .post("/api/game-over", {
                 gameId: id,
@@ -92,6 +95,9 @@ export const Match = ({id}: Props) => {
 
                 setDialogBox(true);
                 setGameLev(gameLev + 1);
+                setMessage("You Have Completed Level "+gameLev);
+                setAccuracy((score/(gameLev==1 ? 2 : gameLev==2 ? 3 : gameLev==3 && 4))*100);
+                setNum((score/(gameLev==1 ? 2 : gameLev==2 ? 3 : gameLev==3 && 4))*5);
                 score = 0;
                 setTimeUp(false);
             })
@@ -131,7 +137,10 @@ export const Match = ({id}: Props) => {
                 <span
                     className={"text-indigo-950 dark:text-indigo-50 text-2xl font-bold uppercase "}> Level - {gameLev}</span>
             </div>
-            <span className={""}>Choose an image from the <strong>Column A</strong> and choose an image from <strong>Column B</strong></span>
+            <div className={"flex justify-center"}>
+
+            <span className={" text-center"}>Choose an image from the <strong>Column A</strong> and choose an image from <strong>Column B</strong></span>
+            </div>
             <div className={"justify-center justify-items-center align-middle"}>
 
                 <Levels lev={gameLev} a1l1={a1l1} a2l1={a2l1} q1l1={q1l1} q2l1={q2l1} q1l2={q1l2}
@@ -140,6 +149,11 @@ export const Match = ({id}: Props) => {
                         handleOnDraw={handleOnDraw} timeup={timeUp}/>
             </div>
             <PopUpNotification display={dialogBox} title={"Match The Image"} message={message}
+                               num={num}
+                               over={gameOver}
+                               accuracy={accuracy}
+
+                               time={initialTime - time}
                                buttonOnClick={() => startGame()}/>
         </div>
     );

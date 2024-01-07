@@ -109,23 +109,23 @@ export const Levels = ({
 
             <div className={"flex justify-center m-4"}>
 
-                {lev == 2 && <Image src={l2} alt={"question"} className="md:h-50 md:w-55 h-40 w-25"/>}
+                {lev == 2 && <Image src={l2} alt={"question"} className="md:h-40 md:w-40 h-20 w-20"/>}
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-5 justify-items-center">
                 {lev == 2 && shuffledImages2.map((image, index) => (
 
                     <Image key={index} src={image} alt={`Image${index + 1}`}
-                           className={"aspect-1 md:h-18 md:w-18 h-12 w-12 object-contain cursor-pointer"}
+                           className={"aspect-1 h-15 w-15 object-contain cursor-pointer"}
                            onClick={() => handleOnClick(image)}
                     />
 
                 ))}
             </div>
-            <div className={"flex justify-center m-4"}>
-                {lev == 3 && <Image src={l3} alt={"question"} className="md:h-40 md:w-40 h-20 w-20"/>}
+            <div className={"flex justify-center m-2"}>
+                {lev == 3 && <Image src={l3} alt={"question"} className="h-[300px] aspect-auto object-contain"/>}
             </div>
-            <div className="grid grid-cols-2 gap-10 justify-items-center">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-10 justify-items-center">
                 {lev == 3 && shuffledImages3.map((image, index) => (
                     <Image key={index} src={image} alt={`Image${index + 1}`}
                            className={"aspect-1 h-15 w-15 object-contain cursor-pointer"}

@@ -27,6 +27,8 @@ export const OddOneOut = ({id}: Props) => {
     const [gameLev, setGameLev] = useState(1);
     const [time, setTime] = useState(0);
     const [key, setKey] = useState(0);
+    const [accuracy, setAccuracy] = useState(0);
+    const [num, setNum] = useState(0);
     const [initialTime, setInitialTime] = useState(20);
     const [dialogBox, setDialogBox] = useState(false);
     const [message, setMessage] = useState("");
@@ -60,6 +62,8 @@ export const OddOneOut = ({id}: Props) => {
             .then(() => {
 
                 setDialogBox(true);
+                setAccuracy((acc ? 1 : 0)*100)
+                setNum((acc ? 1 : 0)*5);
                 setGameLev(gameLev + 1);
 
             })
@@ -106,6 +110,10 @@ export const OddOneOut = ({id}: Props) => {
                 {gameLev === 3 && <LevThree even={evenPanda} odd={oddPanda} handleClick={handleOnClick}/>}
             </div>
             <PopUpNotification display={dialogBox} title={"Odd One Out"} message={message}
+                               num={num}
+                               over={gameOver}
+                               accuracy={accuracy}
+                               time={initialTime - time}
                                buttonOnClick={() => startGame()}/>
         </div>
     );

@@ -52,7 +52,8 @@ export const Distance = ({id}: Props) => {
     const [dialogBox, setDialogBox] = useState(false);
     const [message, setMessage] = useState("");
     const [count,setCount] = useState(0);
-
+    const [accuracy, setAccuracy] = useState(0);
+    const [num, setNum] = useState(0);
     const handleOnClick = (image: StaticImageData) => {
         if (!gameOver) {
 
@@ -72,7 +73,6 @@ export const Distance = ({id}: Props) => {
             }
             if(gameLev<2 || gameLev==2 && count==1 || gameLev==3 && count == 2){
                 setGameOver(true);
-                sound.play();
                 sendDate();
 
             }
@@ -81,22 +81,21 @@ export const Distance = ({id}: Props) => {
     };
 
     const sendDate = () => {
-        console.log(score)
+        sound.play();
         axios
             .post("/api/game-over", {
                 gameId: id,
                 timeTaken: initialTime - time + 1,
                 level: gameLev,
-                maximum: gameLev==1 ? 1 : gameLev==2 ? 2 : gameLev==3 && 3,
+                maximum: gameLev,
                 accuracy: score,
             })
             .then(() => {
 
                 setDialogBox(true);
-                setMessage("Level " + gameLev + " completed")
-                // if(gameLev==2 && count==1|| gameLev==1|| gameLev==3 && count==2){
-                //
-                // }
+                setMessage("You Have Completed Level " + gameLev)
+                setAccuracy((score/gameLev)*100);
+                setNum((score/(gameLev))*5);
                 setGameLev(gameLev + 1);
                 setCount(0);
                 score = 0;
@@ -152,6 +151,10 @@ export const Distance = ({id}: Props) => {
                         handleOnClick={handleOnClick}/>
             </div>
             <PopUpNotification display={dialogBox} title={"Distance Dash"} message={message}
+                               num={num}
+                               over={gameOver}
+                               accuracy={accuracy}
+                               time={initialTime - time}
                                buttonOnClick={() => startGame()}/>
         </div>
     );

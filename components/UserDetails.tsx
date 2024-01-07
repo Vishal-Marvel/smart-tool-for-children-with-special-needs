@@ -1,17 +1,20 @@
 import {Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger,} from "@/components/ui/dialog"
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar"
 import {currentUser} from "@clerk/nextjs";
-import {Users} from "@prisma/client";
+import {$Enums, Users} from "@prisma/client";
 
 import ProfileEditButton from "@/components/Customs/ProfileEditButton";
 import CustomSignOutButton from "@/components/Customs/CustomSignOutButton";
+import MemberRole = $Enums.MemberRole;
+import {Button} from "@/components/ui/button";
 
 
 interface Props {
-    profile: Users
+    profile: Users,
+    userType?: MemberRole
 }
 
-export const UserDetails = async ({profile}: Props) => {
+export const UserDetails = async ({profile, userType}: Props) => {
     const user = await currentUser();
     const userDetails = [
         {key: "Name", value: profile.name},
@@ -27,10 +30,16 @@ export const UserDetails = async ({profile}: Props) => {
         <>
             <Dialog>
                 <DialogTrigger>
-                    <Avatar className={"w-9 h-9"}>
-                        <AvatarImage src={user.imageUrl}/>
-                        <AvatarFallback>{profile.name[0]}</AvatarFallback>
-                    </Avatar>
+                    {userType === MemberRole.ADMIN &&
+                        <Avatar className={"w-9 h-9"}>
+                            <AvatarImage src={user.imageUrl}/>
+                            <AvatarFallback>{profile.name[0]}</AvatarFallback>
+                        </Avatar>
+                    }
+                    {
+                        userType === MemberRole.USER &&
+                        <Button className={"w-full"}>Dashboard</Button>
+                    }
 
                 </DialogTrigger>
                 <DialogContent>

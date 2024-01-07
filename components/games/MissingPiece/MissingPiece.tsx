@@ -35,7 +35,7 @@ export const MissingPiece = ({id}: Props) => {
     const [gameLev, setGameLev] = useState(1);
     const [time, setTime] = useState(0);
     const [key, setKey] = useState(0);
-    const [initialTime, setInitialTime] = useState(500);
+    const [initialTime, setInitialTime] = useState(15);
     const [dialogBox, setDialogBox] = useState(false);
     const [message, setMessage] = useState("");
     const [accuracy, setAccuracy] = useState(0);
@@ -84,6 +84,7 @@ export const MissingPiece = ({id}: Props) => {
             setGameOver(false);
             setDialogBox(false);
         } else {
+            setGameOver(false);
             setMessage("Completed")
             router.push("/games/match");
         }
@@ -96,7 +97,7 @@ export const MissingPiece = ({id}: Props) => {
           className={"text-2xl pb-4 font-bold uppercase text-indigo-950 dark:text-indigo-50 text-center flex justify-center"}>
         Spot the Missing Piece
       </span>
-            <div className={"m-4 flex flex-row align-middle items-center justify-around "}>
+            <div className={"m-3 flex flex-row align-middle items-center justify-around "}>
                 <Counter
                     restart={key}
                     isPlaying={!gameOver}

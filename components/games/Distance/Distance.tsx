@@ -46,7 +46,7 @@ export const Distance = ({id}: Props) => {
     const [gameOver, setGameOver] = useState(false);
     const [gameLev, setGameLev] = useState(1);
     const [time, setTime] = useState(0);
-    let score = 0;
+    let score = 0, score1=0, score2=0;
     const [key, setKey] = useState(0);
     const [initialTime, setInitialTime] = useState(15);
     const [dialogBox, setDialogBox] = useState(false);
@@ -57,30 +57,30 @@ export const Distance = ({id}: Props) => {
     const handleOnClick = (image: StaticImageData) => {
         if (!gameOver) {
 
-            if (image === al1 || image === l2a1 || image === l2a2 || image === l3a1 || image === l3a2 || image === l3a3) {
-                console.log("correct");
-
-                // setMessage("It is the correct answer!!")
-
-                score++;
-                if(gameLev>1)   setCount(count+1)
-                
-            } else {
-                
-                // setMessage("It is the wrong answer")
-                if(gameLev>1)   setCount(count+1)
-                
+            if (image === al1 || image === l2a1 || image === l3a1 ) {
+                // console.log("correct");
+                //
+                // // setMessage("It is the correct answer!!")
+                // console.log("cor", score);
+                score=1;
+            }else if (image === l2a2 || image === l3a2 ){
+                score1=1;
+            }else  if (image === l3a3){
+                score2=1;
             }
+            if(gameLev>1)   setCount(count+1)
+
+
             if(gameLev<2 || gameLev==2 && count==1 || gameLev==3 && count == 2){
                 setGameOver(true);
-                sendDate();
+                sendData();
 
             }
 
         }
     };
 
-    const sendDate = () => {
+    const sendData = () => {
         sound.play();
         axios
             .post("/api/game-over", {
@@ -88,18 +88,21 @@ export const Distance = ({id}: Props) => {
                 timeTaken: initialTime - time + 1,
                 level: gameLev,
                 maximum: gameLev,
-                accuracy: score,
+                accuracy: score+score1+score2,
             })
             .then(() => {
+                console.log(score,score1,score2)
 
                 setDialogBox(true);
                 setMessage("You Have Completed Level " + gameLev)
-                setAccuracy((score/gameLev)*100);
-                setNum((score/(gameLev))*5);
+                setAccuracy(Math.floor((score+score1+score2)/gameLev*100));
+                setNum(Math.floor((score+score1+score2)/(gameLev)*5));
                 setGameLev(gameLev + 1);
                 setCount(0);
                 score = 0;
-                
+                score1=0;
+                score2=0;
+
 
             })
             .catch((e) => console.log(e));
@@ -116,8 +119,9 @@ export const Distance = ({id}: Props) => {
           
             setDialogBox(false);
         } else {
+            setGameOver(false);
             setMessage("Completed");
-            router.push("/dashboard");
+            router.push("/games/arrow-challenge");
         }
     }
 
@@ -134,7 +138,7 @@ export const Distance = ({id}: Props) => {
                     isPlaying={!gameOver}
                     onCompleteFunc={() => {
                         setMessage("Time Up");
-                        sendDate();
+                        sendData();
                     }}
                     onUpdateFunc={(remainingTime) => setTime(remainingTime)}
                     time={initialTime}

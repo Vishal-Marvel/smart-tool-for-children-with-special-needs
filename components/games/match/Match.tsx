@@ -44,7 +44,7 @@ export const Match = ({id}: Props) => {
     const [gameLev, setGameLev] = useState(1);
     const [time, setTime] = useState(0);
     const [key, setKey] = useState(0);
-    const [initialTime, setInitialTime] = useState(300);
+    const [initialTime, setInitialTime] = useState(20);
     const [dialogBox, setDialogBox] = useState(false);
     const [message, setMessage] = useState("");
     const [accuracy, setAccuracy] = useState(0);
@@ -92,12 +92,12 @@ export const Match = ({id}: Props) => {
                 accuracy: score,
             })
             .then(() => {
-
+                // console.log(score/(gameLev==1 ? 2 : gameLev==2 ? 3 : gameLev==3 && 4), Math.floor(score/(gameLev==1 ? 2 : gameLev==2 ? 3 : gameLev==3 && 4)*100));
                 setDialogBox(true);
                 setGameLev(gameLev + 1);
                 setMessage("You Have Completed Level "+gameLev);
-                setAccuracy((score/(gameLev==1 ? 2 : gameLev==2 ? 3 : gameLev==3 && 4))*100);
-                setNum((score/(gameLev==1 ? 2 : gameLev==2 ? 3 : gameLev==3 && 4))*5);
+                setAccuracy(Math.floor(score/(gameLev==1 ? 2 : gameLev==2 ? 3 : gameLev==3 && 4)*100));
+                setNum(Math.floor(score/(gameLev==1 ? 2 : gameLev==2 ? 3 : gameLev==3 && 4)*5));
                 score = 0;
                 setTimeUp(false);
             })
@@ -111,6 +111,7 @@ export const Match = ({id}: Props) => {
             setGameOver(false);
             setDialogBox(false);
         } else {
+            setGameOver(false);
             setMessage("Completed")
             router.push("/games/dot-to-dot");
         }

@@ -5,20 +5,18 @@ import oddOne from "@/public/odd-one.png";
 import missingPiece from "@/public/missingpiece.png";
 import match from "@/public/match.png";
 import dot from "@/public/dot.png";
+import arrow from "@/public/arrow.png";
 import distance from "@/public/distance.png";
-import {currentProfile} from "@/lib/current-profile";
 import {Button} from "@/components/ui/button";
-import {UserDetails} from "@/components/UserDetails";
 import {SideBar} from "@/components/SideBar";
 
 const  Tests = async () => {
     return (
 
-        <div className={"p-2 flex "}>
+        <div className={"p-2 flex m-2 "}>
 
             <SideBar/>
             <div className={"m-4 p-2"}>
-                {/*<span className={"text-2xl font-semibold"}>Test Available</span>*/}
                 <Link href={"/games/memory-game"}>
                     <Button className={"w-full"}>Start Test</Button>
                 </Link>
@@ -26,7 +24,7 @@ const  Tests = async () => {
 
                     <GameCard image={memory}
                               med={"Figure Ground Discrimination"}
-                              text={"The objective of this test is to find all the matching pairs by clicking on the cards."}
+                              text={"Identify and locate the hidden objects using memory"}
                               name={"Pair The Hidden Object"}
                     />
                     <GameCard image={oddOne}
@@ -36,23 +34,28 @@ const  Tests = async () => {
                     />
                     <GameCard image={missingPiece}
                               med={"Form constancy assessment"}
-                              text={"Identify the missing piece from a set of given options. Tap or click on the option."}
+                              text={"Identify the missing piece from a set of given options"}
                               name={"Spot The Missing Piece"}
                     />
                     <GameCard image={match}
                               med={"Visual closure assessment"}
-                              text={"Identify and match the hidden image. Tap, draw or click on the option."}
+                              text={"Identify and match the hidden image."}
                               name={"Match The Image"}
                     />
                     <GameCard image={dot}
                               med={"Allocentric visual perception Assessment"}
-                              text={"Connect the dots on the right-hand side to replicate the pattern from the left. Use tapping, clicking, or drawing to place each dot accurately."}
+                              text={"Connect the dots on the right-hand side to replicate the pattern from the left."}
                               name={"Dot To Dot"}
                     />
                     <GameCard image={distance}
                               med={"Egocentric visual perception Assessment"}
                               text={"Answer the questions by selecting the right options"}
                               name={"Distance Dash"}
+                    />
+                    <GameCard image={arrow }
+                              med={"Motion-based dynamic visual cognitive perception"}
+                              text={"Identify the arrow that faces the opposite direction among a fleet of arrows moving across the screen"}
+                              name={"The Arrow Challenge"}
                     />
 
                 </div>

@@ -1,27 +1,27 @@
 "use client"
-import {Counter} from "@/components/Counter";
-import {useState} from "react";
-import {StaticImageData} from "next/image";
-import axios from "axios";
-
-import blue_circle from "@/public/oddOneOut/blue-circle.webp"
-import green_circle from "@/public/oddOneOut/green-circle.webp"
-import basketBall from "@/public/oddOneOut/basketball.webp"
-import bee from "@/public/oddOneOut/bee.webp"
-import oddPanda from "@/public/oddOneOut/odd_panda.png"
-import evenPanda from "@/public/oddOneOut/even_panda.png"
-
-import {LevOneAndLevTwo} from "@/components/games/OddOneOut/LevOneAndLevTwo";
-import {LevThree} from "@/components/games/OddOneOut/LevThree";
-import sound from "@/components/context/PlaySound";
-import {PopUpNotification} from "@/components/PopUpNotification";
 import {useRouter} from "next/navigation";
+import {useEffect, useState} from "react";
+import sound from "@/components/context/PlaySound";
+import axios from "axios";
+import {Counter} from "@/components/Counter";
+import {PopUpNotification} from "@/components/PopUpNotification";
+import ImageSeries from "@/components/games/ArrowChallenge/ImageSeries";
+import {StaticImageData} from "next/image";
+import blue_circle from "@/public/oddOneOut/blue-circle.webp";
+import bee from "@/public/oddOneOut/bee.webp";
+import oddPanda from "@/public/oddOneOut/odd_panda.png";
+import {LevOneAndLevTwo} from "@/components/games/OddOneOut/LevOneAndLevTwo";
+import green_circle from "@/public/oddOneOut/green-circle.webp";
+import basketBall from "@/public/oddOneOut/basketball.webp";
+import {LevThree} from "@/components/games/OddOneOut/LevThree";
+import evenPanda from "@/public/oddOneOut/even_panda.png";
 
-interface Props {
-    id: String
+interface Props{
+    id:string
 }
 
-export const OddOneOut = ({id}: Props) => {
+export const ArrowChallenge = ({id}:Props) => {
+
     const router = useRouter();
     const [gameOver, setGameOver] = useState(false);
     const [gameLev, setGameLev] = useState(1);
@@ -29,26 +29,14 @@ export const OddOneOut = ({id}: Props) => {
     const [key, setKey] = useState(0);
     const [accuracy, setAccuracy] = useState(0);
     const [num, setNum] = useState(0);
-    const [initialTime, setInitialTime] = useState(15);
+    const [initialTime, setInitialTime] = useState(20);
     const [dialogBox, setDialogBox] = useState(false);
     const [message, setMessage] = useState("");
 
-    const handleOnClick = (image: StaticImageData) => {
-        if (!gameOver) {
-            setGameOver(true);
-            if (image === blue_circle || image === bee || image === oddPanda) {
-                sendData(true);
-
-            } else {
-                sendData(false);
-            }
-
-        }
-    };
 
     const sendData = (acc: boolean) => {
         sound.play();
-
+        setGameOver(true);
         axios
             .post("/api/game-over", {
                 gameId: id,
@@ -60,7 +48,6 @@ export const OddOneOut = ({id}: Props) => {
             .then(() => {
 
                 setDialogBox(true);
-                setMessage("You Have Completed Level "+gameLev);
                 setAccuracy((acc ? 1 : 0)*100)
                 setNum((acc ? 1 : 0)*5);
                 setGameLev(gameLev + 1);
@@ -76,9 +63,9 @@ export const OddOneOut = ({id}: Props) => {
             setGameOver(false);
             setDialogBox(false);
         } else {
-            setGameOver(false);
             setMessage("Completed")
-            router.push("/games/missing-piece");
+            setGameOver(false);
+            router.push("/dashboard");
         }
     }
 
@@ -87,7 +74,7 @@ export const OddOneOut = ({id}: Props) => {
         <div>
       <span
           className={"text-2xl pb-4 font-bold uppercase text-indigo-950 dark:text-indigo-50 text-center flex justify-center"}>
-        Pick The Odd One Out
+        The Arrow Challenge
       </span>
             <div className={"m-4 flex flex-row align-middle items-center justify-around "}>
                 <Counter
@@ -103,13 +90,9 @@ export const OddOneOut = ({id}: Props) => {
                 <span
                     className={"text-indigo-950 dark:text-indigo-50 text-2xl font-bold uppercase "}> Level - {gameLev}</span>
             </div>
-            <div className={"justify-center justify-items-center align-middle"}>
-                {gameLev <= 2 &&
-                    <LevOneAndLevTwo lev={gameLev} even1={green_circle} odd1={blue_circle} even2={basketBall} odd2={bee}
-                                     handleOnClick={handleOnClick}/>}
-                {gameLev === 3 && <LevThree even={evenPanda} odd={oddPanda} handleClick={handleOnClick}/>}
-            </div>
-            <PopUpNotification display={dialogBox} title={"Odd One Out"} message={message}
+            <ImageSeries handleClicked={sendData} gameLev={gameLev}/>
+
+            <PopUpNotification display={dialogBox} title={"The Arrow Challenge"} message={message}
                                num={num}
                                over={gameOver}
                                accuracy={accuracy}

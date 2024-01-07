@@ -61,7 +61,7 @@ export const Levels = ({
         setShuffledImages1(shuffledArray);
     }, []);
     useEffect(() => {
-       
+
         const imageArray = [crt2, wrg1l2, wrg2l2, wrg3l2];
         const validImages = imageArray.filter(image => image);
         const shuffleArray = (array: StaticImageData[]) => {
@@ -93,47 +93,56 @@ export const Levels = ({
 
     return (
         <div>
-            <div className={"flex justify-center m-4"}>
-                {lev == 1 && <Image src={l1} alt={'question'} className="md:h-40 md:w-40 h-30 w-30"/>}
-            </div>
-            <div className="grid grid-cols-2 gap-10 justify-center justify-items-center align-middle">
-                {lev == 1 && shuffledImages1.map((image, index) => (
-                    <Image key={index} src={image} alt={`Image${index + 1}`}
-                           className={"aspect-1 md:h-30 md:w-30 h-15 w-15 cursor-pointer"}
-                           onClick={() => handleOnClick(image)}
-                    />
+            {lev == 1 && <>
+                <div className={"flex justify-center m-4"}>
+                    <Image src={l1} alt={'question'} className="md:h-40 md:w-40 h-30 w-30"/>
+                </div>
+                <div className="grid grid-cols-2 gap-10 justify-center justify-items-center align-middle">
+                    {shuffledImages1.map((image, index) => (
+                        <Image key={index} src={image} alt={`Image${index + 1}`}
+                               className={"aspect-1 md:h-30 md:w-30 h-15 w-15 cursor-pointer"}
+                               onClick={() => handleOnClick(image)}
+                        />
 
-                ))}
-            </div>
+                    ))}
+                </div>
+            </>}
 
+            {lev == 2 &&
+                <>
+                    <div className={"flex justify-center m-4"}>
 
-            <div className={"flex justify-center m-4"}>
+                        <Image src={l2} alt={"question"} className="md:h-40 md:w-40 h-20 w-20"/>
+                    </div>
 
-                {lev == 2 && <Image src={l2} alt={"question"} className="md:h-40 md:w-40 h-20 w-20"/>}
-            </div>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-5 justify-items-center">
+                        {shuffledImages2.map((image, index) => (
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-5 justify-items-center">
-                {lev == 2 && shuffledImages2.map((image, index) => (
+                            <Image key={index} src={image} alt={`Image${index + 1}`}
+                                   className={"aspect-1 h-15 w-15 object-contain cursor-pointer"}
+                                   onClick={() => handleOnClick(image)}
+                            />
 
-                    <Image key={index} src={image} alt={`Image${index + 1}`}
-                           className={"aspect-1 h-15 w-15 object-contain cursor-pointer"}
-                           onClick={() => handleOnClick(image)}
-                    />
+                        ))}
+                    </div>
+                </>
+            }
+            {lev == 3 &&
+                <>
+                    <div className={"flex justify-center m-2"}>
+                        <Image src={l3} alt={"question"} className="h-[300px] aspect-auto object-contain"/>
+                    </div>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-10 justify-items-center">
+                        {lev == 3 && shuffledImages3.map((image, index) => (
+                            <Image key={index} src={image} alt={`Image${index + 1}`}
+                                   className={"aspect-1 h-15 w-15 object-contain cursor-pointer"}
+                                   onClick={() => handleOnClick(image)}
+                            />
 
-                ))}
-            </div>
-            <div className={"flex justify-center m-2"}>
-                {lev == 3 && <Image src={l3} alt={"question"} className="h-[300px] aspect-auto object-contain"/>}
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-10 justify-items-center">
-                {lev == 3 && shuffledImages3.map((image, index) => (
-                    <Image key={index} src={image} alt={`Image${index + 1}`}
-                           className={"aspect-1 h-15 w-15 object-contain cursor-pointer"}
-                           onClick={() => handleOnClick(image)}
-                    />
-
-                ))}
-            </div>
+                        ))}
+                    </div>
+                </>
+            }
 
         </div>
     );

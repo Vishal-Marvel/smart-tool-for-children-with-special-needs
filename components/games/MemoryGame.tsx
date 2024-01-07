@@ -106,7 +106,7 @@ export const MemoryGame = ({id}: Props) => {
                     setDialogBox(true)
                     setMessage("You Have Completed Level "+ gameLev + "");
                     setAccuracy(matchedCards.length/16*100)
-                    setNum(Math.ceil((matchedCards.length/16)*5));
+                    setNum(Math.floor((matchedCards.length/16)*5));
                     setGameLev(gameLev+1);
 
 
@@ -130,7 +130,7 @@ export const MemoryGame = ({id}: Props) => {
             initialize();
 
         } else {
-
+            setGameOver(false);
             setMessage("Completed")
             router.push("/games/odd-one-out");
         }

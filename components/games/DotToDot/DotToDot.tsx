@@ -180,10 +180,11 @@ export const DotToDot = ({id}:Props) => {
                 accuracy: score,
             })
             .then(() => {
+                console.log(score)
                 setMessage("You Have Completed Level "+gameLev)
                 setDialogBox(true);
-                setAccuracy((score/(gameLev==1 ? 2 : gameLev==2 ? 3 : gameLev==3 && 4))*100);
-                setNum((score/(gameLev==1 ? 2 : gameLev==2 ? 3 : gameLev==3 && 4))*5);
+                setAccuracy((score/(gameLev==1 ? 1 : gameLev==2 ? 2 : gameLev==3 && 4))*100);
+                setNum(Math.floor(score/(gameLev==1 ? 1 : gameLev==2 ? 2 : gameLev==3 && 4)*5));
                 setGameLev(gameLev + 1);
                 score=0
                 count=0
@@ -202,6 +203,7 @@ export const DotToDot = ({id}:Props) => {
                 setInitialTime(30);
             }
         } else {
+            setGameOver(false);
             setMessage("Completed")
             router.push("/games/distance");
         }
@@ -210,7 +212,7 @@ export const DotToDot = ({id}:Props) => {
         <div className={"w-full flex flex-col justify-center align-middle items-center"}>
       <span
           className={"text-2xl pb-4 font-bold uppercase text-indigo-950 dark:text-indigo-50 text-center flex justify-center"}>
-        Match the image
+        Dot To Dot
       </span>
             <div className={"w-1/2 m-4 flex flex-row align-middle items-center justify-evenly "}>
                 <Counter

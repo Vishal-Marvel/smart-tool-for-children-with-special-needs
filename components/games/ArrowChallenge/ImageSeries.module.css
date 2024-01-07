@@ -1,0 +1,24 @@
+ /*ImageSeries.module.css */
+.imageSeries {
+    overflow: hidden;
+    animation: scrollImages 15s linear infinite; /* Adjust the animation duration as needed */
+}
+ .imageSeries1 {
+    overflow: hidden;
+    animation: scrollImages 8s linear infinite; /* Adjust the animation duration as needed */
+}
+ .imageSeries2 {
+    overflow: hidden;
+    animation: scrollImages 5s linear infinite; /* Adjust the animation duration as needed */
+}
+
+@keyframes scrollImages {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%); /* Adjust the percentage based on the number of images */
+    }
+}
+
+

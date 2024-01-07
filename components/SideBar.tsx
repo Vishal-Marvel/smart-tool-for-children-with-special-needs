@@ -6,8 +6,8 @@ import CustomSignOutButton from "@/components/Customs/CustomSignOutButton";
 export const SideBar = async () => {
     const user = await currentProfile();
     return (
-    <div className={"flex flex-col items-center "}>
-
+    <div className={"flex flex-col items-center text-center"}>
+        <span className={"font-bold text-2xl capitalize text-center"}>Welcome! {user.name}</span>
         <div className={"m-6 w-full items-center flex flex-col h-[300px] sticky left-2 top-2 justify-evenly"}>
 
             <Link href={"/dashboard"} >

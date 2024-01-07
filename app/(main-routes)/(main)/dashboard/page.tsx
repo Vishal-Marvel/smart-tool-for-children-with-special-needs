@@ -14,7 +14,7 @@ const Dashboard = async () => {
 
     return <div>
         <div className={"flex justify-between  p-3"}>
-            <span className={"font-bold text-2xl capitalize"}>Welcome! {profile.name}</span>
+
             <div className={"flex flex-row justify-between min-w-1/7"}>
                 {profile.role === MemberRole.ADMIN && <UserButton afterSignOutUrl={"/"}/>}
                 {/*{profile.role === MemberRole.USER && <UserDetails profile={profile}/>}*/}

@@ -180,7 +180,7 @@ export const DotToDot = ({id}:Props) => {
                 accuracy: score,
             })
             .then(() => {
-                console.log(score)
+                // console.log(score)
                 setMessage("You Have Completed Level "+gameLev)
                 setDialogBox(true);
                 setAccuracy((score/(gameLev==1 ? 1 : gameLev==2 ? 2 : gameLev==3 && 4))*100);

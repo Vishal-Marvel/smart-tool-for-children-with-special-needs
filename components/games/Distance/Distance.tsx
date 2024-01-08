@@ -1,6 +1,6 @@
 "use client"
 import {Counter} from "@/components/Counter";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {StaticImageData} from "next/image";
 import axios from "axios";
 
@@ -46,39 +46,27 @@ export const Distance = ({id}: Props) => {
     const [gameOver, setGameOver] = useState(false);
     const [gameLev, setGameLev] = useState(1);
     const [time, setTime] = useState(0);
-    let score = 0, score1=0, score2=0;
+    const [score, setScore] = useState(0);
     const [key, setKey] = useState(0);
     const [initialTime, setInitialTime] = useState(15);
     const [dialogBox, setDialogBox] = useState(false);
     const [message, setMessage] = useState("");
-    const [count,setCount] = useState(0);
+    const [count, setCount] = useState(0);
     const [accuracy, setAccuracy] = useState(0);
     const [num, setNum] = useState(0);
     const handleOnClick = (image: StaticImageData) => {
         if (!gameOver) {
 
-            if (image === al1 || image === l2a1 || image === l3a1 ) {
+            if (image === al1 || image === l2a1 || image === l3a1 || image === l2a2 || image === l3a2 || image === l3a3) {
                 // console.log("correct");
                 //
                 // // setMessage("It is the correct answer!!")
                 // console.log("cor", score);
-                score=1;
-            }else if (image === l2a2 || image === l3a2 ){
-                score1=1;
-            }else  if (image === l3a3){
-                score2=1;
+                setScore(prevState => prevState + 1);
             }
-            if(gameLev>1)   setCount(count+1)
-
-
-            if(gameLev<2 || gameLev==2 && count==1 || gameLev==3 && count == 2){
-                setGameOver(true);
-                sendData();
-
-            }
-
+            setCount(count + 1)
         }
-    };
+    }
 
     const sendData = () => {
         sound.play();
@@ -88,20 +76,17 @@ export const Distance = ({id}: Props) => {
                 timeTaken: initialTime - time + 1,
                 level: gameLev,
                 maximum: gameLev,
-                accuracy: score+score1+score2,
+                accuracy: score,
             })
             .then(() => {
-                console.log(score,score1,score2)
 
                 setDialogBox(true);
                 setMessage("You Have Completed Level " + gameLev)
-                setAccuracy(Math.floor((score+score1+score2)/gameLev*100));
-                setNum(Math.floor((score+score1+score2)/(gameLev)*5));
+                setAccuracy(Math.floor((score) / gameLev * 100));
+                setNum(Math.floor((score) / (gameLev) * 5));
                 setGameLev(gameLev + 1);
                 setCount(0);
-                score = 0;
-                score1=0;
-                score2=0;
+                setScore(0);
 
 
             })
@@ -112,11 +97,11 @@ export const Distance = ({id}: Props) => {
         setMessage("");
         if (gameLev <= 3) {
             setKey(key + 1);
-            if (gameLev===3){
+            if (gameLev === 3) {
                 setInitialTime(30);
             }
             setGameOver(false);
-          
+
             setDialogBox(false);
         } else {
             setGameOver(false);
@@ -124,6 +109,13 @@ export const Distance = ({id}: Props) => {
             router.push("/games/arrow-challenge");
         }
     }
+    useEffect(() => {
+        if ((gameLev < 2 && count == 1) || (gameLev == 2 && count == 2) || (gameLev == 3 && count == 3)) {
+            setGameOver(true);
+            sendData();
+
+        }
+    }, [count]);
 
 
     return (
@@ -150,7 +142,8 @@ export const Distance = ({id}: Props) => {
 
                 <Levels lev={gameLev} count={count} w1l1={w1l1} w2l1={w2l1} w3l1={w3l1} l2w1={l2w1} l2w2={l2w2}
                         l2w3={l2w3} l2w4={l2w4} l2w5={l2w5} l1={l1} l2={l2} l2w6={l2w6} l3w1={l3w1}
-                        l3w2={l3w2} l3w3={l3w3} l3={l3} l3w4={l3w4} l3w5={l3w5} l3w6={l3w6} l3w7={l3w7} l3w8={l3w8} l3w9={l3w9} al1={al1} l2a1={l2a1}
+                        l3w2={l3w2} l3w3={l3w3} l3={l3} l3w4={l3w4} l3w5={l3w5} l3w6={l3w6} l3w7={l3w7} l3w8={l3w8}
+                        l3w9={l3w9} al1={al1} l2a1={l2a1}
                         l2a2={l2a2} l3a1={l3a1} l3a2={l3a2} l3a3={l3a3}
                         handleOnClick={handleOnClick}/>
             </div>

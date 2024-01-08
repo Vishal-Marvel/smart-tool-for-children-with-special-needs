@@ -74,7 +74,7 @@ export const Match = ({id}: Props) => {
             );
 
             if (correspondingQuestion.answer == pair.answer) {
-                console.log("correct" + score)
+                // console.log("correct" + score)
                 score += 1;
             }
         });

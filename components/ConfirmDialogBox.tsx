@@ -13,7 +13,6 @@ interface Props {
 
 const ConfirmDialogBox = ({open, title, children, trueButtonFunc}: Props) => {
     const [dialog, setDialog] = useState(open);
-    console.log(dialog)
     return (
         <Dialog open={dialog} onOpenChange={() => setDialog(!dialog)}>
 

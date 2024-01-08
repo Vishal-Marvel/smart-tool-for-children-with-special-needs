@@ -31,7 +31,7 @@ export const GameDetail = ({game, userId}: Props) => {
                 }
             });
             const data: User_Game = (await axios.get(url)).data[0];
-            console.log(data)
+            // console.log(data)
 
             if (data != undefined) {
                 setGameData(prevState => {

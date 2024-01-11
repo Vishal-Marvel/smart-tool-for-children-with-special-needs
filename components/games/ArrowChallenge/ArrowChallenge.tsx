@@ -15,12 +15,13 @@ import green_circle from "@/public/oddOneOut/green-circle.webp";
 import basketBall from "@/public/oddOneOut/basketball.webp";
 import {LevThree} from "@/components/games/OddOneOut/LevThree";
 import evenPanda from "@/public/oddOneOut/even_panda.png";
+import {GameInstruction} from "@/components/GameInstruction";
 
-interface Props{
-    id:string
+interface Props {
+    id: string
 }
 
-export const ArrowChallenge = ({id}:Props) => {
+export const ArrowChallenge = ({id}: Props) => {
 
     const router = useRouter();
     const [gameOver, setGameOver] = useState(false);
@@ -32,6 +33,7 @@ export const ArrowChallenge = ({id}:Props) => {
     const [initialTime, setInitialTime] = useState(20);
     const [dialogBox, setDialogBox] = useState(false);
     const [message, setMessage] = useState("");
+    const [instruction, setInstruction] = useState(true);
 
 
     const sendData = (acc: boolean) => {
@@ -48,8 +50,8 @@ export const ArrowChallenge = ({id}:Props) => {
             .then(() => {
 
                 setDialogBox(true);
-                setAccuracy((acc ? 1 : 0)*100)
-                setNum((acc ? 1 : 0)*5);
+                setAccuracy((acc ? 1 : 0) * 100)
+                setNum((acc ? 1 : 0) * 5);
                 setGameLev(gameLev + 1);
 
             })
@@ -72,32 +74,47 @@ export const ArrowChallenge = ({id}:Props) => {
 
     return (
         <div>
-      <span
-          className={"text-2xl pb-4 font-bold uppercase text-indigo-950 dark:text-indigo-50 text-center flex justify-center"}>
-        The Arrow Challenge
-      </span>
-            <div className={"m-4 flex flex-row align-middle items-center justify-around "}>
-                <Counter
-                    restart={key}
-                    isPlaying={!gameOver}
-                    onCompleteFunc={() => {
-                        setMessage("Time Up");
-                        sendData(false);
-                    }}
-                    onUpdateFunc={(remainingTime) => setTime(remainingTime)}
-                    time={initialTime}
-                />
+            {instruction &&
+                <GameInstruction
+                    dialog={instruction}
+                    dialogChange={() => setInstruction(false)}
+                    gameName={"the arrow challenge"}
+                    level1={"20s"}
+                    level2={"20s"}
+                    level3={"20s"}
+                    instructions={["You need to identify and click on " +
+                    "the arrow which faces the opposite direction among a fleet of arrows moving across the screen"
+                    ]}
+                />}
+            {!instruction && <>
                 <span
-                    className={"text-indigo-950 dark:text-indigo-50 text-2xl font-bold uppercase "}> Level - {gameLev}</span>
-            </div>
-            <ImageSeries handleClicked={sendData} gameLev={gameLev}/>
+                  className={"text-2xl pb-4 font-bold uppercase text-indigo-950 dark:text-indigo-50 text-center flex justify-center"}>
+                The Arrow Challenge
+                </span>
+                <div className={"m-4 flex flex-row align-middle items-center justify-around "}>
+                    <Counter
+                        restart={key}
+                        isPlaying={!gameOver}
+                        onCompleteFunc={() => {
+                            setMessage("Time Up");
+                            sendData(false);
+                        }}
+                        onUpdateFunc={(remainingTime) => setTime(remainingTime)}
+                        time={initialTime}
+                    />
+                    <span
+                        className={"text-indigo-950 dark:text-indigo-50 text-2xl font-bold uppercase "}> Level - {gameLev}</span>
+                </div>
+                <ImageSeries handleClicked={sendData} gameLev={gameLev}/>
 
-            <PopUpNotification display={dialogBox} title={"The Arrow Challenge"} message={message}
-                               num={num}
-                               over={gameOver}
-                               accuracy={accuracy}
-                               time={initialTime - time}
-                               buttonOnClick={() => startGame()}/>
+                <PopUpNotification display={dialogBox} title={"The Arrow Challenge"} message={message}
+                                   num={num}
+                                   over={gameOver}
+                                   accuracy={accuracy}
+                                   time={initialTime - time}
+                                   buttonOnClick={() => startGame()}/>
+            </>
+            }
         </div>
     );
 };

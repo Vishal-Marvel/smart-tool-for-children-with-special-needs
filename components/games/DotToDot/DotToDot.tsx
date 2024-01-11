@@ -14,6 +14,7 @@ import Image from "next/image";
 import axios from "axios";
 import {Button} from "@/components/ui/button";
 import sound from "@/components/context/PlaySound";
+import {GameInstruction} from "@/components/GameInstruction";
 
 interface Props{
     id: string
@@ -33,6 +34,8 @@ export const DotToDot = ({id}:Props) => {
 
     const [accuracy, setAccuracy] = useState(0);
     const [num, setNum] = useState(0);
+    const [instruction, setInstruction] = useState(true);
+
     const lev1 = {
         "0,0,0": 1,
         "0,0,1": 0,
@@ -211,6 +214,19 @@ export const DotToDot = ({id}:Props) => {
     }
     return (
         <div className={"w-full flex flex-col justify-center align-middle items-center"}>
+            {instruction &&
+                <GameInstruction
+                    dialog={instruction}
+                    dialogChange={() => setInstruction(false)}
+                    gameName={"Dot to Dot"}
+                    level1={"15s"}
+                    level2={"15s"}
+                    level3={"30s"}
+                    instructions={["You need to connect the dots on the right-hand side to replicate the pattern from the left",
+                        "You need to click in between the two dots to connect them."
+                    ]}
+                />}
+            {!instruction && <>
       <span
           className={"text-2xl pb-4 font-bold uppercase text-indigo-950 dark:text-indigo-50 text-center flex justify-center"}>
         Dot To Dot
@@ -259,6 +275,8 @@ export const DotToDot = ({id}:Props) => {
                                accuracy={accuracy}
                                time={initialTime - time}
                                buttonOnClick={() => {startGame()}}/>
+            </>
+            }
         </div>
 
     );

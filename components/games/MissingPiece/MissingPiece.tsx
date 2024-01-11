@@ -24,6 +24,7 @@ import {Levels} from "@/components/games/MissingPiece/Levels";
 import sound from "@/components/context/PlaySound";
 import {PopUpNotification} from "@/components/PopUpNotification";
 import {useRouter} from "next/navigation";
+import {GameInstruction} from "@/components/GameInstruction";
 
 interface Props {
     id: String
@@ -40,6 +41,8 @@ export const MissingPiece = ({id}: Props) => {
     const [message, setMessage] = useState("");
     const [accuracy, setAccuracy] = useState(0);
     const [num, setNum] = useState(0);
+    const [instruction, setInstruction] = useState(true);
+
 
     const handleOnClick = (image: StaticImageData) => {
         if (!gameOver) {
@@ -94,37 +97,53 @@ export const MissingPiece = ({id}: Props) => {
 
     return (
         <div>
-      <span
-          className={"text-2xl pb-4 font-bold uppercase text-indigo-950 dark:text-indigo-50 text-center flex justify-center"}>
-        Spot the Missing Piece
-      </span>
-            <div className={"m-3 flex flex-row align-middle items-center justify-around "}>
-                <Counter
-                    restart={key}
-                    isPlaying={!gameOver}
-                    onCompleteFunc={() => {
-                        setMessage("Time Up");
-                        sendData(false);
-                    }}
-                    onUpdateFunc={(remainingTime) => setTime(remainingTime)}
-                    time={initialTime}
-                />
-                <span
-                    className={"text-indigo-950 dark:text-indigo-50 text-2xl font-bold uppercase "}> Level - {gameLev}</span>
-            </div>
-            <div className={"justify-center justify-items-center align-middle"}>
+            {instruction &&
+                <GameInstruction
+                    dialog={instruction}
+                    dialogChange={() => setInstruction(false)}
+                    gameName={"Spot the missing piece"}
+                    level1={"15s"}
+                    level2={"15s"}
+                    level3={"15s"}
+                    instructions={["You need to find the missing piece from the image",
+                        "You need to click on one of the image below which matches with the missing piece in the given image"
+                    ]}
+                />}
+            {!instruction && <>
+                  <span
+                      className={"text-2xl pb-4 font-bold uppercase text-indigo-950 dark:text-indigo-50 text-center flex justify-center"}>
+                    Spot the Missing Piece
+                  </span>
+                <div className={"m-3 flex flex-row align-middle items-center justify-around "}>
+                    <Counter
+                        restart={key}
+                        isPlaying={!gameOver}
+                        onCompleteFunc={() => {
+                            setMessage("Time Up");
+                            sendData(false);
+                        }}
+                        onUpdateFunc={(remainingTime) => setTime(remainingTime)}
+                        time={initialTime}
+                    />
+                    <span
+                        className={"text-indigo-950 dark:text-indigo-50 text-2xl font-bold uppercase "}> Level - {gameLev}</span>
+                </div>
+                <div className={"justify-center justify-items-center align-middle"}>
 
-                <Levels lev={gameLev} wrg1l1={wrg1l1} wrg2l1={wrg2l1} wrg3l1={wrg3l1} wrg1l2={wrg1l2} wrg2l2={wrg2l2}
-                        wrg3l2={wrg3l2} crt1={crt1} crt2={crt2} l1={l1} l2={l2} crt3={crt3} wrg1l3={wrg1l3}
-                        wrg2l3={wrg2l3} wrg3l3={wrg3l3} l3={l3}
-                        handleOnClick={handleOnClick}/>
-            </div>
-            <PopUpNotification display={dialogBox} title={"Spot The Missing Piece"} message={message}
-                               num={num}
-                               over={gameOver}
-                               accuracy={accuracy}
-                               time={initialTime - time}
-                               buttonOnClick={() => startGame()}/>
+                    <Levels lev={gameLev} wrg1l1={wrg1l1} wrg2l1={wrg2l1} wrg3l1={wrg3l1} wrg1l2={wrg1l2}
+                            wrg2l2={wrg2l2}
+                            wrg3l2={wrg3l2} crt1={crt1} crt2={crt2} l1={l1} l2={l2} crt3={crt3} wrg1l3={wrg1l3}
+                            wrg2l3={wrg2l3} wrg3l3={wrg3l3} l3={l3}
+                            handleOnClick={handleOnClick}/>
+                </div>
+                <PopUpNotification display={dialogBox} title={"Spot The Missing Piece"} message={message}
+                                   num={num}
+                                   over={gameOver}
+                                   accuracy={accuracy}
+                                   time={initialTime - time}
+                                   buttonOnClick={() => startGame()}/>
+            </>
+            }
         </div>
     );
 };

@@ -19,6 +19,7 @@ import {PopUpNotification} from "@/components/PopUpNotification";
 import sound from "@/components/context/PlaySound";
 import {Counter} from "@/components/Counter";
 import {cn} from "@/lib/utils";
+import {GameInstruction} from "@/components/GameInstruction";
 
 interface Props {
     id: string
@@ -26,7 +27,7 @@ interface Props {
 
 export const MemoryGame = ({id}: Props) => {
     const router = useRouter();
-    const [board,setBoard] = useState([robot, alien, ghost, clown, penguin, peacock, smile, rocket]);
+    const [board, setBoard] = useState([robot, alien, ghost, clown, penguin, peacock, smile, rocket]);
 
     const [boardData, setBoardData] = useState([]);
     const [flippedCards, setFlippedCards] = useState([]);
@@ -36,11 +37,12 @@ export const MemoryGame = ({id}: Props) => {
     const [dialogBox, setDialogBox] = useState(false);
     const [time, setTime] = useState(0);
     const [initialTime, setInitialTime] = useState(100);
-    const [gameLev , setGameLev] = useState(1);
+    const [gameLev, setGameLev] = useState(1);
     const [message, setMessage] = useState("");
     const [key, setKey] = useState(0);
     const [accuracy, setAccuracy] = useState(0);
     const [num, setNum] = useState(0);
+    const [instruction, setInstruction] = useState(true);
     useEffect(() => {
 
         initialize();
@@ -89,10 +91,9 @@ export const MemoryGame = ({id}: Props) => {
             setMoves((v) => v + 1);
         }
     };
-    const completeGame = ()=>{
+    const completeGame = () => {
         if (gameOver === true) {
             sound.play();
-
 
 
             axios.post("/api/game-over", {
@@ -102,12 +103,12 @@ export const MemoryGame = ({id}: Props) => {
                 maximum: 16,
                 timeTaken: initialTime - time
             })
-                .then(()=>{
+                .then(() => {
                     setDialogBox(true)
-                    setMessage("You Have Completed Level "+ gameLev + "");
-                    setAccuracy(matchedCards.length/16*100)
-                    setNum(Math.floor((matchedCards.length/16)*5));
-                    setGameLev(gameLev+1);
+                    setMessage("You Have Completed Level " + gameLev + "");
+                    setAccuracy(matchedCards.length / 16 * 100)
+                    setNum(Math.floor((matchedCards.length / 16) * 5));
+                    setGameLev(gameLev + 1);
 
 
                 })
@@ -122,10 +123,9 @@ export const MemoryGame = ({id}: Props) => {
             setKey(key + 1);
             // setGameOver(false);
             setDialogBox(false);
-             if (gameLev==2){
+            if (gameLev == 2) {
                 setInitialTime(75)
-            }
-            else if (gameLev==3){
+            } else if (gameLev == 3) {
                 setInitialTime(50);
             }
             initialize();
@@ -138,66 +138,81 @@ export const MemoryGame = ({id}: Props) => {
     }
 
 
-    useEffect(()=>{
+    useEffect(() => {
         completeGame();
 
-    },[gameOver])
+    }, [gameOver])
 
 
     return (
 
         <div className={"justify-center justify-items-center flex flex-col"}>
+            {instruction &&
+                <GameInstruction
+                    dialog={instruction}
+                    dialogChange={() => setInstruction(false)}
+                    gameName={"PAIR THE HIDDEN OBJECT"}
+                    level1={"1m 40s"}
+                    level2={"1m 15s"}
+                    level3={"50s"}
+                    instructions={["You need to click on the circle to see the object",
+                        "Only two circle will be open at a given time",
+                        "You need to use your memory to memorize the location of the object and pair them"
+                    ]}
+                />}
+            {!instruction && <>
 
-            <span className={"text-center font-semibold text-2xl capitalize"}>PAIR THE HIDDEN OBJECT</span>
-            <div className="container">
-                <div className="menu">
-                    <Counter
-                        restart={key}
-                        isPlaying={!gameOver}
-                        onCompleteFunc={() => setGameOver(true)}
-                        onUpdateFunc={(remainingTime) => setTime(remainingTime)}
-                        time={initialTime}
-                    />
-                    <span
-                        className={"text-indigo-950 dark:text-indigo-50 text-2xl font-bold uppercase "}> Level - {gameLev}
+                <span className={"text-center font-semibold text-2xl capitalize"}>PAIR THE HIDDEN OBJECT</span>
+                <div className="container">
+                    <div className="menu">
+                        <Counter
+                            restart={key}
+                            isPlaying={!gameOver}
+                            onCompleteFunc={() => setGameOver(true)}
+                            onUpdateFunc={(remainingTime) => setTime(remainingTime)}
+                            time={initialTime}
+                        />
+                        <span
+                            className={"text-indigo-950 dark:text-indigo-50 text-2xl font-bold uppercase "}> Level - {gameLev}
                     </span>
 
 
-                </div>
+                    </div>
 
-                <div className={cn("board")}>
+                    <div className={cn("board")}>
 
-                    {boardData.map((data, i) => {
-                        const flipped = flippedCards.includes(i);
-                        const matched = matchedCards.includes(i);
-                        return (
-                            <div
-                                onClick={() => {
-                                    updateActiveCards(i);
-                                }}
-                                key={i}
-                                className={`card ${flipped || matched ? "active" : ""} ${
-                                    matched ? "matched" : ""
-                                } ${gameOver ? "gameover" : ""}`}
-                            >
-                                <div className="card-front object-cover pl-1">
-                                    <Image src={data} alt={"Image"} height={70} width={70}/>
+                        {boardData.map((data, i) => {
+                            const flipped = flippedCards.includes(i);
+                            const matched = matchedCards.includes(i);
+                            return (
+                                <div
+                                    onClick={() => {
+                                        updateActiveCards(i);
+                                    }}
+                                    key={i}
+                                    className={`card ${flipped || matched ? "active" : ""} ${
+                                        matched ? "matched" : ""
+                                    } ${gameOver ? "gameover" : ""}`}
+                                >
+                                    <div className="card-front object-cover pl-1">
+                                        <Image src={data} alt={"Image"} height={70} width={70}/>
+                                    </div>
+                                    <div className="card-back"></div>
                                 </div>
-                                <div className="card-back"></div>
-                            </div>
-                        );
-                    })}
+                            );
+                        })}
+                    </div>
+
                 </div>
-
-            </div>
-            <PopUpNotification display={dialogBox} title={"Memory Game"}
-                               message={message}
-                               num={num}
-                               over={gameOver}
-                               accuracy={accuracy}
-                               time={initialTime - time}
-                               buttonOnClick={startGame}/>
-
+                <PopUpNotification display={dialogBox} title={"Memory Game"}
+                                   message={message}
+                                   num={num}
+                                   over={gameOver}
+                                   accuracy={accuracy}
+                                   time={initialTime - time}
+                                   buttonOnClick={startGame}/>
+            </>
+            }
         </div>
     );
 }

@@ -36,6 +36,7 @@ import {Levels} from "@/components/games/Distance/Levels";
 import sound from "@/components/context/PlaySound";
 import {PopUpNotification} from "@/components/PopUpNotification";
 import {useRouter} from "next/navigation";
+import {GameInstruction} from "@/components/GameInstruction";
 
 interface Props {
     id: String
@@ -54,6 +55,8 @@ export const Distance = ({id}: Props) => {
     const [count, setCount] = useState(0);
     const [accuracy, setAccuracy] = useState(0);
     const [num, setNum] = useState(0);
+    const [instruction, setInstruction] = useState(true);
+
     const handleOnClick = (image: StaticImageData) => {
         if (!gameOver) {
 
@@ -121,6 +124,18 @@ export const Distance = ({id}: Props) => {
 
     return (
         <div>
+            {instruction &&
+                <GameInstruction
+                    dialog={instruction}
+                    dialogChange={() => setInstruction(false)}
+                    gameName={"distance dash"}
+                    level1={"15s"}
+                    level2={"15s"}
+                    level3={"30s"}
+                    instructions={["You need to Answer the question by selecting the right option"
+                    ]}
+                />}
+            {!instruction && <>
       <span
           className={"text-2xl pb-4 font-bold uppercase text-indigo-950 dark:text-indigo-50 text-center flex justify-center"}>
         Distance Dash
@@ -154,6 +169,8 @@ export const Distance = ({id}: Props) => {
                                accuracy={accuracy}
                                time={initialTime - time}
                                buttonOnClick={() => startGame()}/>
+            </>
+            }
         </div>
     );
 };

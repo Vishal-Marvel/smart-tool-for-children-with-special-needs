@@ -28,6 +28,7 @@ import {Levels} from "@/components/games/match/Levels";
 import {PopUpNotification} from "@/components/PopUpNotification";
 import {useRouter} from "next/navigation";
 import sound from "@/components/context/PlaySound";
+import {GameInstruction} from "@/components/GameInstruction";
 
 interface Props {
     id: String
@@ -50,6 +51,8 @@ export const Match = ({id}: Props) => {
     const [accuracy, setAccuracy] = useState(0);
     const [num, setNum] = useState(0);
     const [timeUp, setTimeUp] = useState(false);
+    const [instruction, setInstruction] = useState(true);
+
     const imageDataArray: ImageData[] = [
         {question: q1l1, answer: a1l1},
         {question: q2l1, answer: a2l1},
@@ -121,10 +124,25 @@ export const Match = ({id}: Props) => {
 
     return (
         <div>
-      <span
-          className={"text-2xl pb-4 font-bold uppercase text-indigo-950 dark:text-indigo-50 text-center flex justify-center"}>
-        Match the image
-      </span>
+            {instruction &&
+                <GameInstruction
+                    dialog={instruction}
+                    dialogChange={() => setInstruction(false)}
+                    gameName={"Match The Image"}
+                    level1={"20s"}
+                    level2={"20s"}
+                    level3={"20s"}
+                    instructions={["You need to match the hidden image",
+                        "First choose an image from the column A and then choose an image which you think matches from the column B",
+                        "Once an image is matched the image shrinks which means you can't rematch"
+                    ]}
+                />}
+            {!instruction && <>
+
+              <span
+                  className={"text-2xl pb-4 font-bold uppercase text-indigo-950 dark:text-indigo-50 text-center flex justify-center"}>
+                Match the image
+              </span>
             <div className={"m-4 flex flex-row align-middle items-center justify-around "}>
                 <Counter
                     restart={key}
@@ -138,10 +156,6 @@ export const Match = ({id}: Props) => {
                 />
                 <span
                     className={"text-indigo-950 dark:text-indigo-50 text-2xl font-bold uppercase "}> Level - {gameLev}</span>
-            </div>
-            <div className={"flex justify-center"}>
-
-            <span className={" text-center"}>Choose an image from the <strong>Column A</strong> and choose an image from <strong>Column B</strong></span>
             </div>
             <div className={"justify-center justify-items-center align-middle"}>
 
@@ -157,6 +171,8 @@ export const Match = ({id}: Props) => {
 
                                time={initialTime - time}
                                buttonOnClick={() => startGame()}/>
+            </>
+            }
         </div>
     );
 };

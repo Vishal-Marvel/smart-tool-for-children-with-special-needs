@@ -15,7 +15,7 @@ const  Tests = async () => {
     const user = await currentProfile();
     return (
 
-        <div className={"p-2 flex m-2 "}>
+        <div className={"p-2 flex flex-col md:flex-row m-2 "}>
 
             <SideBar user={user}/>
             <div className={"m-4 p-2"}>

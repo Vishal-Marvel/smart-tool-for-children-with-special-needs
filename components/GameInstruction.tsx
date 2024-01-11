@@ -23,14 +23,8 @@ interface Props{
 }
 
 export const GameInstruction = ({dialog, dialogChange, gameName, level1, level2, level3, instructions}:Props) =>{
-    // const [instructionSet, setInstructionSet] = useState([]);
-    // useEffect(()=>{
-    //     if (instructions){
-    //         setInstructionSet(instructions);
-    //     }
-    // }, [])
+
   return (
-      <div>
       <Dialog open={dialog}>
 
           <DialogContent>
@@ -41,7 +35,7 @@ export const GameInstruction = ({dialog, dialogChange, gameName, level1, level2,
               </DialogHeader>
 
               <DialogClose className={"hidden"}/>
-              <div>
+              <div className={"m-2 p-2"}>
 
                   <ul className={"list-disc"}>
                       <li className={"mt-2 mb-2"}>
@@ -67,6 +61,5 @@ export const GameInstruction = ({dialog, dialogChange, gameName, level1, level2,
               </div>
           </DialogContent>
       </Dialog>
-      </div>
   )
 }

@@ -10,7 +10,7 @@ const AnalysisPage = async () => {
 
 
     return (
-        <div className={"flex flex-row m-2 p-2"}>
+        <div className={"flex flex-col md:flex-row m-2 p-2"}>
             <SideBar user={user}/>
             <div className={"w-full m-2 flex flex-col justify-center"}>
                 {games.map((game, index) => (

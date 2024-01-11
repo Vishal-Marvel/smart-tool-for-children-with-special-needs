@@ -75,10 +75,10 @@ export const GameDetail = ({game, userId}: Props) => {
 
             {gameData.length > 0 &&
 
-                <div className={"w-full m-2 border-2 rounded-2xl p-2"}>
-                    <span className={"text-2xl font-bold uppercase ml-10 m-3 p-3"}>{game.name}</span>
-                    <div className={"w-[97%] flex justify-evenly"}>
-                        <div className={"w-1/3"}>
+                <div className={"w-fit m-2 border-2 rounded-2xl p-2 text-center md:text-left"}>
+                    <span className={"text-2xl font-bold uppercase md:ml-10 underline underline-offset-3"}>{game.name}</span>
+                    <div className={"w-[97%] flex md:flex-row flex-col justify-evenly"}>
+                        <div className={"md:w-1/3 "}>
                             <Bar
                                 className={"h-[350px] w-[500px]"}
                                 data={{
@@ -87,8 +87,8 @@ export const GameDetail = ({game, userId}: Props) => {
                                         {
                                             label: "Time (s)",
                                             data: time,
-                                            backgroundColor: "blue",
-                                            borderColor: "orange",
+                                            backgroundColor: "#27aeef",
+                                            borderColor: "red",
                                             borderWidth: 2
                                         }
                                     ]
@@ -99,7 +99,7 @@ export const GameDetail = ({game, userId}: Props) => {
                                 }}
                             />
                         </div>
-                        <div className={"w-1/3 "}>
+                        <div className={"md:w-1/3 "}>
                             <Bar
                                 className={"h-[350px] w-[500px]"}
                                 data={{
@@ -108,7 +108,7 @@ export const GameDetail = ({game, userId}: Props) => {
                                         {
                                             label: "Accuracy (%)",
                                             data: accuracy,
-                                            backgroundColor: "purple",
+                                            backgroundColor: "#87bc45",
                                             borderColor: "red",
                                             borderWidth: 2
                                         }
@@ -121,9 +121,9 @@ export const GameDetail = ({game, userId}: Props) => {
                             />
                         </div>
                     </div>
-                    <div className={"w-full flex justify-center p-2"}>
-                        <div className={"text-center w-2/3"}>
-                            <span>{"The time-accuracy graph of the user states that the "} <strong>{game.description}</strong>
+                    <div className={"w-full flex justify-center"}>
+                        <div className={"text-center w-2/3 bg-gray-300 rounded-2xl p-4"}>
+                            <span className={"md:text-[16px] text-sm"}>{"The time-accuracy graph of the user states that the "} <strong>{game.description}</strong>
                                 {" attribute is satisfied with a average percentage and time of "}
                                 <strong>{avgAcc.toFixed(1)}% </strong>
                                 in <strong>{avgTime.toFixed(1)}s </strong>

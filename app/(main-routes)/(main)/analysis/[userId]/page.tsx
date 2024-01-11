@@ -19,7 +19,7 @@ const AnalysisPage = async (req, res) => {
     games.sort((a,b)=>a.name.localeCompare(b.name))
 
     return (
-        <div className={"flex flex-row m-2 p-2"}>
+        <div className={"flex flex-col md:flex-row m-2 p-2"}>
             <SideBar userName={dynamicUser.name} user={user}/>
             <div className={"w-full m-2 flex flex-col justify-center"}>
                 {games.map((game, index) => (

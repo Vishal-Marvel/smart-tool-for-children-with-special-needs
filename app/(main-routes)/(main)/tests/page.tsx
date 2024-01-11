@@ -17,9 +17,11 @@ const  Tests = async () => {
 
             <SideBar/>
             <div className={"m-4 p-2"}>
+                <div>
                 <Link href={"/games/memory-game"}>
                     <Button className={"w-full"}>Start Test</Button>
                 </Link>
+                </div>
                 <div className={"flex flex-row flex-wrap justify-center justify-items-center"}>
 
                     <GameCard image={memory}

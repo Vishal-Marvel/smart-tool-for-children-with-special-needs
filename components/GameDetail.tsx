@@ -19,6 +19,8 @@ export const GameDetail = ({game, userId}: Props) => {
     const [gameData, setGameData] = useState<User_Game[]>([]);
     const [time, setTime] = useState<number[]>([]);
     const [accuracy, setAccuracy] = useState<number[]>([]);
+    const [avgTime, setAvgTime] = useState<number>(0);
+    const [avgAcc, setAvgAcc] = useState<number>(0);
 
     const getData = async () => {
         for (let i = 1; i < 4; i++) {
@@ -56,61 +58,84 @@ export const GameDetail = ({game, userId}: Props) => {
         const times = sortedGameData.map(data => data.timeTaken);
         const accuracies = sortedGameData.map(data => (data.accuracy / data.maximum) * 100);
 
+        const avgTime = times.length > 0 ? times.reduce((acc, time) => acc + time, 0) / times.length : 0;
+
+        const avgAccuracy = accuracies.length > 0 ? accuracies.reduce((acc, accuracy) => acc + accuracy, 0) / accuracies.length : 0;
+
         setTime(times);
         setAccuracy(accuracies);
+        setAvgAcc(avgAccuracy);
+        setAvgTime(avgTime);
 
     }, [gameData]);
 
+
     return (
-        <div className={"w-full m-2 p-3"}>
-            <span className={"text-2xl font-bold uppercase ml-10 m-3 p-3"}>{game.name}</span>
-            <div className={"w-[97%] flex justify-evenly"}>
-                <div className={"w-1/3"}>
-                    <Bar
-                        className={"h-[350px] w-[500px]"}
-                        data={{
-                            labels: ["Level 1", "Level 2", "Level 3"],
-                            datasets: [
-                                {
-                                    label: "Time",
-                                    data: time,
-                                    backgroundColor: "blue",
-                                    borderColor: "orange",
-                                    borderWidth: 2
-                                }
-                            ]
-                        }}
-                        width={50}
-                        options={{
-                            maintainAspectRatio: false
-                        }}
-                    />
+        <div>
+
+            {gameData.length > 0 &&
+
+                <div className={"w-full m-2 border-2 rounded-2xl p-2"}>
+                    <span className={"text-2xl font-bold uppercase ml-10 m-3 p-3"}>{game.name}</span>
+                    <div className={"w-[97%] flex justify-evenly"}>
+                        <div className={"w-1/3"}>
+                            <Bar
+                                className={"h-[350px] w-[500px]"}
+                                data={{
+                                    labels: ["Level 1", "Level 2", "Level 3"],
+                                    datasets: [
+                                        {
+                                            label: "Time (s)",
+                                            data: time,
+                                            backgroundColor: "blue",
+                                            borderColor: "orange",
+                                            borderWidth: 2
+                                        }
+                                    ]
+                                }}
+                                width={50}
+                                options={{
+                                    maintainAspectRatio: false
+                                }}
+                            />
+                        </div>
+                        <div className={"w-1/3 "}>
+                            <Bar
+                                className={"h-[350px] w-[500px]"}
+                                data={{
+                                    labels: ["Level 1", "Level 2", "Level 3"],
+                                    datasets: [
+                                        {
+                                            label: "Accuracy (%)",
+                                            data: accuracy,
+                                            backgroundColor: "purple",
+                                            borderColor: "red",
+                                            borderWidth: 2
+                                        }
+                                    ]
+                                }}
+                                width={50}
+                                options={{
+                                    maintainAspectRatio: false
+                                }}
+                            />
+                        </div>
+                    </div>
+                    <div className={"w-full flex justify-center p-2"}>
+                        <div className={"text-center w-2/3"}>
+                            <span>{"The time-accuracy graph of the user states that the "} <strong>{game.description}</strong>
+                                {" attribute is satisfied with a average percentage and time of "}
+                                <strong>{avgAcc.toFixed(1)}% </strong>
+                                in <strong>{avgTime.toFixed(1)}s </strong>
+                                respectively
+                             </span>
+
+                        </div>
+                    </div>
+
                 </div>
-                <div className={"w-1/3 "}>
-                    <Bar
-                        className={"h-[350px] w-[500px]"}
-                        data={{
-                            labels: ["Level 1", "Level 2", "Level 3"],
-                            datasets: [
-                                {
-                                    label: "Accuracy",
-                                    data: accuracy,
-                                    backgroundColor: "purple",
-                                    borderColor: "red",
-                                    borderWidth: 2
-                                }
-                            ]
-                        }}
-                        width={50}
-                        options={{
-                            maintainAspectRatio: false
-                        }}
-                    />
-                </div>
-            </div>
-            <div className={"text-center"}>
-                <span className={"text-center "}>{game.graphStatement}</span>
-            </div>
+            }
         </div>
+
     );
 };

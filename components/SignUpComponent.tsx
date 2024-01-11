@@ -35,7 +35,9 @@ const formSchema = z.object({
     gender: z.string().min(1,"Gender Is required"),
     weight: z.string().min(1, "Weight is Required"),
     height: z.string().min(1, "Height is Required"),
-    phone: z.string().min(10, "Number must be 10 digits"),
+    phone: z.string().refine(data => data.length === 10, {
+        message: "Number must be 10 digits",
+    }),
     medicalHistory: z.string().min(1, "Medical History is Required"),
 });
 
@@ -182,6 +184,7 @@ export function SignUpComponent() {
                                         <FormLabel>Phone Number:</FormLabel>
                                         <FormControl>
                                             <Input
+                                                type={"number"}
                                                 disabled={isLoading}
                                                 placeholder="Enter your Phone Number"
                                                 {...field}

@@ -35,7 +35,7 @@ export const MemoryGame = ({id}: Props) => {
     const [gameOver, setGameOver] = useState(false);
     const [dialogBox, setDialogBox] = useState(false);
     const [time, setTime] = useState(0);
-    const [initialTime, setInitialTime] = useState(45);
+    const [initialTime, setInitialTime] = useState(100);
     const [gameLev , setGameLev] = useState(1);
     const [message, setMessage] = useState("");
     const [key, setKey] = useState(0);
@@ -115,6 +115,7 @@ export const MemoryGame = ({id}: Props) => {
         }
     }
     const startGame = () => {
+        sound.stop();
         setMessage("");
 
         if (gameLev <= 3) {
@@ -122,10 +123,10 @@ export const MemoryGame = ({id}: Props) => {
             // setGameOver(false);
             setDialogBox(false);
              if (gameLev==2){
-                setInitialTime(35)
+                setInitialTime(75)
             }
             else if (gameLev==3){
-                setInitialTime(25);
+                setInitialTime(50);
             }
             initialize();
 

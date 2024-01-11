@@ -39,7 +39,7 @@ export const UsersTable = async ()=> {
                             <TableCell>{user.email}</TableCell>
                             <TableCell>{user.phone_no}</TableCell>
                             <TableCell className={"text-right"}>{user.medical_history}</TableCell>
-                            <TableCell><Button variant={"link"} ><Link href={"user-details/"+user.id}>View Details</Link> </Button></TableCell>
+                            <TableCell><Button variant={"link"} ><Link href={"analysis/"+user.id}>View Details</Link> </Button></TableCell>
 
                         </TableRow>
                     ))}

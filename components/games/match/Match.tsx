@@ -105,6 +105,7 @@ export const Match = ({id}: Props) => {
     };
 
     const startGame = () => {
+        sound.stop();
         setMessage("");
         if (gameLev <= 3) {
             setKey(key + 1);

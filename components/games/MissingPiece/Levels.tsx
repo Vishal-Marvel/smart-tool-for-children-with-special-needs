@@ -112,7 +112,7 @@ export const Levels = ({
                 <>
                     <div className={"flex justify-center m-4"}>
 
-                        <Image src={l2} alt={"question"} className="md:h-40 md:w-40 h-20 w-20"/>
+                        <Image src={l2} alt={"question"} className="md:h-40 md:w-40"/>
                     </div>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-5 justify-items-center">

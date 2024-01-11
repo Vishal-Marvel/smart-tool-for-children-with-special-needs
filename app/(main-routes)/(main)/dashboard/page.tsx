@@ -13,13 +13,13 @@ const Dashboard = async () => {
     const profile: Users = await initProfile();
 
     return <div>
-        <div className={"flex justify-between  p-3"}>
+        {/*<div className={"flex justify-between  p-3"}>*/}
 
-            <div className={"flex flex-row justify-between min-w-1/7"}>
-                {profile.role === MemberRole.ADMIN && <UserButton afterSignOutUrl={"/"}/>}
-                {/*{profile.role === MemberRole.USER && <UserDetails profile={profile}/>}*/}
-            </div>
-        </div>
+        {/*    <div className={"flex flex-row justify-between min-w-1/7"}>*/}
+        {/*        {profile.role === MemberRole.ADMIN && <UserButton afterSignOutUrl={"/"}/>}*/}
+        {/*        /!*{profile.role === MemberRole.USER && <UserDetails profile={profile}/>}*!/*/}
+        {/*    </div>*/}
+        {/*</div>*/}
         <div>
             {profile.role === MemberRole.ADMIN && <AdminDashboard/>}
             {profile.role === MemberRole.USER && <UserDashboard/>}

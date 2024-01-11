@@ -34,13 +34,14 @@ export const GameInstruction = ({dialog, dialogChange, gameName, level1, level2,
       <Dialog open={dialog}>
 
           <DialogContent>
-              {/*<DialogHeader>*/}
+              <DialogHeader>
                   <DialogTitle className={"uppercase"}>{gameName}</DialogTitle>
                   <DialogDescription>Lets see How To Play </DialogDescription>
 
-              {/*</DialogHeader>*/}
+              </DialogHeader>
 
               <DialogClose className={"hidden"}/>
+              <div>
 
                   <ul className={"list-disc"}>
                       <li className={"mt-2 mb-2"}>
@@ -48,7 +49,7 @@ export const GameInstruction = ({dialog, dialogChange, gameName, level1, level2,
                           <ul className={"ml-10"}>
                               <li>Level 1: <strong>{level1}</strong></li>
                               <li>Level 2: <strong>{level2}</strong></li>
-                              <li>Level 1: <strong>{level3}</strong></li>
+                              <li>Level 3: <strong>{level3}</strong></li>
                           </ul>
                       </li>
                       {instructions.map((instruction, index)=>(
@@ -58,9 +59,12 @@ export const GameInstruction = ({dialog, dialogChange, gameName, level1, level2,
                       ))}
 
                   </ul>
-                  <Button onClick={dialogChange}>
+
+                  <Button onClick={dialogChange} className={"w-full m-2 "}>
                       I have Read the Instructions And I am Ready To Play
                   </Button>
+
+              </div>
           </DialogContent>
       </Dialog>
       </div>

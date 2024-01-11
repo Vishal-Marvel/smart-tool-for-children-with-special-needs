@@ -1,39 +1,63 @@
+"use client"
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
 import {currentProfile} from "@/lib/current-profile";
 import CustomSignOutButton from "@/components/Customs/CustomSignOutButton";
 import {$Enums} from ".prisma/client";
 import MemberRole = $Enums.MemberRole;
-interface Props{
-    userName? :string
+import {MobileToggle} from "@/components/MobileToggle";
+import {useEffect, useState} from "react";
+import {Users} from "@prisma/client";
+
+interface Props {
+    userName?: string
+    user:Users
 }
-export const SideBar = async ({userName}:Props) => {
-    const user = await currentProfile();
+
+export const SideBar = ({userName, user}: Props) => {
+    const [title, setTitle] = useState("");
+    useEffect(()=>{
+
+
+        if (user.role === MemberRole.USER){
+            setTitle("Welcome! "+ user.name);
+        }else if (user.role === MemberRole.ADMIN && userName){
+            setTitle("Game Details Of "+userName);
+        }
+
+
+    }, [user]);
+
+
+
     return (
-        <div className={"flex flex-col items-center text-center"}>
+        <div>
+            <div className={"md:hidden m-2 p-2"}>
+                    <MobileToggle title={title} user={user}/>
 
-            {user.role === MemberRole.USER &&
-                <span className={"font-bold text-2xl capitalize text-center"}>Welcome! {user.name}</span>
-            }
-            {user.role === MemberRole.ADMIN &&
-                <span className={"font-bold text-2xl capitalize text-center"}>Game Details of {userName}</span>
-            }
-            <div className={"m-6 w-full items-center flex flex-col h-[300px] sticky left-2 top-5 justify-evenly"}>
+            </div>
+            <div className={"hidden md:flex flex-col items-center text-center"}>
 
-                <Link href={"/dashboard"}>
-                    <Button className={"w-full"}>Dashboard</Button>
-                </Link>
-                {user.role === MemberRole.USER &&
-                    <>
-                        <Link href={"/tests"}>
-                            <Button className={"w-full"}>Tests</Button>
-                        </Link>
-                        <Link href={"/analysis"}>
-                            <Button className={"w-full"}>Analysis</Button>
-                        </Link>
-                    </>
-                }
-                <CustomSignOutButton/>
+                    <span className={"font-bold text-2xl capitalize text-center"}>{title}</span>
+                <div
+                    className={"m-6 w-full items-center flex flex-col h-[300px] sticky left-2 top-5 justify-evenly"}>
+
+                    <Link href={"/dashboard"}>
+                        <Button className={"w-full"}>Dashboard</Button>
+                    </Link>
+                    {user && user.role === MemberRole.USER &&
+                        <>
+                            <Link href={"/tests"}>
+                                <Button className={"w-full"}>Tests</Button>
+                            </Link>
+                            <Link href={"/analysis"}>
+                                <Button className={"w-full"}>Analysis</Button>
+                            </Link>
+                        </>
+                    }
+                    <CustomSignOutButton/>
+                </div>
+
             </div>
 
         </div>

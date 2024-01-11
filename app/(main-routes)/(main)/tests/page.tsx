@@ -9,13 +9,15 @@ import arrow from "@/public/arrow.png";
 import distance from "@/public/distance.png";
 import {Button} from "@/components/ui/button";
 import {SideBar} from "@/components/SideBar";
+import {currentProfile} from "@/lib/current-profile";
 
 const  Tests = async () => {
+    const user = await currentProfile();
     return (
 
         <div className={"p-2 flex m-2 "}>
 
-            <SideBar/>
+            <SideBar user={user}/>
             <div className={"m-4 p-2"}>
                 <div>
                 <Link href={"/games/memory-game"}>

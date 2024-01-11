@@ -11,7 +11,7 @@ const AnalysisPage = async () => {
 
     return (
         <div className={"flex flex-row m-2 p-2"}>
-            <SideBar />
+            <SideBar user={user}/>
             <div className={"w-full m-2 flex flex-col justify-center"}>
                 {games.map((game, index) => (
                     <GameDetail

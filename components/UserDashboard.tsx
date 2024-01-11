@@ -2,6 +2,7 @@
 import {currentProfile} from "@/lib/current-profile";
 import ProfileEditButton from "@/components/Customs/ProfileEditButton";
 import {SideBar} from "@/components/SideBar";
+import {MobileToggle} from "@/components/MobileToggle";
 
 export const UserDashboard = async () => {
     const profile = await currentProfile();
@@ -18,9 +19,10 @@ export const UserDashboard = async () => {
     return (
 
         <div className={"p-2 flex "}>
-            <SideBar/>
-            <div className={"m-4 p-2 flex w-full justify-center"}>
-                <div className={"w-1/2 flex flex-col justify-center justify-items-center"}>
+            <SideBar user={profile}/>
+
+            <div className={"m-4 p-2 flex w-full md:justify-center"}>
+                <div className={"md:w-1/2 flex flex-col justify-center justify-items-center"}>
 
                     <div className="flex flex-col p-4">
                         {userDetails.map((member, index) => (

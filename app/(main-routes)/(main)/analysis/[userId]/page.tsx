@@ -20,7 +20,7 @@ const AnalysisPage = async (req, res) => {
 
     return (
         <div className={"flex flex-row m-2 p-2"}>
-            <SideBar userName={dynamicUser.name}/>
+            <SideBar userName={dynamicUser.name} user={user}/>
             <div className={"w-full m-2 flex flex-col justify-center"}>
                 {games.map((game, index) => (
                     <GameDetail

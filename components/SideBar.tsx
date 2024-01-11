@@ -32,7 +32,7 @@ export const SideBar = ({userName, user}: Props) => {
 
     return (
         <div>
-            <div className={"md:hidden m-2 p-2"}>
+            <div className={"md:hidden md:m-2 md:p-2"}>
                     <MobileToggle title={title} user={user}/>
 
             </div>

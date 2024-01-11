@@ -8,7 +8,7 @@ export const AdminDashboard = async () => {
     return (
         <div className={"p-2 m-2  md:flex-row flex flex-col"}>
             <SideBar user={user}/>
-            <div className={" justify-center items-center flex flex-col pt-4"}>
+            <div className={"w-full justify-center items-center flex flex-col pt-4"}>
                 <h1 className={"font-bold text-2xl m-2 p-2 font-sans"}>User Details</h1>
                 <UsersTable/>
             </div>

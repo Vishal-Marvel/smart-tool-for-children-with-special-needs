@@ -102,9 +102,6 @@ export const MissingPiece = ({id}: Props) => {
                     dialog={instruction}
                     dialogChange={() => setInstruction(false)}
                     gameName={"Spot the missing piece"}
-                    level1={"15s"}
-                    level2={"15s"}
-                    level3={"15s"}
                     instructions={["You need to find the missing piece from the image",
                         "You need to click on one of the image below which matches with the missing piece in the given image"
                     ]}

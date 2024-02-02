@@ -10,26 +10,36 @@ import {
 } from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
 import {useEffect, useState} from "react";
+import {Ear, Speaker, Volume2} from "lucide-react";
 
 interface Props{
     dialog: boolean
     dialogChange:any
     gameName:string
-    level1:string
-    level2:string
-    level3:string
     instructions:string[]
 
 }
 
-export const GameInstruction = ({dialog, dialogChange, gameName, level1, level2, level3, instructions}:Props) =>{
+export const GameInstruction = ({dialog, dialogChange, gameName, instructions}:Props) =>{
+    const [isMounted, setIsMounted] = useState(false);
+    useEffect(()=>{
+        setIsMounted(true);
+    }, [])
+    if (!isMounted){
+        return null;
+    }
 
   return (
       <Dialog open={dialog}>
 
           <DialogContent>
               <DialogHeader>
-                  <DialogTitle className={"uppercase"}>{gameName}</DialogTitle>
+                  <DialogTitle>
+                      <div className={"flex justify-between"}>
+                      {gameName}
+                          <Volume2 className={"h-5 w-5 cursor-pointer hover:scale-150 transition-all duration-200 ease-in"}/>
+                      </div>
+                  </DialogTitle>
                   <DialogDescription>Lets see How To Play </DialogDescription>
 
               </DialogHeader>
@@ -39,12 +49,7 @@ export const GameInstruction = ({dialog, dialogChange, gameName, level1, level2,
 
                   <ul className={"list-disc"}>
                       <li className={"mt-2 mb-2"}>
-                          This Game Contains 3 levels with the following Timings
-                          <ul className={"ml-10"}>
-                              <li>Level 1: <strong>{level1}</strong></li>
-                              <li>Level 2: <strong>{level2}</strong></li>
-                              <li>Level 3: <strong>{level3}</strong></li>
-                          </ul>
+                          This Game Contains 3 levels
                       </li>
                       {instructions.map((instruction, index)=>(
                           <li key={index} className={"mt-2 mb-2"}>

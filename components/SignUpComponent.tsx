@@ -32,7 +32,7 @@ const formSchema = z.object({
         message: 'Name is required',
     }),
     age: z.string().min(1, "Age is Required"),
-    gender: z.string().min(1,"Gender Is required"),
+    gender: z.string().min(1, "Gender Is required"),
     weight: z.string().min(1, "Weight is Required"),
     height: z.string().min(1, "Height is Required"),
     phone: z.string().refine(data => data.length === 10, {
@@ -59,11 +59,11 @@ export function SignUpComponent() {
     const router = useRouter();
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        try{
+        try {
             await axios.post("/api/signup", values);
             form.reset()
             router.push('/dashboard');
-        }catch(error){
+        } catch (error) {
             console.error(error)
         }
     };
@@ -92,7 +92,7 @@ export function SignUpComponent() {
                                                 {...field}
                                             />
                                         </FormControl>
-                                        <FormMessage />
+                                        <FormMessage/>
                                     </FormItem>
                                 )
                                 }/>
@@ -111,7 +111,7 @@ export function SignUpComponent() {
                                                 {...field}
                                             />
                                         </FormControl>
-                                        <FormMessage />
+                                        <FormMessage/>
                                     </FormItem>
                                 )
                                 }/>
@@ -119,13 +119,13 @@ export function SignUpComponent() {
                                 disabled={isLoading}
                                 name={"gender"}
                                 control={form.control}
-                                render={({field}) =>(
+                                render={({field}) => (
                                     <FormItem>
                                         <FormLabel>Gender:</FormLabel>
                                         <Select
                                             disabled={isLoading}
                                             onValueChange={field.onChange}
-                                            >
+                                        >
                                             <FormControl>
                                                 <SelectTrigger>
                                                     <SelectValue placeholder="Select a Gender"/>
@@ -139,29 +139,29 @@ export function SignUpComponent() {
                                                 </SelectGroup>
                                             </SelectContent>
                                         </Select>
-                                        <FormMessage />
+                                        <FormMessage/>
                                     </FormItem>
                                 )
-                                } />
+                                }/>
                             <FormField
                                 disabled={isLoading}
                                 name={"weight"}
                                 control={form.control}
-                                render={({field}) =>(
+                                render={({field}) => (
                                     <FormItem>
                                         <FormLabel>Weight (Kg)</FormLabel>
                                         <FormControl>
                                             <Input placeholder="Your Weight" {...field} />
                                         </FormControl>
-                                        <FormMessage />
+                                        <FormMessage/>
                                     </FormItem>
                                 )
-                                } />
+                                }/>
                             <FormField
                                 disabled={isLoading}
                                 name={"height"}
                                 control={form.control}
-                                render={({field}) =>(
+                                render={({field}) => (
                                     <FormItem>
                                         <FormLabel>Height: (cm)</FormLabel>
                                         <FormControl>
@@ -171,15 +171,15 @@ export function SignUpComponent() {
                                                 {...field}
                                             />
                                         </FormControl>
-                                        <FormMessage />
+                                        <FormMessage/>
                                     </FormItem>
                                 )
-                                } />
+                                }/>
                             <FormField
                                 disabled={isLoading}
                                 name={"phone"}
                                 control={form.control}
-                                render={({field}) =>(
+                                render={({field}) => (
                                     <FormItem>
                                         <FormLabel>Phone Number:</FormLabel>
                                         <FormControl>
@@ -190,16 +190,16 @@ export function SignUpComponent() {
                                                 {...field}
                                             />
                                         </FormControl>
-                                        <FormMessage />
+                                        <FormMessage/>
                                     </FormItem>
                                 )
-                                } />
+                                }/>
                         </div>
                         <FormField
                             disabled={isLoading}
                             name={"medicalHistory"}
                             control={form.control}
-                            render={({field}) =>(
+                            render={({field}) => (
                                 <FormItem>
                                     <FormLabel>Medical History</FormLabel>
                                     <FormControl>
@@ -208,10 +208,10 @@ export function SignUpComponent() {
                                             {...field}
                                         />
                                     </FormControl>
-                                    <FormMessage />
+                                    <FormMessage/>
                                 </FormItem>
                             )
-                            } />
+                            }/>
 
                         <div className="flex flex-col space-y-1.5 pt-2">
                             <Button type="submit">Sign Up</Button>

@@ -129,9 +129,6 @@ export const Match = ({id}: Props) => {
                     dialog={instruction}
                     dialogChange={() => setInstruction(false)}
                     gameName={"Match The Image"}
-                    level1={"20s"}
-                    level2={"20s"}
-                    level3={"20s"}
                     instructions={["You need to match the hidden image",
                         "First choose an image from the column A and then choose an image which you think matches from the column B",
                         "Once an image is matched the image shrinks which means you can't rematch"

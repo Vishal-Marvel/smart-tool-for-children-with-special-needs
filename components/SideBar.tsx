@@ -32,15 +32,15 @@ export const SideBar = ({userName, user}: Props) => {
 
     return (
         <div>
-            <div className={"md:hidden md:m-2 md:p-2"}>
+            <div className={"md:hidden md:m-2 md:p-2 relative"}>
                     <MobileToggle title={title} user={user}/>
 
             </div>
-            <div className={"hidden md:flex flex-col items-center text-center"}>
+            <div className={"hidden md:flex flex-col items-center text-center  sticky left-2 top-5"}>
 
                     <span className={"font-bold text-2xl capitalize text-center"}>{title}</span>
                 <div
-                    className={"m-6 w-full items-center flex flex-col h-[300px] sticky left-2 top-5 justify-evenly"}>
+                    className={"m-6 w-full items-center flex flex-col h-[300px] justify-evenly"}>
 
                     <Link href={"/dashboard"}>
                         <Button className={"w-full"}>Dashboard</Button>

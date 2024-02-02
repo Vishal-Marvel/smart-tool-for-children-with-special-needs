@@ -16,10 +16,11 @@ import rocket from "@/public/memory/rocket.webp"
 
 import {PopUpNotification} from "@/components/PopUpNotification";
 
-import sound from "@/components/context/PlaySound";
+import {sound} from "@/components/context/PlaySound";
 import {Counter} from "@/components/Counter";
 import {cn} from "@/lib/utils";
 import {GameInstruction} from "@/components/GameInstruction";
+import {ExitGameButton} from "@/components/ExitGameButton";
 
 interface Props {
     id: string
@@ -27,8 +28,8 @@ interface Props {
 
 export const MemoryGame = ({id}: Props) => {
     const router = useRouter();
-    const [board, setBoard] = useState([robot, alien, ghost, clown, penguin, peacock, smile, rocket]);
-
+    const [board, setBoard] = useState(
+        [robot, alien, ghost, clown, penguin, peacock, smile, rocket]);
     const [boardData, setBoardData] = useState([]);
     const [flippedCards, setFlippedCards] = useState([]);
     const [matchedCards, setMatchedCards] = useState([]);
@@ -36,23 +37,24 @@ export const MemoryGame = ({id}: Props) => {
     const [gameOver, setGameOver] = useState(false);
     const [dialogBox, setDialogBox] = useState(false);
     const [time, setTime] = useState(0);
-    const [initialTime, setInitialTime] = useState(100);
+    const [initialTime, setInitialTime] = useState(600);
     const [gameLev, setGameLev] = useState(1);
     const [message, setMessage] = useState("");
     const [key, setKey] = useState(0);
     const [accuracy, setAccuracy] = useState(0);
     const [num, setNum] = useState(0);
     const [instruction, setInstruction] = useState(true);
-    useEffect(() => {
-
-        initialize();
-
-    }, []);
 
 
     useEffect(() => {
-        if (matchedCards.length === 16) {
+        if (gameLev == 1 && matchedCards.length === 4) {
             setGameOver(true);
+        } else if (gameLev == 2 && matchedCards.length === 16) {
+            setGameOver(true);
+
+        } else if (gameLev == 3 && matchedCards.length === 36) {
+            setGameOver(true);
+
         }
     }, [moves]);
 
@@ -64,7 +66,15 @@ export const MemoryGame = ({id}: Props) => {
         setMoves(0);
     };
     const shuffle = () => {
-        let shuffledCards = [...board, ...board];
+        let shuffledCards
+        if (gameLev === 1) {
+            shuffledCards = [...board.slice(0, 2), ...board.slice(0, 2)];
+        } else if (gameLev === 2) {
+            shuffledCards = [...board, ...board];
+        } else if (gameLev === 3) {
+            shuffledCards = [...board, ...board, ...board, ...board, ...board.slice(0, 2), ...board.slice(0, 2)];
+        }
+
 
         shuffledCards
             .sort(() => Math.random() - 0.5)
@@ -94,23 +104,37 @@ export const MemoryGame = ({id}: Props) => {
     const completeGame = () => {
         if (gameOver === true) {
             sound.play();
+            const maximum = gameLev == 1 ? 4 : gameLev === 2 ? 16 : 36
+            let accuracy;
+            if (moves <= (maximum * (1.5)))
+                accuracy = 5
+            else if (moves <= (maximum * 2))
+                accuracy = 4
+            else if (moves <= (maximum * (2.5)))
+                accuracy = 3
+            else if (moves <= (maximum * 3))
+                accuracy = 2
+            else accuracy = 1
+
+            console.log(maximum, moves)
 
 
             axios.post("/api/game-over", {
                 gameId: id,
                 level: gameLev,
-                accuracy: matchedCards.length,
-                maximum: 16,
+                accuracy: accuracy,
+                maximum: 5,
                 timeTaken: initialTime - time
             })
                 .then(() => {
-                    setDialogBox(true)
-                    setMessage("You Have Completed Level " + gameLev + "");
-                    setAccuracy(matchedCards.length / 16 * 100)
-                    setNum(Math.floor((matchedCards.length / 16) * 5));
-                    setGameLev(gameLev + 1);
-
-
+                    setTimeout(() => {
+                        setDialogBox(true)
+                        setMessage("You Have Completed Level " + gameLev + "");
+                        setAccuracy(accuracy / 5 * 100)
+                        setNum(accuracy);
+                        setGameLev(gameLev + 1);
+                    }, 1000)
+                    // clearInterval(timer);
                 })
 
         }
@@ -120,14 +144,10 @@ export const MemoryGame = ({id}: Props) => {
         setMessage("");
 
         if (gameLev <= 3) {
+
             setKey(key + 1);
             // setGameOver(false);
             setDialogBox(false);
-            if (gameLev == 2) {
-                setInitialTime(75)
-            } else if (gameLev == 3) {
-                setInitialTime(50);
-            }
             initialize();
 
         } else {
@@ -137,24 +157,25 @@ export const MemoryGame = ({id}: Props) => {
         }
     }
 
-
     useEffect(() => {
         completeGame();
 
     }, [gameOver])
+    useEffect(() => {
+        initialize();
+
+    }, [])
 
 
     return (
 
-        <div className={"justify-center justify-items-center flex flex-col"}>
+        <div className={" flex flex-col items-center justify-evenly h-full"}>
+            <ExitGameButton/>
             {instruction &&
                 <GameInstruction
                     dialog={instruction}
                     dialogChange={() => setInstruction(false)}
                     gameName={"PAIR THE HIDDEN OBJECT"}
-                    level1={"1m 40s"}
-                    level2={"1m 15s"}
-                    level3={"50s"}
                     instructions={["You need to click on the circle to see the object",
                         "Only two circle will be open at a given time",
                         "You need to use your memory to memorize the location of the object and pair them"
@@ -163,23 +184,23 @@ export const MemoryGame = ({id}: Props) => {
             {!instruction && <>
 
                 <span className={"text-center font-semibold text-2xl capitalize"}>PAIR THE HIDDEN OBJECT</span>
-                <div className="container">
-                    <div className="menu">
-                        <Counter
-                            restart={key}
-                            isPlaying={!gameOver}
-                            onCompleteFunc={() => setGameOver(true)}
-                            onUpdateFunc={(remainingTime) => setTime(remainingTime)}
-                            time={initialTime}
-                        />
-                        <span
-                            className={"text-indigo-950 dark:text-indigo-50 text-2xl font-bold uppercase "}> Level - {gameLev}
+                <div className="text-center">
+                    <Counter
+
+                        restart={key}
+                        isPlaying={!gameOver}
+                        onCompleteFunc={() => setGameOver(true)}
+                        onUpdateFunc={(remainingTime) => setTime(remainingTime)}
+                        time={initialTime}
+                    />
+                    <span
+                        className={"text-indigo-950 dark:text-indigo-50 text-2xl font-bold uppercase "}> Level - {gameLev}
                     </span>
+                </div>
+                <div className="text-center">
 
-
-                    </div>
-
-                    <div className={cn("board")}>
+                    <div
+                        className={cn("board w-full h-full", gameLev === 1 ? "grid-cols-2" : gameLev === 2 ? "grid-cols-4" : "grid-cols-6")}>
 
                         {boardData.map((data, i) => {
                             const flipped = flippedCards.includes(i);
@@ -190,7 +211,7 @@ export const MemoryGame = ({id}: Props) => {
                                         updateActiveCards(i);
                                     }}
                                     key={i}
-                                    className={`card ${flipped || matched ? "active" : ""} ${
+                                    className={`card w-[75px] ${flipped || matched ? "active" : ""} ${
                                         matched ? "matched" : ""
                                     } ${gameOver ? "gameover" : ""}`}
                                 >

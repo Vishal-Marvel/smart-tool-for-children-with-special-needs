@@ -1,16 +1,19 @@
-import {Card, CardContent, CardDescription, CardTitle} from "@/components/ui/card";
+import {Card, CardContent, CardDescription, CardFooter, CardTitle} from "@/components/ui/card";
 import Image, {StaticImageData} from "next/image";
+import {Button, buttonVariants} from "@/components/ui/button";
+import Link from "next/link";
 
-interface GameCardProps{
+interface GameCardProps {
     image: StaticImageData,
     text: string,
     name: string,
-    med: string
+    med: string,
+    link: string
 }
 
-export const GameCard = ({image, text, name, med}: GameCardProps) => {
+export const GameCard = ({image, text, name, med, link}: GameCardProps) => {
     return (
-        <Card className={"p-3 m-3 w-[350px] h-[500px]"}>
+        <Card className={"p-3 m-3 w-[350px] "}>
             <CardTitle className={"p-2 text-center"}>
                 {name}
             </CardTitle>
@@ -18,11 +21,16 @@ export const GameCard = ({image, text, name, med}: GameCardProps) => {
                 <strong className={"capitalize"}>{med}</strong><br/>
                 {text}
             </CardDescription>
-            <CardContent className={"flex items-center justify-center p-3 justify-items-center"}>
-                <div className={"flex flex-col justify-center items-center"}>
+            <CardContent className={"flex-1 h-[250px]"}>
+
+                <div className={"flex-1 flex-col justify-center items-center "}>
                     <Image src={image} alt={name}/>
                 </div>
+
             </CardContent>
+            <CardFooter className={"flex justify-center"}>
+                <Link href={link} className={buttonVariants({variant: "default"})}>Start Game</Link>
+            </CardFooter>
         </Card>
     )
 }

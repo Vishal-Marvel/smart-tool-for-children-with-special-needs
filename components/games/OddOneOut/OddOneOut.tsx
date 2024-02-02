@@ -93,9 +93,7 @@ export const OddOneOut = ({id}: Props) => {
                     dialog={instruction}
                     dialogChange={() => setInstruction(false)}
                     gameName={"Pick The Odd One Out"}
-                    level1={"15s"}
-                    level2={"15s"}
-                    level3={"15s"}
+
                     instructions={["You need to identify the Odd One Out",
                         "You Need to click on the image which could be the odd one out"
                     ]}

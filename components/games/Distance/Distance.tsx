@@ -129,9 +129,6 @@ export const Distance = ({id}: Props) => {
                     dialog={instruction}
                     dialogChange={() => setInstruction(false)}
                     gameName={"distance dash"}
-                    level1={"15s"}
-                    level2={"15s"}
-                    level3={"30s"}
                     instructions={["You need to Answer the question by selecting the right option"
                     ]}
                 />}

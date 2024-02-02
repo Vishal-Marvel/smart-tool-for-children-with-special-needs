@@ -20,10 +20,10 @@ interface Props{
 export const MobileToggle = ({title, user}:Props) => {
   return (
       <Sheet>
-        <SheetTrigger>
+        <SheetTrigger className={"sticky top-2 left-2"}>
             <Menu/>
         </SheetTrigger>
-          <SheetContent side={"left"}>
+          <SheetContent side={"left"} >
               <SheetTitle>
                   {title}
               </SheetTitle>

@@ -43,7 +43,7 @@ const renderTime = ({remainingTime}) => {
 export const Counter = ({restart, time, isPlaying, size, onCompleteFunc, onUpdateFunc}: Props) => {
     return (
         <div className="App">
-            <div className="timer-wrapper">
+            <div className="hidden">
                 <CountdownCircleTimer
                     key={restart ? restart : 0}
                     isPlaying={isPlaying}

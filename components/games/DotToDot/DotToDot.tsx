@@ -219,9 +219,6 @@ export const DotToDot = ({id}:Props) => {
                     dialog={instruction}
                     dialogChange={() => setInstruction(false)}
                     gameName={"Dot to Dot"}
-                    level1={"15s"}
-                    level2={"15s"}
-                    level3={"30s"}
                     instructions={["You need to connect the dots on the right-hand side to replicate the pattern from the left",
                         "You need to click in between the two dots to connect them."
                     ]}

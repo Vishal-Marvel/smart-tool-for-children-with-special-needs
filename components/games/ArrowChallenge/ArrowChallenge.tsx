@@ -79,9 +79,6 @@ export const ArrowChallenge = ({id}: Props) => {
                     dialog={instruction}
                     dialogChange={() => setInstruction(false)}
                     gameName={"the arrow challenge"}
-                    level1={"20s"}
-                    level2={"20s"}
-                    level3={"20s"}
                     instructions={["You need to identify and click on " +
                     "the arrow which faces the opposite direction among a fleet of arrows moving across the screen"
                     ]}

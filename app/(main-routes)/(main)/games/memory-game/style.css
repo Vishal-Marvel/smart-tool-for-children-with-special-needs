@@ -7,7 +7,7 @@ a {
 
 .board {
     display: grid;
-    grid-template-columns: repeat(4, 75px);
+    /*grid-template-columns: repeat(4, 75px);*/
     grid-gap: 8px;
 }
 
@@ -21,6 +21,7 @@ a {
     transform-style: preserve-3d;
     transition: all 0.2s;
     user-select: none;
+    width: 75px;
 }
 .card.gameover {
     pointer-events: none;

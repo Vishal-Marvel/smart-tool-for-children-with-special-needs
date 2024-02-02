@@ -116,7 +116,6 @@ export const MemoryGame = ({id}: Props) => {
                 accuracy = 2
             else accuracy = 1
 
-            console.log(maximum, moves)
 
 
             axios.post("/api/game-over", {
@@ -133,7 +132,7 @@ export const MemoryGame = ({id}: Props) => {
                         setAccuracy(accuracy / 5 * 100)
                         setNum(accuracy);
                         setGameLev(gameLev + 1);
-                    }, 1000)
+                    }, 2000)
                     // clearInterval(timer);
                 })
 

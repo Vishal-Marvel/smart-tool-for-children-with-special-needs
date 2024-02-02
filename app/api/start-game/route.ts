@@ -2,7 +2,7 @@ import {currentProfile} from "@/lib/current-profile";
 import {db} from "@/lib/db";
 import {NextResponse} from "next/server";
 
-export default async function GET(){
+export async function GET(){
     try {
         const user = await currentProfile();
         await db.user_Game.deleteMany({
@@ -11,5 +11,7 @@ export default async function GET(){
         return NextResponse.json("Previous Games deleted");
     }catch (e){
         console.log("START GAME", e)
+        return new NextResponse("Internal Error", {status: 500});
+
     }
 }

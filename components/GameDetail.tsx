@@ -21,6 +21,7 @@ export const GameDetail = ({game, userId}: Props) => {
     const [accuracy, setAccuracy] = useState<number[]>([]);
     const [avgTime, setAvgTime] = useState<number>(0);
     const [avgAcc, setAvgAcc] = useState<number>(0);
+    const [date, setDate] = useState("");
 
     const getData = async () => {
         for (let i = 1; i < 4; i++) {
@@ -56,16 +57,20 @@ export const GameDetail = ({game, userId}: Props) => {
         const sortedGameData = gameData.sort((a, b) => a.level - b.level);
 
         const times = sortedGameData.map(data => data.timeTaken);
+        const dates = sortedGameData.map(data => data.date);
         const accuracies = sortedGameData.map(data => (data.accuracy / data.maximum) * 100);
 
         const avgTime = times.length > 0 ? times.reduce((acc, time) => acc + time, 0) / times.length : 0;
 
         const avgAccuracy = accuracies.length > 0 ? accuracies.reduce((acc, accuracy) => acc + accuracy, 0) / accuracies.length : 0;
+        const lastDate =  dates.sort().reverse()
+        setDate(lastDate[0] && lastDate[0].toLocaleString());
 
         setTime(times);
         setAccuracy(accuracies);
         setAvgAcc(avgAccuracy);
         setAvgTime(avgTime);
+
 
     }, [gameData]);
 
@@ -73,11 +78,13 @@ export const GameDetail = ({game, userId}: Props) => {
     return (
         <div>
 
-            {gameData.length > 0 &&
 
-                <div className={"w-fit m-2 border-2 rounded-2xl p-2 text-center md:text-left"}>
+
+                <div className={"w-[97%] m-2 border-2 rounded-2xl p-2 text-center md:text-left flex flex-col"}>
                     <span className={"text-2xl font-bold uppercase md:ml-10 underline underline-offset-3"}>{game.name}</span>
-                    <div className={"w-[97%] flex md:flex-row flex-col justify-evenly"}>
+                    {gameData.length > 0 ?
+                        <>
+                    <div className={"w-full flex md:flex-row flex-col justify-evenly"}>
                         <div className={"md:w-1/3 "}>
                             <Bar
                                 className={"h-[350px] w-[500px]"}
@@ -127,14 +134,21 @@ export const GameDetail = ({game, userId}: Props) => {
                                 {" attribute is satisfied with a average percentage and time of "}
                                 <strong>{avgAcc.toFixed(1)}% </strong>
                                 in <strong>{avgTime.toFixed(1)}s </strong>
-                                respectively
+                                respectively. Game Last Played At {date && date.slice(0,10)}
                              </span>
 
                         </div>
-                    </div>
 
+                    </div>
+                        </>
+                       :
+                        <>
+                        <span className={"flex-1 text-center"}>
+                            No Data Found
+                        </span></>
+                    }
                 </div>
-            }
+
         </div>
 
     );

@@ -1,7 +1,6 @@
 "use client"
 import {Dialog, DialogClose, DialogContent, DialogFooter, DialogTitle} from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
-import {CircularProgress} from "@mui/material";
 import StarRating from "@/components/StarRating";
 import {well, great, keep} from "@/components/context/PlaySound";
 import {useEffect} from "react";

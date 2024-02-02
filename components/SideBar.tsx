@@ -8,6 +8,7 @@ import MemberRole = $Enums.MemberRole;
 import {MobileToggle} from "@/components/MobileToggle";
 import {useEffect, useState} from "react";
 import {Users} from "@prisma/client";
+import {StartGameButton} from "@/components/StartGameButton";
 
 interface Props {
     userName?: string
@@ -47,6 +48,8 @@ export const SideBar = ({userName, user}: Props) => {
                     </Link>
                     {user && user.role === MemberRole.USER &&
                         <>
+                            <StartGameButton/>
+
                             <Link href={"/tests"}>
                                 <Button className={"w-full"}>Tests</Button>
                             </Link>

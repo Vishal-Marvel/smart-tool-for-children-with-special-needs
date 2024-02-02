@@ -24,9 +24,6 @@ const  Tests = async () => {
 
             <SideBar user={user}/>
             <div className={"m-4 p-2"}>
-                <div>
-                    <StartGameButton/>
-                </div>
                 <div className={"flex flex-row flex-wrap justify-center justify-items-center"}>
 
                     <GameCard image={memory}

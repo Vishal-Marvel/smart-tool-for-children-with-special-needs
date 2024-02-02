@@ -1,20 +1,13 @@
 "use client"
 import {useRouter} from "next/navigation";
-import {useEffect, useState} from "react";
-import sound from "@/components/context/PlaySound";
+import {useState} from "react";
+import {sound} from "@/components/context/PlaySound";
 import axios from "axios";
 import {Counter} from "@/components/Counter";
 import {PopUpNotification} from "@/components/PopUpNotification";
 import ImageSeries from "@/components/games/ArrowChallenge/ImageSeries";
-import {StaticImageData} from "next/image";
-import blue_circle from "@/public/oddOneOut/blue-circle.webp";
-import bee from "@/public/oddOneOut/bee.webp";
-import oddPanda from "@/public/oddOneOut/odd_panda.png";
-import {LevOneAndLevTwo} from "@/components/games/OddOneOut/LevOneAndLevTwo";
-import green_circle from "@/public/oddOneOut/green-circle.webp";
-import basketBall from "@/public/oddOneOut/basketball.webp";
-import {LevThree} from "@/components/games/OddOneOut/LevThree";
-import evenPanda from "@/public/oddOneOut/even_panda.png";
+
+
 import {GameInstruction} from "@/components/GameInstruction";
 
 interface Props {

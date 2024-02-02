@@ -33,7 +33,7 @@ import w2l1 from "@/public/Distance/w2l1.png"
 import w3l1 from "@/public/Distance/w3l1.png"
 
 import {Levels} from "@/components/games/Distance/Levels";
-import sound from "@/components/context/PlaySound";
+import {sound} from "@/components/context/PlaySound";
 import {PopUpNotification} from "@/components/PopUpNotification";
 import {useRouter} from "next/navigation";
 import {GameInstruction} from "@/components/GameInstruction";

@@ -21,7 +21,7 @@ import crt2 from "@/public/missingpiece/test2_crt2.png"
 import crt3 from "@/public/missingpiece/test2_crt3.png"
 
 import {Levels} from "@/components/games/MissingPiece/Levels";
-import sound from "@/components/context/PlaySound";
+import {sound} from "@/components/context/PlaySound";
 import {PopUpNotification} from "@/components/PopUpNotification";
 import {useRouter} from "next/navigation";
 import {GameInstruction} from "@/components/GameInstruction";

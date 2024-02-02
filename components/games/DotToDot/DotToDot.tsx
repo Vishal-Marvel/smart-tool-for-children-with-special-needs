@@ -13,7 +13,7 @@ import {Comp} from "@/components/games/DotToDot/Comp";
 import Image from "next/image";
 import axios from "axios";
 import {Button} from "@/components/ui/button";
-import sound from "@/components/context/PlaySound";
+import {sound} from "@/components/context/PlaySound";
 import {GameInstruction} from "@/components/GameInstruction";
 
 interface Props{

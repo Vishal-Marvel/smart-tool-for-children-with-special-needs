@@ -27,7 +27,7 @@ import q4l3 from "@/public/match/q4l3.png"
 import {Levels} from "@/components/games/match/Levels";
 import {PopUpNotification} from "@/components/PopUpNotification";
 import {useRouter} from "next/navigation";
-import sound from "@/components/context/PlaySound";
+import {sound} from "@/components/context/PlaySound";
 import {GameInstruction} from "@/components/GameInstruction";
 
 interface Props {

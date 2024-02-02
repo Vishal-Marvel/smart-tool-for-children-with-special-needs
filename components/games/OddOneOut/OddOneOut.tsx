@@ -13,7 +13,7 @@ import evenPanda from "@/public/oddOneOut/even_panda.png"
 
 import {LevOneAndLevTwo} from "@/components/games/OddOneOut/LevOneAndLevTwo";
 import {LevThree} from "@/components/games/OddOneOut/LevThree";
-import sound from "@/components/context/PlaySound";
+import {sound} from "@/components/context/PlaySound";
 import {PopUpNotification} from "@/components/PopUpNotification";
 import {useRouter} from "next/navigation";
 import {GameInstruction} from "@/components/GameInstruction";

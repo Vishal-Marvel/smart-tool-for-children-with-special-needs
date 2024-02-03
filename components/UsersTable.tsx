@@ -39,7 +39,7 @@ export const UsersTable = async () => {
                             <TableCell className={"hidden lg:table-cell"}>{user.email}</TableCell>
                             <TableCell className={"hidden lg:table-cell"}>{user.phone_no}</TableCell>
                             <TableCell className={"text-right hidden lg:table-cell"}>{user.medical_history}</TableCell>
-                            <TableCell><Button variant={"link"}><Link href={"analysis/" + user.id}>View
+                            <TableCell><Button variant={"outline"}><Link href={"analysis/" + user.id}>View
                                 Details</Link></Button></TableCell>
                         </TableRow>
                     ))}

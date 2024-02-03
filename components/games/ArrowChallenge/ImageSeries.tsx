@@ -7,31 +7,51 @@ import Image from "next/image";
 import {cn} from "@/lib/utils";
 import {useEffect, useState} from "react";
 
-interface Props{
-    handleClicked:(img)=>void;
-    gameLev:number
+interface Props {
+    handleClicked: (img) => void;
+    gameLev: number
 }
 
 const ImageSeries = ({handleClicked, gameLev}: Props) => {
-    const array = Array.from({length:48});
-    const [randomNumber, setRandomNumber] = useState(0);
-    useEffect(()=>
-     {
-         setRandomNumber(Math.floor(Math.random() * 48) + 1)
+    const array = Array.from({length: 10});
+    const [randomNumberRow, setRandomNumberRow] = useState(0);
+    const [randomNumberCol, setRandomNumberCol] = useState(0);
+    useEffect(() => {
+        setRandomNumberRow(Math.floor(Math.random() * 10) )
+        setRandomNumberCol(Math.floor(Math.random() * 7) )
     }, [gameLev])
+    useEffect(()=>{
+        console.log(randomNumberRow, randomNumberCol)
+    }, [randomNumberRow, randomNumberCol])
 
     return (
         <div className={"w-full flex justify-center "}>
-            <div className={"h-fit overflow-hidden"}>
-                <div className={cn(gameLev==1? styles.imageSeries:gameLev==2?styles.imageSeries1:styles.imageSeries2
-                    , "grid grid-cols-8 gap-0")}>
-                    {array.map((ele, index)=>(
-                        <>
-                        {index==randomNumber && <Image onClick={()=>handleClicked(true)} src={left} className={"cursor-pointer h-[50px] w-[100px]"} alt="Image 1"/>}
-                        {index!=randomNumber && <Image onClick={()=>handleClicked(false)} src={right} className={"cursor-pointer h-[50px] w-[100px]"} alt="Image 1"/>}
-                        </>
-                    ))}
+            <div className={"h-fit w-full"}>
+                <div className={cn(" ", styles.scroller)}>
+                    <ul className={cn(styles.scroller_inner, gameLev == 1 ? styles.imageSeries : gameLev == 2 ? styles.imageSeries1 : styles.imageSeries2)}>
+                        {array.map((row, indexR) => (
+                            <li className={"flex flex-col gap-2"}>
+                                {array.slice(2).map((col, indexC) => (
+                                    <Image onClick={() => handleClicked(indexR == randomNumberRow && indexC == randomNumberCol)}
+                                           src={indexR == randomNumberRow && indexC == randomNumberCol ? left : right}
+                                           className={"cursor-pointer min-h-[15px] min-w-[80px]"} alt={`Image ${row} ${col}`}/>
+                                ))}
+
+                            </li>
+                        ))}
+                        {array.map((row, indexR) => (
+                            <li className={"flex flex-col gap-2"}>
+                                {array.slice(2).map((col, indexC) => (
+                                    <Image onClick={() => handleClicked(indexR == randomNumberRow && indexC == randomNumberCol)}
+                                           src={indexR == randomNumberRow && indexC == randomNumberCol ? left : right}
+                                           className={"cursor-pointer min-h-[15px] min-w-[80px]"} alt={`Image ${row} ${col}`}/>
+                                ))}
+
+                            </li>
+                        ))}
+                    </ul>
                 </div>
+
             </div>
         </div>
     );

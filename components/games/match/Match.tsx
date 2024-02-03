@@ -29,6 +29,7 @@ import {PopUpNotification} from "@/components/PopUpNotification";
 import {useRouter} from "next/navigation";
 import {sound} from "@/components/context/PlaySound";
 import {GameInstruction} from "@/components/GameInstruction";
+import {ExitGameButton} from "@/components/ExitGameButton";
 
 interface Props {
     id: String
@@ -45,7 +46,7 @@ export const Match = ({id}: Props) => {
     const [gameLev, setGameLev] = useState(1);
     const [time, setTime] = useState(0);
     const [key, setKey] = useState(0);
-    const [initialTime, setInitialTime] = useState(20);
+    const [initialTime, setInitialTime] = useState(6000);
     const [dialogBox, setDialogBox] = useState(false);
     const [message, setMessage] = useState("");
     const [accuracy, setAccuracy] = useState(0);
@@ -86,23 +87,28 @@ export const Match = ({id}: Props) => {
 
     const sendData = () => {
         sound.play()
+        const maximum = gameLev==1 ? 2 : gameLev==2 ? 3 : 4
         axios
             .post("/api/game-over", {
                 gameId: id,
                 timeTaken: initialTime - time + 1,
                 level: gameLev,
-                maximum: gameLev==1 ? 2 : gameLev==2 ? 3 : gameLev==3 && 4,
+                maximum,
                 accuracy: score,
             })
             .then(() => {
+                setTimeout(() => {
+                    setDialogBox(true);
+                    setGameLev(gameLev + 1);
+                    setMessage("You Have Completed Level "+gameLev);
+                    // @ts-ignore
+                    // setAccuracy(Math.floor(score/maximum*100)>0 || 1);
+                    setNum(Math.floor(score/maximum*5) || 1);
+                    score = 0;
+                    setTimeUp(false);
+                }, 2000)
                 // console.log(score/(gameLev==1 ? 2 : gameLev==2 ? 3 : gameLev==3 && 4), Math.floor(score/(gameLev==1 ? 2 : gameLev==2 ? 3 : gameLev==3 && 4)*100));
-                setDialogBox(true);
-                setGameLev(gameLev + 1);
-                setMessage("You Have Completed Level "+gameLev);
-                setAccuracy(Math.floor(score/(gameLev==1 ? 2 : gameLev==2 ? 3 : gameLev==3 && 4)*100));
-                setNum(Math.floor(score/(gameLev==1 ? 2 : gameLev==2 ? 3 : gameLev==3 && 4)*5));
-                score = 0;
-                setTimeUp(false);
+
             })
             .catch((e) => console.log(e));
     };
@@ -123,7 +129,8 @@ export const Match = ({id}: Props) => {
 
 
     return (
-        <div>
+        <div className={"flex flex-col items-center justify-evenly h-full"}>
+            <ExitGameButton/>
             {instruction &&
                 <GameInstruction
                     dialog={instruction}

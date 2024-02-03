@@ -37,6 +37,7 @@ import {sound} from "@/components/context/PlaySound";
 import {PopUpNotification} from "@/components/PopUpNotification";
 import {useRouter} from "next/navigation";
 import {GameInstruction} from "@/components/GameInstruction";
+import {ExitGameButton} from "@/components/ExitGameButton";
 
 interface Props {
     id: String
@@ -49,7 +50,7 @@ export const Distance = ({id}: Props) => {
     const [time, setTime] = useState(0);
     const [score, setScore] = useState(0);
     const [key, setKey] = useState(0);
-    const [initialTime, setInitialTime] = useState(15);
+    const [initialTime, setInitialTime] = useState(6000);
     const [dialogBox, setDialogBox] = useState(false);
     const [message, setMessage] = useState("");
     const [count, setCount] = useState(0);
@@ -82,14 +83,16 @@ export const Distance = ({id}: Props) => {
                 accuracy: score,
             })
             .then(() => {
+                setTimeout(() => {
+                    setDialogBox(true);
+                    setMessage("You Have Completed Level " + gameLev)
+                    setAccuracy(Math.floor((score) / gameLev * 100));
+                    setNum(Math.floor((score) / (gameLev) * 5) || 1);
+                    setGameLev(gameLev + 1);
+                    setCount(0);
+                    setScore(0);
+                }, 2000)
 
-                setDialogBox(true);
-                setMessage("You Have Completed Level " + gameLev)
-                setAccuracy(Math.floor((score) / gameLev * 100));
-                setNum(Math.floor((score) / (gameLev) * 5));
-                setGameLev(gameLev + 1);
-                setCount(0);
-                setScore(0);
 
 
             })
@@ -123,12 +126,13 @@ export const Distance = ({id}: Props) => {
 
 
     return (
-        <div>
+        <div className={" flex flex-col items-center justify-evenly h-full"}>
+            <ExitGameButton/>
             {instruction &&
                 <GameInstruction
                     dialog={instruction}
                     dialogChange={() => setInstruction(false)}
-                    gameName={"distance dash"}
+                    gameName={"Distance Dash"}
                     instructions={["You need to Answer the question by selecting the right option"
                     ]}
                 />}

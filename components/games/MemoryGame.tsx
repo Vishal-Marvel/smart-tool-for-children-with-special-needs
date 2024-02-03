@@ -5,6 +5,7 @@ import {useRouter} from "next/navigation";
 import axios from "axios";
 import Image from "next/image";
 
+
 import robot from "@/public/memory/robot.webp"
 import alien from "@/public/memory/alien.webp"
 import ghost from "@/public/memory/ghost.webp"
@@ -16,11 +17,11 @@ import rocket from "@/public/memory/rocket.webp"
 
 import {PopUpNotification} from "@/components/PopUpNotification";
 
-import {sound} from "@/components/context/PlaySound";
 import {Counter} from "@/components/Counter";
 import {cn} from "@/lib/utils";
 import {GameInstruction} from "@/components/GameInstruction";
 import {ExitGameButton} from "@/components/ExitGameButton";
+import {sound} from "@/components/context/PlaySound";
 
 interface Props {
     id: string
@@ -37,7 +38,7 @@ export const MemoryGame = ({id}: Props) => {
     const [gameOver, setGameOver] = useState(false);
     const [dialogBox, setDialogBox] = useState(false);
     const [time, setTime] = useState(0);
-    const [initialTime, setInitialTime] = useState(600);
+    const [initialTime, setInitialTime] = useState(6000);
     const [gameLev, setGameLev] = useState(1);
     const [message, setMessage] = useState("");
     const [key, setKey] = useState(0);

@@ -17,6 +17,7 @@ import {sound} from "@/components/context/PlaySound";
 import {PopUpNotification} from "@/components/PopUpNotification";
 import {useRouter} from "next/navigation";
 import {GameInstruction} from "@/components/GameInstruction";
+import {ExitGameButton} from "@/components/ExitGameButton";
 
 interface Props {
     id: String
@@ -30,7 +31,7 @@ export const OddOneOut = ({id}: Props) => {
     const [key, setKey] = useState(0);
     const [accuracy, setAccuracy] = useState(0);
     const [num, setNum] = useState(0);
-    const [initialTime, setInitialTime] = useState(15);
+    const [initialTime, setInitialTime] = useState(6000);
     const [dialogBox, setDialogBox] = useState(false);
     const [instruction, setInstruction] = useState(true);
     const [message, setMessage] = useState("");
@@ -60,12 +61,13 @@ export const OddOneOut = ({id}: Props) => {
                 accuracy: acc ? 1 : 0,
             })
             .then(() => {
-
-                setDialogBox(true);
-                setMessage("You Have Completed Level " + gameLev);
-                setAccuracy((acc ? 1 : 0) * 100)
-                setNum((acc ? 1 : 0) * 5);
-                setGameLev(gameLev + 1);
+                setTimeout(() => {
+                    setDialogBox(true);
+                    setMessage("You Have Completed Level " + gameLev);
+                    setAccuracy((acc ? 1 : 0) * 100)
+                    setNum((acc ? 5 : 1));
+                    setGameLev(gameLev + 1);
+                }, 2000)
 
             })
             .catch((e) => console.log(e));
@@ -87,7 +89,8 @@ export const OddOneOut = ({id}: Props) => {
 
 
     return (
-        <div>
+        <div className={"flex flex-col items-center justify-evenly h-full"}>
+            <ExitGameButton/>
             {instruction &&
                 <GameInstruction
                     dialog={instruction}
@@ -100,10 +103,10 @@ export const OddOneOut = ({id}: Props) => {
                 />}
             {!instruction && <>
       <span
-          className={"text-2xl pb-4 font-bold uppercase text-indigo-950 dark:text-indigo-50 text-center flex justify-center"}>
+          className={"text-3xl font-bold uppercase text-indigo-950 dark:text-indigo-50 text-center flex justify-center"}>
         Pick The Odd One Out
       </span>
-                <div className={"m-4 flex flex-row align-middle items-center justify-around "}>
+                <div className={"flex flex-row align-middle items-center justify-around "}>
                     <Counter
                         restart={key}
                         isPlaying={!gameOver}

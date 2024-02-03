@@ -22,9 +22,9 @@ export const StartGameButton = () => {
         }
     }
     return (
-        <Button onClick={handleStartNew} className={" font-2xl "} disabled={clicked}>
+        <Button onClick={handleStartNew} className={" w-[150px]"} disabled={clicked}>
 
-            {clicked && <Loader2 className={"h-4 w-4 animate-spin mr-2"}/> }
-            Start New Game</Button>
+            {clicked ? <Loader2 className={"h-5 w-5 animate-spin mr-2"}/> :
+            "Start New Game"}</Button>
     )
 }

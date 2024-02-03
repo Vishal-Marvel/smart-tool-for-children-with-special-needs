@@ -2,7 +2,7 @@
 import Image, {StaticImageData} from "next/image";
 import {useEffect, useState} from "react";
 import {cn} from "@/lib/utils";
-
+import { Draggable, Droppable } from 'react-drag-and-drop';
 interface ImageData {
     question: StaticImageData;
     answer: StaticImageData;
@@ -62,7 +62,7 @@ export const Levels = ({
     const [shuffledImages2, setShuffledImages2] = useState<StaticImageData[]>([]);
     const [shuffledImages3, setShuffledImages3] = useState<StaticImageData[]>([]);
     const [lev1questions, setLev1questions] = useState([q1l1, q2l1]);
-    const [lev2questions, setLev2questions] = useState([q1l2, q2l2, q3l2]);
+    const [lev2questions, setLev2questions] = useState([q2l2, q1l2, q3l2]);
     const [lev3questions, setLev3questions] = useState([q1l3, q2l3, q3l3, q4l3]);
 
     const [columnA, setColumnA] = useState<StaticImageData>(null);
@@ -70,6 +70,7 @@ export const Levels = ({
     const [selected, setSelected] = useState<StaticImageData[]>([]);
     const [pairs, setPairs] = useState<ImageData[]>([]);
     const handleSelect = (column, img) => {
+        // console.log(column, img, data, event)
         if (column === "A") {
             if (!selected.includes(img)) {
                 setColumnA(img);
@@ -127,7 +128,7 @@ export const Levels = ({
     }, []);
     useEffect(() => {
 
-        const imageArray = [a1l2, a2l2, a3l2];
+        const imageArray = [a3l2, a2l2, a1l2];
         const validImages = imageArray.filter(image => image);
         const shuffleArray = (array: StaticImageData[]) => {
             for (let i = array.length - 1; i > 0; i--) {
@@ -154,6 +155,7 @@ export const Levels = ({
 
         setShuffledImages3(shuffledArray);
     }, []);
+
     useEffect(() => {
 
         const imageArray = lev1questions;
@@ -205,47 +207,54 @@ export const Levels = ({
                 <span>Column A </span>
                 <span>Column B </span>
             </div>
-            {lev === 1 ? <div className={"flex flex-row w-full justify-evenly m-3"}>
+            {lev === 1 ? <div className={"flex flex-row w-full justify-evenly m-3 gap-10"}>
                 <div className={"flex flex-col"}>
                     {lev1questions.map((qn, index) => (
-
+                        <Draggable onDrag={()=>handleSelect("A", qn)} draggable={false}>
                         <Image src={qn} alt={`${index}`}
                                className={cn("m-2 transition-all ease-in cursor-pointer", selected.includes(qn) ? "scale-50" : "",
                                    columnA === qn ? "scale-125" : "")}
-                               onClick={(e) => handleSelect("A", qn)}/>
+                               onTouchStart={()=>handleSelect("A", qn)}
 
+                               />
+                        </Draggable>
                     ))}
                 </div>
                 <div className={"flex flex-col"}>
                     {shuffledImages1.map((qn, index) => (
-
+                        <Droppable onDrop={()=>handleSelect("B", qn)}>
                         <Image src={qn} alt={`${index}`}
                                className={cn("m-2 transition-all ease-in cursor-pointer", selected.includes(qn) ? "scale-50" : "",
                                    columnB === qn ? "scale-125" : "")}
-                               onClick={(e) => handleSelect("B", qn)}/>
+                               onTouchStart={()=>handleSelect("B", qn)}
 
+                               />
+                        </Droppable>
                     ))}
                 </div>
 
 
-            </div> : lev === 2 ? <div className={"flex flex-row w-full justify-evenly m-3"}>
+            </div> : lev === 2 ? <div className={"flex flex-row w-full justify-evenly m-3 gap-10"}>
                 <div className={"flex flex-col"}>
                     {lev2questions.map((qn, index) => (
-
+                        <Draggable onDrag={()=>handleSelect("A", qn)}>
                         <Image src={qn} alt={`${index}`}
                                className={cn("h-[120px] w-[100px]  m-1 transition-all ease-in cursor-pointer", selected.includes(qn) ? "scale-50" : "",
                                    columnA === qn ? "scale-125" : "")}
-                               onClick={(e) => handleSelect("A", qn)}/>
-
+                               onTouchStart={()=>handleSelect("A", qn)}
+                               />
+                        </Draggable>
                     ))}
                 </div>
                 <div className={"flex flex-col"}>
                     {shuffledImages2.map((qn, index) => (
+                        <Droppable onDrop={()=>handleSelect("B", qn)}>
                         <Image src={qn} alt={`${index}`}
                                className={cn("h-[120px] w-[100px] m-1 transition-all ease-in cursor-pointer", selected.includes(qn) ? "scale-50" : "",
                                    columnB === qn ? "scale-125" : "")}
-                               onClick={(e) => handleSelect("B", qn)}/>
-
+                               onTouchStart={()=>handleSelect("B", qn)}
+                               />
+                        </Droppable>
                     ))}
                 </div>
 
@@ -253,21 +262,24 @@ export const Levels = ({
             </div> : lev == 3 ? <div className={"flex flex-row  justify-evenly m-3"}>
                 <div className={"grid grid-cols-1 md:grid-cols-2"}>
                     {lev3questions.map((qn, index) => (
+                        <Draggable onDrag={()=>handleSelect("A", qn)} >
                         <Image src={qn} alt={`${index}`}
 
                                className={cn("m-2 transition-all ease-in cursor-pointer", selected.includes(qn) ? "scale-50" : "",
                                    columnA === qn ? "scale-125" : "")}
-                               onClick={(e) => handleSelect("A", qn)}/>
+                               onTouchStart={()=>handleSelect("A", qn)}/>
+                        </Draggable>
                     ))}
                 </div>
                 <div className={"grid md:grid-cols-2"}>
                     {shuffledImages3.map((qn, index) => (
-
+                        <Droppable onDrop={()=>handleSelect("B", qn)}>
                         <Image src={qn} alt={`${index}`}
                                className={cn("m-2 transition-all ease-in cursor-pointer", selected.includes(qn) ? "scale-50" : "",
                                    columnB === qn ? "scale-125" : "")}
-                               onClick={(e) => handleSelect("B", qn)}/>
-
+                               onTouchStart={()=>handleSelect("B", qn)}
+                               />
+                        </Droppable>
                     ))}
                 </div>
 

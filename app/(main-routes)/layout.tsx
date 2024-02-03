@@ -25,7 +25,7 @@ export default function RootLayout({
         <ThemeProvider>
             <ClerkProvider>
                 <html lang="en">
-                <body className={inter.className}>
+                <body className={inter.className} style={{background:"url('bg.png')", backgroundRepeat:"no-repeat", backgroundSize:"cover"}}>
 
                 {children}
                 </body>

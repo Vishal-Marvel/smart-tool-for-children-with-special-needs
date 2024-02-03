@@ -6,6 +6,16 @@ import axios from "axios";
 import {Bar} from "react-chartjs-2";
 import {CategoryScale} from 'chart.js';
 import Chart from 'chart.js/auto';
+import {
+    Table,
+    TableBody,
+    TableCaption,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table"
+
 
 Chart.register(CategoryScale);
 
@@ -63,7 +73,7 @@ export const GameDetail = ({game, userId}: Props) => {
         const avgTime = times.length > 0 ? times.reduce((acc, time) => acc + time, 0) / times.length : 0;
 
         const avgAccuracy = accuracies.length > 0 ? accuracies.reduce((acc, accuracy) => acc + accuracy, 0) / accuracies.length : 0;
-        const lastDate =  dates.sort().reverse()
+        const lastDate = dates.sort().reverse()
         setDate(lastDate[0] && lastDate[0].toLocaleString());
 
         setTime(times);
@@ -78,12 +88,11 @@ export const GameDetail = ({game, userId}: Props) => {
     return (
         <div>
 
+            {gameData.length > 0 &&
+                <div className={"w-[97%] m-4 border-2 rounded-2xl p-2 text-center md:text-left flex flex-col"}>
+                    <span
+                        className={"text-2xl font-bold uppercase md:ml-10 m-3  underline underline-offset-3"}>{game.name}</span>
 
-
-                <div className={"w-[97%] m-2 border-2 rounded-2xl p-2 text-center md:text-left flex flex-col"}>
-                    <span className={"text-2xl font-bold uppercase md:ml-10 underline underline-offset-3"}>{game.name}</span>
-                    {gameData.length > 0 ?
-                        <>
                     <div className={"w-full flex md:flex-row flex-col justify-evenly"}>
                         <div className={"md:w-1/3 "}>
                             <Bar
@@ -128,27 +137,50 @@ export const GameDetail = ({game, userId}: Props) => {
                             />
                         </div>
                     </div>
+
+                    <div className={"w-full flex justify-center md:m-4 mt-1 mb-1 overflow-hidden"}>
+                        <Table className={"md:w-2/3 w-1/3"}>
+                            <TableHeader className={"bg-secondary"}>
+                                <TableRow>
+                                    <TableHead>Levels</TableHead>
+                                    <TableHead>No. Of Errors</TableHead>
+                                    {/*<TableHead>Total</TableHead>*/}
+                                    <TableHead>Time Taken (s)</TableHead>
+                                    <TableHead>Accuracy (%)</TableHead>
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                {gameData.map((game, index) => (
+                                    <TableRow>
+                                        <TableCell>{game.level}</TableCell>
+                                        <TableCell>{game.maximum - game.accuracy}</TableCell>
+                                        {/*<TableCell>{game.maximum}</TableCell>*/}
+                                        <TableCell>{game.timeTaken}</TableCell>
+                                        <TableCell>{(game.accuracy / game.maximum * 100).toFixed(0)}</TableCell>
+                                    </TableRow>
+                                ))}
+
+                            </TableBody>
+                        </Table>
+                    </div>
                     <div className={"w-full flex justify-center"}>
                         <div className={"text-center w-2/3 bg-gray-300 rounded-2xl p-4"}>
-                            <span className={"md:text-[16px] text-sm"}>{"The time-accuracy graph of the user states that the "} <strong>{game.description}</strong>
+                            <span
+                                className={"md:text-[16px] text-sm"}>{"The time-accuracy graph of the user states that the "}
+                                <strong>{game.description}</strong>
                                 {" attribute is satisfied with a average percentage and time of "}
                                 <strong>{avgAcc.toFixed(1)}% </strong>
                                 in <strong>{avgTime.toFixed(1)}s </strong>
-                                respectively. Game Last Played At {date && date.slice(0,10)}
+                                respectively. Game Last Played At {date && date.slice(0, 10)}
                              </span>
 
                         </div>
 
                     </div>
-                        </>
-                       :
-                        <>
-                        <span className={"flex-1 text-center"}>
-                            No Data Found
-                        </span></>
-                    }
+
                 </div>
 
+            }
         </div>
 
     );

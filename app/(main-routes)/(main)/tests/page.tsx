@@ -42,7 +42,7 @@ const  Tests = async () => {
                               med={"Form constancy assessment"}
                               text={"Identify the missing piece from a set of given options"}
                               name={"Spot The Missing Piece"}
-                              link={"/games/mission-piece"}
+                              link={"/games/missing-piece"}
                     />
                     <GameCard image={match}
                               med={"Visual closure assessment"}

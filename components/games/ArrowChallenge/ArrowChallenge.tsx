@@ -9,6 +9,7 @@ import ImageSeries from "@/components/games/ArrowChallenge/ImageSeries";
 
 
 import {GameInstruction} from "@/components/GameInstruction";
+import {ExitGameButton} from "@/components/ExitGameButton";
 
 interface Props {
     id: string
@@ -23,7 +24,7 @@ export const ArrowChallenge = ({id}: Props) => {
     const [key, setKey] = useState(0);
     const [accuracy, setAccuracy] = useState(0);
     const [num, setNum] = useState(0);
-    const [initialTime, setInitialTime] = useState(20);
+    const [initialTime, setInitialTime] = useState(6000);
     const [dialogBox, setDialogBox] = useState(false);
     const [message, setMessage] = useState("");
     const [instruction, setInstruction] = useState(true);
@@ -41,11 +42,15 @@ export const ArrowChallenge = ({id}: Props) => {
                 accuracy: acc ? 1 : 0,
             })
             .then(() => {
+                setTimeout(() => {
+                    setMessage("You Have Completed Level " + gameLev)
 
-                setDialogBox(true);
-                setAccuracy((acc ? 1 : 0) * 100)
-                setNum((acc ? 1 : 0) * 5);
-                setGameLev(gameLev + 1);
+                    setDialogBox(true);
+                    setNum((acc ? 5 : 1));
+                    setGameLev(gameLev + 1);
+                }, 2000)
+
+
 
             })
             .catch((e) => console.log(e));
@@ -60,13 +65,14 @@ export const ArrowChallenge = ({id}: Props) => {
         } else {
             setMessage("Completed")
             setGameOver(false);
-            router.push("/dashboard");
+            router.push("/analysis");
         }
     }
 
 
     return (
-        <div>
+        <div className={" flex flex-col items-center justify-evenly h-full"}>
+            <ExitGameButton/>
             {instruction &&
                 <GameInstruction
                     dialog={instruction}

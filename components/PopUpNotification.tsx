@@ -49,10 +49,10 @@ export const PopUpNotification = ({
             <DialogContent>
                 <DialogClose className={"hidden"}/>
                 <DialogTitle>{title}</DialogTitle>
-                <div className={"m-2 w-full flex-col flex"}>
+                <div className={"m-2 w-full flex-col flex space-y-4"}>
                     <span className={"text-indigo-950 pb-4"}>{message}</span>
                     {over &&
-                        <div className={"m-4 flex flex-col "}>
+                        <div className={" flex flex-col "}>
                             <StarRating num={num}/>
                         </div>
                     }

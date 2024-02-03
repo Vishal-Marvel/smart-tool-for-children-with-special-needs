@@ -20,7 +20,7 @@ export default function Home() {
         <div>
 
 
-            <div className="m-3 flex items-center text-center flex-col text-indigo-950 dark:text-indigo-50">
+            <div className="m-3 flex flex-1 items-center text-center flex-col text-indigo-950 dark:text-indigo-50 justify-evenly">
                 <h1 className={"text-2xl md:text-4xl font-bold w-4/5 font-sans"}>
                     Smart And Digitised Visual Perception Integrated Tool for Child With Special Needs
                 </h1>
@@ -28,7 +28,8 @@ export default function Home() {
 
                     <p className={"text-justify md:p-4 p-2"}>
                         <strong className={"text-[24px] p-2 pl-0"}>DOMAINS TESTED:</strong><br/><br/>
-
+                        <div className={"flex w-full gap-4 text-justify"}>
+                        <div className={"w-1/2"}>
                         <strong>Visual Discrimination:</strong> The ability to differentiate and identify distinct
                         visual stimuli or details, crucial for tasks like reading and recognizing shapes.
                         <br/><br/><strong>Form Constancy Assessment:</strong> Examining the capability to recognize and
@@ -38,7 +39,9 @@ export default function Home() {
                         <br/><br/><strong>Visual Closure Assessment:</strong> Gauging the ability to mentally complete
                         or identify a whole object when presented with incomplete visual information, contributing to
                         overall visual understanding.
-                        <br/><br/><strong>Allocentric visual perception Assessment:</strong> Evaluating the ability to
+                        </div>
+                        <div className={"w-1/2"}>
+                        <strong>Allocentric visual perception Assessment:</strong> Evaluating the ability to
                         perceive and understand the spatial relationships between objects from an external,
                         viewer-independent perspective.
                         <br/><br/><strong>Egocentric visual perception Assessment:</strong> Assessing the ability to
@@ -48,6 +51,8 @@ export default function Home() {
                         Assessment:</strong> Examining cognitive processing abilities related to understanding and
                         interpreting visual information in motion, including tracking moving objects and perceiving
                         dynamic visual stimuli.
+                        </div>
+                        </div>
                     </p>
                 </div>
             </div>

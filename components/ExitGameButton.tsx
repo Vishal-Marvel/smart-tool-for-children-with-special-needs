@@ -22,7 +22,7 @@ export const ExitGameButton = () => {
     return (
         <AlertDialog>
 
-            <AlertDialogTrigger className={cn("absolute flex gap-3 top-3 items-center left-3", buttonVariants({variant: "outline"}))}>
+            <AlertDialogTrigger className={cn("absolute flex gap-3 top-3 items-center left-3", buttonVariants({variant: "ghost"}))}>
                 <ArrowLeft className={"h-5 w-5"}/>
                 Exit Game
             </AlertDialogTrigger>

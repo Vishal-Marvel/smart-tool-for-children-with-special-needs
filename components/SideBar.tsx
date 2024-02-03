@@ -41,24 +41,24 @@ export const SideBar = ({userName, user}: Props) => {
 
                     <span className={"font-bold text-2xl capitalize text-center"}>{title}</span>
                 <div
-                    className={"m-6 w-full items-center flex flex-col h-[300px] justify-evenly"}>
+                    className={"m-6 w-full items-center flex flex-col h-[400px] justify-evenly"}>
 
                     <Link href={"/dashboard"}>
-                        <Button className={"w-full"}>Dashboard</Button>
+                        <Button  className={"w-[150px]"}>Dashboard</Button>
                     </Link>
                     {user && user.role === MemberRole.USER &&
                         <>
                             <StartGameButton/>
 
                             <Link href={"/tests"}>
-                                <Button className={"w-full"}>Tests</Button>
+                                <Button className={"w-[150px]"}>Tests</Button>
                             </Link>
                             <Link href={"/analysis"}>
-                                <Button className={"w-full"}>Analysis</Button>
+                                <Button  className={"w-[150px]"}>Analysis</Button>
                             </Link>
                         </>
                     }
-                    <CustomSignOutButton/>
+                    <CustomSignOutButton />
                 </div>
 
             </div>

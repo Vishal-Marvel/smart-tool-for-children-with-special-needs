@@ -6,10 +6,7 @@ import ToggleButton from "@/components/ToggleButton";
 const EditPage = async () => {
     const profile: Users = await currentProfile();
     return (
-        <div className={"h-[98vh] "}>
-            <div className={" flex justify-end right-0 p-3 m-2"}>
-                <ToggleButton/>
-            </div>
+        <div className={"h-[98vh] flex items-center justify-center"}>
             <div className={"flex items-center justify-center"}>
 
                 <EditProfile profile={profile}/>

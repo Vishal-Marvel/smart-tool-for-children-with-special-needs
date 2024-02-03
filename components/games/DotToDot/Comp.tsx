@@ -82,6 +82,12 @@ export const Comp = ({img, handleDone, timeUp}:Props) => {
             event.target.style.backgroundColor = "rgb(255,255,255)"
         }
     }
+    const handleDrag = (val)=>{
+        console.log("drag" , val)
+    }
+    const handleDrop = (val)=>{
+        console.log("drop", val)
+    }
 
     const makeBoard = (boardSize) => {
         var cols = [];
@@ -90,9 +96,10 @@ export const Comp = ({img, handleDone, timeUp}:Props) => {
             for (let j = 0; j <= 2 * boardSize; j++) {
                 if (i % 2 === 0) {
                     if (j % 2 === 0) {
-                        row.push(React.createElement("div",
+                        const element = React.createElement("div",
                             {className: "dot", id: "dot" + Math.floor(i / 2) + "," + Math.floor(j / 2)}
-                            , ""))
+                            , "")
+                        row.push(element)
                     } else {
                         row.push(React.createElement("div"
                             , {
@@ -128,6 +135,7 @@ export const Comp = ({img, handleDone, timeUp}:Props) => {
                                 id: "box" + Math.floor(i / 2) + ',' + Math.floor(j / 2)
                             }
                             , ""))
+
 
                     }
                 }

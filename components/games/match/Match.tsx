@@ -122,7 +122,9 @@ export const Match = ({id}: Props) => {
             setDialogBox(false);
         } else {
             setGameOver(false);
+            setNum(0);
             setMessage("Completed")
+
             router.push("/games/dot-to-dot");
         }
     }
@@ -137,7 +139,7 @@ export const Match = ({id}: Props) => {
                     dialogChange={() => setInstruction(false)}
                     gameName={"Match The Image"}
                     instructions={["You need to match the hidden image",
-                        "First choose an image from the column A and then choose an image which you think matches from the column B",
+                        "Drag an image from Column A and drop it on an image in the Column B",
                         "Once an image is matched the image shrinks which means you can't rematch"
                     ]}
                 />}

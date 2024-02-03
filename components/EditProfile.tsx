@@ -98,7 +98,7 @@ export function EditProfile({profile}: EditProfileProps) {
 
     return (
         <>
-            <Card className="w-fit  ">
+            <Card className="w-fit">
                 <CardHeader>
                     <div className={"flex flex-row"}>
                         <TooltipProvider>

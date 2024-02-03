@@ -15,7 +15,6 @@ interface Props{
 }
 
 export const Comp = ({img, handleDone, timeUp}:Props) => {
-    const [click, setClick] = useState(0)
     const [state, setState] = useState<stateInterface>({
         boardSize: 2,
         winMessage: "",
@@ -60,7 +59,7 @@ export const Comp = ({img, handleDone, timeUp}:Props) => {
 
     const selectColor = (int) => {
         if (int === 0) {
-            return ("rgb(255,255,255)")
+            return ("transparent")
         } else if (int === 1) {
             return ("rgb(255,0,0)")
         } else if (int === -1) {
@@ -79,14 +78,8 @@ export const Comp = ({img, handleDone, timeUp}:Props) => {
     const untint = (event) => {
         var currentCoord = event.target.dataset.coord
         if (state.lineCoordinates[currentCoord] === 0) {
-            event.target.style.backgroundColor = "rgb(255,255,255)"
+            event.target.style.backgroundColor = "transparent"
         }
-    }
-    const handleDrag = (val)=>{
-        console.log("drag" , val)
-    }
-    const handleDrop = (val)=>{
-        console.log("drop", val)
     }
 
     const makeBoard = (boardSize) => {
@@ -152,7 +145,7 @@ export const Comp = ({img, handleDone, timeUp}:Props) => {
 
     return(
         <div className={"flex flex-row items-center justify-center"}>
-            <Image src={img} alt={"Level 1"}/>
+            <Image src={img} alt={"Level 1"} className={"object-contain aspect-square mix-blend-color-burn"}/>
             {/*<div className={"h-full bg-black p-0.5 pt-40"}></div>*/}
             <div id="game" className={"border-2 border-black pt-3 pb-3"}>
                 <div id="board">

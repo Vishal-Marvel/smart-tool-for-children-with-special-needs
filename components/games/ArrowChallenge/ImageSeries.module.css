@@ -1,37 +1,19 @@
  /*ImageSeries.module.css */
 .imageSeries {
-    animation: scrollImages 15s linear infinite; /* Adjust the animation duration as needed */
+    animation: scrollImages 20s linear infinite; /* Adjust the animation duration as needed */
 }
  .imageSeries1 {
-    animation: scrollImages 10s linear infinite; /* Adjust the animation duration as needed */
+    animation: scrollImages 12s linear infinite; /* Adjust the animation duration as needed */
 }
  .imageSeries2 {
-    animation: scrollImages 6s linear infinite; /* Adjust the animation duration as needed */
+    animation: scrollImages 8s linear infinite; /* Adjust the animation duration as needed */
 }
-
- .scroller{
-     max-width: 60vw;
-     overflow: hidden;
-     /*outline: 3px solid lime;*/
- }
- .scroller_inner{
-     flex-wrap: nowrap;
-     width: fit-content;
-     /*padding-block: 2rem;*/
-     display: flex;
-     gap: 1rem;
- }
 
 @keyframes scrollImages {
     to{
         transform: translate(calc(-50% - 0.5rem));
     }
-    /*0% {*/
-    /*    transform: translateX(100%);*/
-    /*}*/
-    /*100% {*/
-    /*    transform: translateX(-100%); !* Adjust the percentage based on the number of images *!*/
-    /*}*/
+
 }
 
 

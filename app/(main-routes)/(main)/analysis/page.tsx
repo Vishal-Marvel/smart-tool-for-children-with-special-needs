@@ -2,20 +2,21 @@ import {db} from "@/lib/db";
 import {GameDetail} from "@/components/GameDetail";
 import {SideBar} from "@/components/SideBar";
 import {currentProfile} from "@/lib/current-profile";
-import {Frown} from "lucide-react";
+import {Frown, Loader2} from "lucide-react";
 import {StartGameButton} from "@/components/StartGameButton";
 
 const AnalysisPage = async () => {
     const user = await currentProfile();
     const games = await db.game.findMany();
     games.sort((a, b) => a.name.localeCompare(b.name))
-    const userGames = await db.user_Game.findMany({where: {userId: user.id}})
-
+    let userGames = null ;
+    userGames = await db.user_Game.findMany({where:{userId:user.id}});
 
     return (
         <div className={"flex flex-col md:flex-row m-2 p-2"}>
             <SideBar user={user}/>
             <div className={"w-full m-2 flex flex-col justify-center"}>
+                {userGames === null && <Loader2 className={"animate-spin h-10 w-10"}/>}
                 {userGames.length > 0 ?
                     <>
                         {games.map((game, index) => (

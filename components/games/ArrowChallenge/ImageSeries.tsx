@@ -20,15 +20,13 @@ const ImageSeries = ({handleClicked, gameLev}: Props) => {
         setRandomNumberRow(Math.floor(Math.random() * 10) )
         setRandomNumberCol(Math.floor(Math.random() * 7) )
     }, [gameLev])
-    useEffect(()=>{
-        console.log(randomNumberRow, randomNumberCol)
-    }, [randomNumberRow, randomNumberCol])
+
 
     return (
         <div className={"w-full flex justify-center "}>
             <div className={"h-fit w-full"}>
-                <div className={cn(" ", styles.scroller)}>
-                    <ul className={cn(styles.scroller_inner, gameLev == 1 ? styles.imageSeries : gameLev == 2 ? styles.imageSeries1 : styles.imageSeries2)}>
+                <div className={cn("max-w-[60vw] overflow-hidden")}>
+                    <ul className={cn("flex-nowrap w-fit flex gap-[1rem]", gameLev == 1 ? styles.imageSeries : gameLev == 2 ? styles.imageSeries1 : styles.imageSeries2)}>
                         {array.map((row, indexR) => (
                             <li className={"flex flex-col gap-2"}>
                                 {array.slice(2).map((col, indexC) => (

@@ -152,7 +152,10 @@ export const MemoryGame = ({id}: Props) => {
 
         } else {
             setGameOver(false);
+            setNum(0);
+
             setMessage("Completed")
+
             router.push("/games/odd-one-out");
         }
     }

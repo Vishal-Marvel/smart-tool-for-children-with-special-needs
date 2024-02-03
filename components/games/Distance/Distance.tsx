@@ -112,6 +112,8 @@ export const Distance = ({id}: Props) => {
             setDialogBox(false);
         } else {
             setGameOver(false);
+            setNum(0);
+
             setMessage("Completed");
             router.push("/games/arrow-challenge");
         }

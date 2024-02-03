@@ -89,7 +89,7 @@ export const GameDetail = ({game, userId}: Props) => {
         <div>
 
             {gameData.length > 0 &&
-                <div className={"w-[97%] m-4 border-2 rounded-2xl p-2 text-center md:text-left flex flex-col"}>
+                <div className={"w-[97%] m-4 border-4 shadow-2xl border-emerald-600 rounded-2xl p-2 text-center md:text-left flex flex-col"}>
                     <span
                         className={"text-2xl font-bold uppercase md:ml-10 m-3  underline underline-offset-3"}>{game.name}</span>
 
@@ -138,10 +138,10 @@ export const GameDetail = ({game, userId}: Props) => {
                         </div>
                     </div>
 
-                    <div className={"w-full flex justify-center md:m-4 mt-1 mb-1 overflow-hidden"}>
-                        <Table className={"md:w-2/3 w-1/3"}>
-                            <TableHeader className={"bg-secondary"}>
-                                <TableRow>
+                    <div className={"w-full flex justify-center md:p-8 md:m-4 mt-1 mb-1 overflow-hidden"}>
+                        <Table className={"md:w-2/3 w-1/3 shadow-xl   rounded-2xl bg-blue-300 bg-blend-color bg-opacity-30"}>
+                            <TableHeader className={""}>
+                                <TableRow className={"bg-secondary bg-opacity-30 rounded-2xl divide-x divide-gray-200"}>
                                     <TableHead>Levels</TableHead>
                                     <TableHead>No. Of Errors</TableHead>
                                     {/*<TableHead>Total</TableHead>*/}
@@ -151,7 +151,7 @@ export const GameDetail = ({game, userId}: Props) => {
                             </TableHeader>
                             <TableBody>
                                 {gameData.map((game, index) => (
-                                    <TableRow>
+                                    <TableRow className={"divide-x divide-gray-200"}>
                                         <TableCell>{game.level}</TableCell>
                                         <TableCell>{game.maximum - game.accuracy}</TableCell>
                                         {/*<TableCell>{game.maximum}</TableCell>*/}
@@ -163,7 +163,7 @@ export const GameDetail = ({game, userId}: Props) => {
                             </TableBody>
                         </Table>
                     </div>
-                    <div className={"w-full flex justify-center"}>
+                    <div className={"w-full flex justify-center md:m-2 md:p-2"}>
                         <div className={"text-center w-2/3 bg-gray-300 rounded-2xl p-4"}>
                             <span
                                 className={"md:text-[16px] text-sm"}>{"The time-accuracy graph of the user states that the "}

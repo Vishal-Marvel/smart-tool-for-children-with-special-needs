@@ -27,21 +27,19 @@ export const PopUpNotification = ({
                                       message,
                                       num,
                                       over,
-                                      time,
-                                      accuracy
                                   }: Props) => {
-    useEffect(()=>{
+    useEffect(() => {
         if (display) {
             if (num === 5) {
                 great.play()
             } else if (num < 5 && num > 2) {
                 well.play()
-            } else {
+            } else if (num > 0 && num <= 2) {
                 keep.play()
             }
         }
 
-    }, [num])
+    }, [num, display, title, message])
 
     return (
         <Dialog open={display}>

@@ -82,6 +82,8 @@ export const OddOneOut = ({id}: Props) => {
             setDialogBox(false);
         } else {
             setGameOver(false);
+            setNum(0);
+
             setMessage("Completed")
             router.push("/games/missing-piece");
         }

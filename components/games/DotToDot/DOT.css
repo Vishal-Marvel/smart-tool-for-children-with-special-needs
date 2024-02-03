@@ -9,8 +9,8 @@
 }
 
 .dot {
-    height: 6px;
-    width: 6px;
+    height: 8px;
+    width: 8px;
     background-color: #000;
 }
 
@@ -20,15 +20,17 @@
 }
 
 .horizContainer {
-    height: 6px;
+    height: 8px;
     width: 35px;
     border: 2px;
+    background-color: transparent;
 }
 
 .vertContainer {
     height: 35px;
-    width: 6px;
+    width: 8px;
     border: 2px;
+    background-color: transparent;
 }
 
 #board {

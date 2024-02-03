@@ -11,7 +11,8 @@ export const LevThree = ({odd, even, handleClick}: Props) => {
     const [shuffledImages, setShuffledImages] = useState<StaticImageData[]>([]);
 
     useEffect(() => {
-        const imageArray = [odd, even, even, even, even, even, even, even, even, even, even, even, even, even, even, even, even, even, even, even, even, even, even, even];
+        const array = Array.from({length:29 })
+        const imageArray = [odd, ...array.map((ele)=>even)];
         const validImages = imageArray.filter(image => image);
         const shuffleArray = (array: StaticImageData[]) => {
             for (let i = array.length - 1; i > 0; i--) {

@@ -7,7 +7,7 @@ const ProfileEditButton = () => {
     const router = useRouter()
 
     return (
-        <Button variant={"secondary"} className={"rounded-2xl"} onClick={() => router.push("/edit-profile")}>
+        <Button variant={"ghost"} className={"rounded-xl"} onClick={() => router.push("/edit-profile")}>
 
             <Edit/> <span className={"pl-2"}>Edit</span>
         </Button>

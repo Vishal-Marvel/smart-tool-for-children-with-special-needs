@@ -64,6 +64,8 @@ export const ArrowChallenge = ({id}: Props) => {
             setDialogBox(false);
         } else {
             setMessage("Completed")
+            setNum(0);
+
             setGameOver(false);
             router.push("/analysis");
         }

@@ -29,24 +29,24 @@ const AnalysisPage = async (req, res) => {
             <SideBar userName={dynamicUser.name} user={user}/>
             <div className={"w-full m-2 flex flex-col justify-center"}>
                 {userGames === null && <Loader2 className={"animate-spin h-10 w-10"}/>}
-                {/*{userGames.length > 0 ?*/}
+                {userGames.length > 0 ?
                     <>
                         {games.map((game, index) => (
                             <GameDetail
                                 game={game}
-                                userId={user.id}
+                                userId={userId}
                                 key={game.id}
                                 // initialGameData={initialGameData[index]}
                             />
                         ))}
                     </>
-                    {/*: <div className={"flex flex-col justify-center items-center gap-4"}>*/}
-                    {/*    <div className={"text-center text-3xl font-bold flex gap-2 items-center"}>*/}
-                    {/*        <Frown/> No Data Found*/}
-                    {/*    </div>*/}
-                    {/*    */}
-                    {/*</div>*/}
-                {/*}*/}
+                    : <div className={"flex flex-col justify-center items-center gap-4"}>
+                        <div className={"text-center text-3xl font-bold flex gap-2 items-center"}>
+                            <Frown/> No Data Found
+                        </div>
+
+                    </div>
+                }
             </div>
         </div>
     );

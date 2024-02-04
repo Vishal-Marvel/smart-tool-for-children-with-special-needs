@@ -22,7 +22,7 @@ const AnalysisPage = async (req, res) => {
     const games = await db.game.findMany();
     games.sort((a,b)=>a.name.localeCompare(b.name))
     let userGames = null ;
-    userGames = await db.user_Game.findMany({where:userId});
+    userGames = await db.user_Game.findMany({where:{userId:dynamicUser.id}});
 
     return (
         <div className={"flex flex-col md:flex-row m-2 p-2"}>

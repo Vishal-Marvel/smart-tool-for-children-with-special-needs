@@ -16,9 +16,9 @@ export const UsersTable = async () => {
     return (
         <ScrollArea className={"h-[80vh] "}>
 
-            <Table className={"table-auto"}>
-                <TableHeader className={"sticky top-0 bg-secondary"}>
-                    <TableRow className={"text-indigo-950"}>
+            <Table className={"shadow-xl   rounded-2xl bg-blue-300 bg-blend-color bg-opacity-30"}>
+                <TableHeader className={"sticky top-0 "}>
+                    <TableRow className={"text-indigo-950 bg-secondary bg-opacity-30"}>
                         <TableHead className={"lg:w-1/7"}>User Name</TableHead>
                         <TableHead className={"hidden lg:table-cell"}>Age</TableHead>
                         <TableHead className={"hidden lg:table-cell"}>Weight</TableHead>
@@ -39,13 +39,13 @@ export const UsersTable = async () => {
                             <TableCell className={"hidden lg:table-cell"}>{user.email}</TableCell>
                             <TableCell className={"hidden lg:table-cell"}>{user.phone_no}</TableCell>
                             <TableCell className={"text-right hidden lg:table-cell"}>{user.medical_history}</TableCell>
-                            <TableCell><Button variant={"outline"}><Link href={"analysis/" + user.id}>View
+                            <TableCell><Button variant={"ghost"}><Link href={"analysis/" + user.id}>View
                                 Details</Link></Button></TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
-                <TableFooter className={"sticky bottom-0 bg-secondary"}>
-                    <TableRow>
+                <TableFooter className={"sticky bottom-0 "}>
+                    <TableRow className={"bg-secondary bg-opacity-30"}>
                         <TableCell colSpan={7}>Total</TableCell>
                         <TableCell className="text-right">{users.length} User(s)</TableCell>
                     </TableRow>

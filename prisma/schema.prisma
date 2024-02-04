@@ -17,17 +17,16 @@ enum MemberRole {
 }
 
 model Users {
-  id              String      @id @default(auto()) @map("_id") @db.ObjectId
+  id              String     @id @default(auto()) @map("_id") @db.ObjectId
   name            String
   age             String
   gender          String
   weight          String
   height          String
-  email           String      @unique
+  email           String     @unique
   phone_no        String
   medical_history String
-  role            MemberRole  @default(USER)
-  User_Game       User_Game[]
+  role            MemberRole @default(USER)
 }
 
 model Game {
@@ -39,8 +38,7 @@ model Game {
 model User_Game {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   gameId    String
-  userId    String   @db.ObjectId
-  user      Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
   date      DateTime @default(now())
   maximum   Int?
   timeTaken Int

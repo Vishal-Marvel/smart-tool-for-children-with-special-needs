@@ -1,18 +1,12 @@
-"use client"
+
 import {cn} from "@/lib/utils";
-import {useRouter} from "next/navigation";
-import {useState} from "react";
 import Link from "next/link";
 
 import {SignedIn, SignedOut, SignInButton} from "@clerk/nextjs";
 
 import {Button, buttonVariants} from "@/components/ui/button"
-import ToggleButton from "@/components/ToggleButton";
 
 export default function Home() {
-    const router = useRouter();
-    const [Arrow, setArrow] = useState("opacity-0");
-    const [Text, setText] = useState("translate-x-1/2");
 
 
     return (
@@ -26,9 +20,9 @@ export default function Home() {
                 </h1>
                 <div className={"flex flex-col align-middle justify-center md:m-4"}>
 
-                    <p className={"text-justify md:p-4 p-2"}>
+                    {/*<p className={"text-justify md:p-4 p-2"}>*/}
                         <strong className={"text-[24px] p-2 pl-0"}>DOMAINS TESTED:</strong><br/><br/>
-                        <div className={"flex w-full gap-4 text-justify"}>
+                        <div className={"flex w-full gap-8 text-justify md:p-4 p-2"}>
                         <div className={"w-1/2"}>
                         <strong>Visual Discrimination:</strong> The ability to differentiate and identify distinct
                         visual stimuli or details, crucial for tasks like reading and recognizing shapes.
@@ -53,7 +47,7 @@ export default function Home() {
                         dynamic visual stimuli.
                         </div>
                         </div>
-                    </p>
+
                 </div>
             </div>
             <div className={"justify-center flex mb-4"}>

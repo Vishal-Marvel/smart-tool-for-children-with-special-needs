@@ -54,6 +54,13 @@ export const Comp = ({img, handleDone, timeUp}:Props) => {
                 lineCoordinates: newState,
             }))
 
+        }else{
+            let newState = state.lineCoordinates
+            newState[currentCoord] = 0
+            setState(prevState => ({
+                ...prevState,
+                lineCoordinates: newState,
+            }))
         }
     }
 

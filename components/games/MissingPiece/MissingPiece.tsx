@@ -4,21 +4,21 @@ import {useState} from "react";
 import {StaticImageData} from "next/image";
 import axios from "axios";
 
-import wrg1l1 from "@/public/missingpiece/test2_wrg1.png"
-import wrg2l1 from "@/public/missingpiece/test2_wrg2.png"
-import wrg3l1 from "@/public/missingpiece/test2_wrg3.png"
-import wrg1l2 from "@/public/missingpiece/test2_wrg4.png"
-import wrg2l2 from "@/public/missingpiece/test2_wrg5.png"
-import wrg3l2 from "@/public/missingpiece/test2_wrg6.png"
-import wrg1l3 from "@/public/missingpiece/test2_wrg7.png"
-import wrg2l3 from "@/public/missingpiece/test2_wrg8.png"
-import wrg3l3 from "@/public/missingpiece/test2_wrg9.png"
-import l1 from "@/public/missingpiece/test2.png"
-import l2 from "@/public/missingpiece/test2_l2.png"
-import l3 from "@/public/missingpiece/test2_l3.png"
-import crt1 from "@/public/missingpiece/test2_crt1.png"
-import crt2 from "@/public/missingpiece/test2_crt2.png"
-import crt3 from "@/public/missingpiece/test2_crt3.png"
+import wrg1l1 from "@/public/missingpiece/output/test2_wrg1.png"
+import wrg2l1 from "@/public/missingpiece/output/test2_wrg2.png"
+import wrg3l1 from "@/public/missingpiece/output/test2_wrg3.png"
+import wrg1l2 from "@/public/missingpiece/output/test2_wrg4.png"
+import wrg2l2 from "@/public/missingpiece/output/test2_wrg5.png"
+import wrg3l2 from "@/public/missingpiece/output/test2_wrg6.png"
+import wrg1l3 from "@/public/missingpiece/output/test2_wrg7.png"
+import wrg2l3 from "@/public/missingpiece/output/test2_wrg8.png"
+import wrg3l3 from "@/public/missingpiece/output/test2_wrg9.png"
+import l1 from "@/public/missingpiece/output/test2.png"
+import l2 from "@/public/missingpiece/output/test2_l2.png"
+import l3 from "@/public/missingpiece/output/test2_l3.png"
+import crt1 from "@/public/missingpiece/output/test2_crt1.png"
+import crt2 from "@/public/missingpiece/output/test2_crt2.png"
+import crt3 from "@/public/missingpiece/output/test2_crt3.png"
 
 import {Levels} from "@/components/games/MissingPiece/Levels";
 import {sound} from "@/components/context/PlaySound";

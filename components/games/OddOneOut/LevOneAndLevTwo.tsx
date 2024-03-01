@@ -48,13 +48,13 @@ export const LevOneAndLevTwo = ({odd1, even1, odd2, even2, lev, handleOnClick}: 
         <div className={"grid grid-cols-1 md:grid-cols-2 gap-10 justify-items-center justify-center"}>
             {lev == 1 && shuffledImages1.map((image, index) => (
                 <Image key={index} src={image} alt={`Image${index + 1}`}
-                       className={"aspect-1 md:h-40 md:w-40 h-20 w-20 object-contain cursor-pointer mix-blend-color-burn"}
+                       className={"aspect-1 md:h-40 md:w-40 h-20 w-20 object-contain cursor-pointer "}
                        onClick={() => handleOnClick(image)}
                 />
             ))}
             {lev == 2 && shuffledImages2.map((image, index) => (
                 <Image key={index} src={image} alt={`Image${index + 1}`}
-                       className={"aspect-1 md:h-40 md:w-40 h-20 w-20 object-contain cursor-pointer mix-blend-color-burn"}
+                       className={"aspect-1 md:h-40 md:w-40 h-20 w-20 object-contain cursor-pointer "}
                        onClick={() => handleOnClick(image)}
                 />
             ))}
